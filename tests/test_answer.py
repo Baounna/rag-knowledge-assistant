@@ -80,7 +80,10 @@ def test_refusal_has_no_uncited_claims():
 # -- refusal gates ------------------------------------------------------
 
 def _generator(min_confidence: float = 0.35, key: str = "") -> AnswerGenerator:
-    s = replace(get_settings(), min_confidence=min_confidence, anthropic_api_key=key)
+    # Pin the provider: with LLM_PROVIDER=ollama in .env an "unconfigured"
+    # LLM is genuinely available, and the suite would run real inference.
+    s = replace(get_settings(), min_confidence=min_confidence,
+                anthropic_api_key=key, llm_provider="anthropic")
     return AnswerGenerator(llm=LLM(s), settings=s)
 
 
@@ -93,6 +96,19 @@ def test_refuses_below_the_confidence_threshold_without_calling_the_model():
     """Cheaper and safer than asking a model to be careful with bad context."""
     a = _generator(min_confidence=0.8).answer("q", result(chunk("a#c0001", conf=0.2)))
     assert a.refused and "below threshold" in a.refusal_reason
+
+
+def test_no_reranker_means_no_threshold_not_automatic_refusal():
+    """Regression: `confidence` used to fall back to the RRF fusion score,
+    which peaks near 0.03. Any threshold above that refused every question
+    whenever reranking was off -- silently, and before the model ran."""
+    chunk_without_rerank = RetrievedChunk(
+        chunk_id="a#c0001", text="t", heading_trail=[], source="s",
+        url=None, fusion_score=0.032)
+    assert chunk_without_rerank.confidence is None
+    a = _generator(min_confidence=0.35).answer("q", result(chunk_without_rerank))
+    assert a.refusal_reason == "no API key configured", (
+        "gate must fall through to the model when no calibrated score exists")
 
 
 def test_threshold_of_zero_disables_the_pre_model_gate():

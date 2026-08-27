@@ -123,14 +123,20 @@ class RetrievedChunk:
     reason: str = ""
 
     @property
-    def confidence(self) -> float:
-        """Rerank score on 0-1 when available, else the fusion score.
+    def confidence(self) -> float | None:
+        """Calibrated relevance on 0-1, or None when there is no such signal.
 
-        The answer stage uses this to decide whether to refuse: fusion scores
-        are relative and say nothing about whether ANY chunk is actually
-        relevant, whereas a rerank score does.
+        ONLY the reranker produces a calibrated score, because it actually
+        reads the passage against the question. An RRF fusion score is a sum
+        of rank reciprocals -- it peaks near 1/(60+1)+1/(60+1) = 0.033 and
+        says only "this ranked well relative to the other candidates", never
+        "this is relevant". Treating it as a 0-1 confidence made every
+        threshold unreachable and refused every question.
+
+        None means "unknown", and the refusal gate skips the threshold rather
+        than assuming the worst.
         """
-        return self.rerank_score / 10 if self.rerank_score is not None else self.fusion_score
+        return self.rerank_score / 10 if self.rerank_score is not None else None
 
     def as_context(self) -> str:
         trail = " > ".join(self.heading_trail)
@@ -147,8 +153,8 @@ class RetrievalResult:
     notes: list[str] = field(default_factory=list)
 
     @property
-    def top_confidence(self) -> float:
-        return self.chunks[0].confidence if self.chunks else 0.0
+    def top_confidence(self) -> float | None:
+        return self.chunks[0].confidence if self.chunks else None
 
     def context_block(self) -> str:
         return "\n\n---\n\n".join(c.as_context() for c in self.chunks)
@@ -184,7 +190,7 @@ class Retriever:
             context = f"Conversation so far:\n{turns}\n\n"
         try:
             out = self.llm.complete_json(
-                model=self.settings.model_rewrite,
+                model=self.llm.model_for("rewrite"),
                 system=REWRITE_SYSTEM,
                 messages=[{"role": "user", "content": f"{context}Question: {query}"}],
                 schema=REWRITE_SCHEMA,
@@ -215,7 +221,7 @@ class Retriever:
         )
         try:
             out = self.llm.complete_json(
-                model=self.settings.model_rerank,
+                model=self.llm.model_for("rerank"),
                 system=RERANK_SYSTEM,
                 messages=[{"role": "user",
                            "content": f"Question: {query}\n\nCandidates:\n\n{listing}"}],

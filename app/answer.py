@@ -166,12 +166,20 @@ class AnswerGenerator:
         )
 
     def _gate(self, result: RetrievalResult) -> str | None:
-        """Reasons to refuse before spending a model call."""
+        """Reasons to refuse before spending a model call.
+
+        The threshold applies only when a CALIBRATED confidence exists, which
+        means the reranker ran. With reranking off there is no signal that
+        says "none of this is relevant", so the decision falls to the model's
+        own refusal instruction -- refusing on an uncalibrated number would
+        reject every question (RRF scores never exceed ~0.03).
+        """
         if not result.chunks:
             return "retrieval returned nothing"
-        if (self.settings.min_confidence > 0
-                and result.top_confidence < self.settings.min_confidence):
-            return (f"top confidence {result.top_confidence:.2f} below "
+        confidence = result.top_confidence
+        if (confidence is not None and self.settings.min_confidence > 0
+                and confidence < self.settings.min_confidence):
+            return (f"top confidence {confidence:.2f} below "
                     f"threshold {self.settings.min_confidence:.2f}")
         return None
 
@@ -188,7 +196,7 @@ class AnswerGenerator:
             return self._refusal(question, result, "no API key configured")
 
         text = self.llm.complete_text(
-            model=self.settings.model_answer,
+            model=self.llm.model_for("answer"),
             system=ANSWER_SYSTEM,
             messages=self._messages(question, result, history),
             max_tokens=1500,
@@ -204,7 +212,7 @@ class AnswerGenerator:
             yield REFUSAL_TEXT
             return
         yield from self.llm.stream_text(
-            model=self.settings.model_answer,
+            model=self.llm.model_for("answer"),
             system=ANSWER_SYSTEM,
             messages=self._messages(question, result, history),
             max_tokens=1500,

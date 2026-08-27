@@ -23,18 +23,26 @@ services:
       timeout: 5s
       retries: 20
 
-  # OPTIONAL. The default embedding provider is `fastembed` (ONNX, in-process,
-  # no container, no API key), so this service is not needed. Start it only if
-  # you set EMBEDDING_PROVIDER=ollama:
-  #     docker compose --profile ollama up -d
-  embeddings:
+  # Local LLM: runs rerank / query-rewrite / answers / eval-judge with no API
+  # key and no cost, when LLM_PROVIDER=ollama.
+  #     make ollama-up
+  #
+  # Docker on macOS has no GPU passthrough, so this runs on CPU -- roughly
+  # 10-90s per answer. Install Ollama natively for Metal acceleration if you
+  # need it responsive; the app talks to the same URL either way.
+  ollama:
     profiles: ["ollama"]
     image: ollama/ollama:latest
-    container_name: rag-embeddings
+    container_name: rag-ollama
     ports:
       - "11434:11434"
     volumes:
       - rag-ollama:/root/.ollama
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
 
 volumes:
   rag-pgdata:

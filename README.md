@@ -30,8 +30,65 @@ make eval      # retrieval metrics across 6 configurations
 make test      # 90 tests
 ```
 
-No API key is needed to run any of the above: embeddings default to
-`fastembed` (BGE, ONNX, in-process). A Claude key is required from slice 4.
+## Running it without paying for anything
+
+Every part of this project can run with no API key and no cost:
+
+```bash
+make db-up
+make ollama-up          # local LLM in Docker, pulls qwen2.5:7b-instruct (~4.7GB)
+# set LLM_PROVIDER=ollama in .env
+make ingest && make index && make serve
+```
+
+| | free path | paid path |
+|---|---|---|
+| Embeddings | `fastembed` — BGE, ONNX, in-process | Voyage / OpenAI |
+| Rerank · rewrite · answers · judge | Ollama, local | Claude |
+| Cost | nothing | ~2c per question |
+
+`LLM_PROVIDER` accepts `ollama`, `anthropic`, or `auto` (use Claude if a key
+is present, otherwise fall back to the local model). Nothing else in the
+codebase changes — the pipeline talks to a `Backend` interface, and the model
+for each role is resolved by the backend.
+
+**The honest trade-off.** A local 7B model is meaningfully weaker at exactly
+the two behaviours this project is graded on: following the strict
+`[source:chunk_id]` citation format, and refusing when the context does not
+support an answer. Expect more fabricated citations (the validator catches
+them, and `make eval` counts them) and more answers that should have been
+refusals. It is also slower — Docker on macOS has no GPU passthrough, so it
+runs on CPU.
+
+Both are measurable rather than a matter of opinion: run `make eval-full`
+under each provider and compare `grounded`, `citation_validity`, and
+`refusal_correct`. That comparison is itself a strong result for the report —
+"here is what a hosted frontier model buys over a local one, on my corpus, in
+numbers".
+
+### Measured: local models on this corpus
+
+Three questions, models warm, Docker CPU on an M1 Pro:
+
+| | qwen2.5:3b | qwen2.5:7b |
+|---|---|---|
+| "expense report deadline" (answerable) | ✅ correct | ✅ correct |
+| "per diem in London" (answerable) | ❌ **wrongly refused** | ✅ correct |
+| "parental leave policy" (unanswerable) | ✅ refused | ✅ refused |
+| Fabricated citations | 0 | 0 |
+| Mean latency | 22 s | 44 s |
+
+Two things worth carrying into the report. First, **neither model fabricated a
+citation** — the strict format plus schema-constrained decoding holds up even
+on a 3B model. Second, **the 3B model's failure is over-refusal, not
+hallucination**: it declined a question the corpus answers. That is the safer
+failure direction, but it is still a failure, and `refusal_correct` scores it
+in both directions precisely so it cannot hide.
+
+**Latency is the real cost of the free path.** 10-90 s per answer, because
+Docker on macOS has no GPU passthrough and this runs on CPU. Installing Ollama
+natively gives it Metal and is several times faster; the app points at the
+same `OLLAMA_URL` either way, so nothing in the code changes.
 
 Drop your own documents into `corpus/` and re-run `make ingest`. Nothing in
 the code needs to change:

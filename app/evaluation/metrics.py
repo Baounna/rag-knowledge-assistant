@@ -157,7 +157,7 @@ def judge_answer(
     context = "\n\n---\n\n".join(f"[{c.chunk_id}]\n{c.text}" for c in answer.chunks_used)
     try:
         out = llm.complete_json(
-            model=settings.model_judge,
+            model=llm.model_for("judge"),
             system=JUDGE_SYSTEM,
             messages=[{"role": "user", "content": (
                 f"Question: {question.question}\n\n"

@@ -53,7 +53,8 @@ class FakeEmbedder:
 
 
 def _retriever(**kw) -> Retriever:
-    settings = replace(get_settings(), anthropic_api_key=kw.pop("key", ""))
+    settings = replace(get_settings(), anthropic_api_key=kw.pop("key", ""),
+                       llm_provider="anthropic")   # never reach a live model
     return Retriever(store=FakeStore(), embedder=FakeEmbedder(),
                      llm=LLM(settings), settings=settings)
 
@@ -99,17 +100,67 @@ def test_context_block_carries_ids_for_citation():
         assert f"[{chunk.chunk_id}]" in block, "model cannot cite an id it never sees"
 
 
-def test_confidence_prefers_rerank_score_when_present():
+def test_confidence_is_none_without_a_reranker():
+    """RRF scores are rank reciprocals (~0.03 max), not probabilities. Only
+    the reranker, which reads the passage, produces a calibrated 0-1 score."""
     c = RetrievedChunk(chunk_id="x", text="t", heading_trail=[], source="s",
                        url=None, fusion_score=0.01)
-    assert c.confidence == pytest.approx(0.01)
+    assert c.confidence is None
     c.rerank_score = 8.0
     assert c.confidence == pytest.approx(0.8)
 
 
-def test_llm_raises_a_typed_error_when_unconfigured():
+def test_unconfigured_backend_raises_a_typed_error():
+    """A distinct exception type so callers can degrade gracefully: retrieval
+    works without a model, so the reranker must be skippable, not fatal."""
+    from app.llm import AnthropicBackend
+
+    settings = replace(get_settings(), anthropic_api_key="", llm_provider="anthropic")
+    backend = AnthropicBackend(settings)
+    assert not backend.available
     with pytest.raises(LLMUnavailable):
-        LLM(replace(get_settings(), anthropic_api_key="")).client()
+        backend.client()
+
+
+def test_provider_auto_prefers_a_configured_key():
+    from app.llm import make_backend
+
+    with_key = replace(get_settings(), anthropic_api_key="sk-test", llm_provider="auto")
+    assert make_backend(with_key).name == "anthropic"
+
+
+def test_unknown_provider_is_rejected():
+    from app.llm import make_backend
+
+    with pytest.raises(ValueError, match="unknown LLM_PROVIDER"):
+        make_backend(replace(get_settings(), llm_provider="gpt5"))
+
+
+def test_ollama_flattens_system_blocks_and_content_lists():
+    """Ollama has no system array and no content blocks, so the Claude-shaped
+    request has to be flattened -- including the cached context block, whose
+    text must survive even though the cache_control does not."""
+    from app.llm import OllamaBackend
+
+    msgs = OllamaBackend._flatten(
+        [{"type": "text", "text": "SYSTEM RULES", "cache_control": {"type": "ephemeral"}}],
+        [{"role": "user", "content": [
+            {"type": "text", "text": "CONTEXT", "cache_control": {"type": "ephemeral"}},
+            {"type": "text", "text": "Question: x"},
+        ]}],
+    )
+    assert msgs[0] == {"role": "system", "content": "SYSTEM RULES"}
+    assert "CONTEXT" in msgs[1]["content"] and "Question: x" in msgs[1]["content"]
+
+
+def test_ollama_reports_no_cache_because_it_has_none():
+    """0% cache hit under Ollama means caching does not exist there, not that
+    it silently failed -- the distinction matters when reading the eval report."""
+    from app.llm import OllamaBackend
+
+    usage = OllamaBackend(get_settings())._usage({"prompt_eval_count": 900, "eval_count": 120})
+    assert usage.input_tokens == 900 and usage.output_tokens == 120
+    assert usage.cache_read_input_tokens == 0
 
 
 def test_usage_reports_cache_hit_rate():

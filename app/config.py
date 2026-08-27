@@ -44,6 +44,8 @@ def _int(name: str, default: int) -> int:
 @dataclass(frozen=True, slots=True)
 class Settings:
     # -- models --------------------------------------------------------
+    llm_provider: str            # anthropic | ollama | auto
+    ollama_model: str            # one local model serves every role
     anthropic_api_key: str
     model_answer: str            # final answer -- quality matters most
     model_rerank: str            # one call per candidate: cheap and fast
@@ -97,6 +99,8 @@ def get_settings() -> Settings:
     default_model, default_dim = defaults.get(provider, defaults["fastembed"])
 
     return Settings(
+        llm_provider=os.environ.get("LLM_PROVIDER", "auto").lower(),
+        ollama_model=os.environ.get("OLLAMA_MODEL", "qwen2.5:7b-instruct"),
         anthropic_api_key=os.environ.get("ANTHROPIC_API_KEY", ""),
         model_answer=os.environ.get("MODEL_ANSWER", "claude-sonnet-5"),
         model_rerank=os.environ.get("MODEL_RERANK", "claude-haiku-4-5"),
