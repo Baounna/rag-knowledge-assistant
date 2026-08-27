@@ -25,6 +25,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app.config import get_settings  # noqa: E402
 from app.embeddings import get_embedder  # noqa: E402
+from app.retrieval import Retriever  # noqa: E402
 from app.store import Filters, SearchHit, Store  # noqa: E402
 
 DIM = "\033[2m"
@@ -75,6 +76,7 @@ def main() -> int:
     print(f"{DIM}:k N  :source TEXT  :nosource  :stats  :q{OFF}")
 
     embedder = get_embedder(settings)
+    retriever = Retriever(store=store, embedder=embedder, settings=settings)
     k = settings.retrieval_top_k
     source: str | None = None
 
@@ -115,16 +117,33 @@ def main() -> int:
 
         vector = store.vector_search(embedder.embed_query(query), k=k, filters=filters)
         lexical = store.lexical_search(query, k=k, filters=filters)
+        result = retriever.retrieve(query, filters=filters, top_k=k, top_n=k)
 
         show("VECTOR   (meaning)", GREEN, vector, lexical)
         show("LEXICAL  (exact words)", CYAN, lexical, vector)
 
-        v_ids, l_ids = [h.chunk_id for h in vector], [h.chunk_id for h in lexical]
-        overlap = len(set(v_ids) & set(l_ids))
-        print(f"\n  {DIM}agreement: {overlap}/{k} chunks in both lists", end="")
-        if v_ids and l_ids and v_ids[0] != l_ids[0]:
-            print("  |  the two indexes disagree on #1 -- this is what RRF resolves", end="")
-        print(OFF)
+        print(f"\n  {YELLOW}{BOLD}HYBRID   (RRF fusion){OFF}")
+        if result.notes:
+            print(f"    {DIM}{'; '.join(result.notes)}{OFF}")
+        for i, c in enumerate(result.chunks, 1):
+            badge = "+".join(c.found_by)
+            score = (f"rerank {c.rerank_score:.1f}/10"
+                     if c.rerank_score is not None else f"rrf {c.fusion_score:.4f}")
+            print(f"    {i}. [{score}] {BOLD}{c.chunk_id}{OFF} {DIM}({badge}){OFF}")
+            print(f"       {DIM}{' > '.join(c.heading_trail)}{OFF}")
+            if c.reason:
+                print(f"       {DIM}why: {c.reason[:80]}{OFF}")
+
+        v_ids = [h.chunk_id for h in vector]
+        l_ids = [h.chunk_id for h in lexical]
+        h_ids = [c.chunk_id for c in result.chunks]
+        print(f"\n  {DIM}#1 by index -> vector: {v_ids[0].split('#')[-1] if v_ids else '-'}"
+              f" | lexical: {l_ids[0].split('#')[-1] if l_ids else '-'}"
+              f" | hybrid: {h_ids[0].split('#')[-1] if h_ids else '-'}{OFF}")
+        if v_ids and l_ids and h_ids and v_ids[0] != l_ids[0]:
+            winner = "vector" if h_ids[0] == v_ids[0] else (
+                "lexical" if h_ids[0] == l_ids[0] else "neither -- agreement won")
+            print(f"  {DIM}the indexes disagreed on #1; RRF sided with: {winner}{OFF}")
 
 
 if __name__ == "__main__":
