@@ -3,16 +3,17 @@
 Answers natural-language questions over an internal document corpus, with
 clickable citations, and refuses when the corpus doesn't support an answer.
 
-Status: **slices 1-5 of 7 complete** (ingestion, indexing, retrieval, generation, eval).
+Status: **all 7 slices built.** Architecture: [ARCHITECTURE.md](ARCHITECTURE.md) ·
+Deployment: [DEPLOY.md](DEPLOY.md)
 
 ```
 [x] 1. Ingestion    parse -> chunk -> chunk records
 [x] 2. Indexing     embeddings (pgvector) + BM25 (pg_search)
 [x] 3. Retrieval    hybrid + RRF -> rerank -> query rewriting
 [x] 4. Generation   citations + refusal + prompt caching
-[x] 5. Eval         recall@K, MRR, faithfulness -> make eval   <- you are here
-[ ] 6. UI           streaming chat, clickable citations, feedback
-[ ] 7. Ops          auth, rate limits, cost ceiling, deploy
+[x] 5. Eval         recall@K, MRR, faithfulness -> make eval
+[x] 6. UI           streaming chat, clickable citations, feedback
+[x] 7. Ops          auth, rate limits, cost ceiling, deploy
 ```
 
 ## Quick start
@@ -24,8 +25,9 @@ make ingest    # corpus/ -> data/chunks.jsonl
 make index     # embed + load into Postgres
 make search Q="how do I get money back for a work trip"
 make demo      # interactive: type questions, watch both indexes
+make serve     # the app at http://localhost:8000
 make eval      # retrieval metrics across 6 configurations
-make test      # 76 tests
+make test      # 90 tests
 ```
 
 No API key is needed to run any of the above: embeddings default to
