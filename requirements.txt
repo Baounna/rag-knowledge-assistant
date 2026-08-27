@@ -1,0 +1,12 @@
+# --- slice 1: ingestion -------------------------------------------------
+pypdf==6.16.2              # PDF text extraction
+
+# --- slice 2: indexing (not yet wired) ----------------------------------
+# psycopg[binary]>=3.2     # Postgres driver
+# pgvector>=0.3            # vector column type
+
+# --- slice 4: generation ------------------------------------------------
+# anthropic>=0.69          # Claude API
+
+# --- dev ----------------------------------------------------------------
+pytest>=8.0
