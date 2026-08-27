@@ -2,7 +2,7 @@ VENV := .venv
 PY   := $(VENV)/bin/python
 PIP  := $(VENV)/bin/pip
 
-.PHONY: help setup db-up db-down ingest inspect index reindex search demo test clean
+.PHONY: help setup db-up db-down ingest inspect index reindex search demo eval eval-full test clean
 
 help:
 	@grep -E '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
@@ -39,6 +39,12 @@ ingest: ## parse + chunk corpus/ -> data/chunks.jsonl
 
 inspect: ## ingest and print sample chunks for eyeballing
 	$(PY) scripts/ingest.py --inspect 5
+
+eval: ## retrieval metrics across all configurations (no API key needed)
+	$(PY) scripts/eval.py
+
+eval-full: ## + answers, citations, refusal, LLM judge (needs ANTHROPIC_API_KEY)
+	$(PY) scripts/eval.py --generate --judge
 
 test: ## run the test suite
 	$(PY) -m pytest tests/ -q

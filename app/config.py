@@ -27,6 +27,13 @@ def load_dotenv(path: Path | None = None) -> None:
         os.environ.setdefault(key.strip(), value.strip().strip("'\""))
 
 
+def _float(name: str, default: float) -> float:
+    try:
+        return float(os.environ.get(name, "") or default)
+    except ValueError:
+        return default
+
+
 def _int(name: str, default: int) -> int:
     try:
         return int(os.environ.get(name, "") or default)
@@ -57,6 +64,7 @@ class Settings:
     # -- retrieval -----------------------------------------------------
     retrieval_top_k: int         # candidates pulled from EACH index
     rerank_top_n: int            # chunks that actually reach the prompt
+    min_confidence: float        # refuse below this; 0 disables the pre-model gate
 
     # -- chunking ------------------------------------------------------
     chunk_target_words: int
@@ -98,6 +106,7 @@ def get_settings() -> Settings:
         ),
         retrieval_top_k=_int("RETRIEVAL_TOP_K", 20),
         rerank_top_n=_int("RERANK_TOP_N", 5),
+        min_confidence=_float("MIN_CONFIDENCE", 0.35),
         chunk_target_words=_int("CHUNK_TARGET_WORDS", 350),
         chunk_max_words=_int("CHUNK_MAX_WORDS", 500),
         chunk_overlap_sentences=_int("CHUNK_OVERLAP_SENTENCES", 2),

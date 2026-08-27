@@ -3,14 +3,14 @@
 Answers natural-language questions over an internal document corpus, with
 clickable citations, and refuses when the corpus doesn't support an answer.
 
-Status: **slices 1-2 of 7 complete** (ingestion, indexing).
+Status: **slices 1-5 of 7 complete** (ingestion, indexing, retrieval, generation, eval).
 
 ```
 [x] 1. Ingestion    parse -> chunk -> chunk records
-[x] 2. Indexing     embeddings (pgvector) + BM25 (pg_search)  <- you are here
-[ ] 3. Retrieval    hybrid + RRF -> rerank -> query rewriting
-[ ] 4. Generation   citations + refusal + prompt caching
-[ ] 5. Eval         recall@K, MRR, faithfulness -> make eval
+[x] 2. Indexing     embeddings (pgvector) + BM25 (pg_search)
+[x] 3. Retrieval    hybrid + RRF -> rerank -> query rewriting
+[x] 4. Generation   citations + refusal + prompt caching
+[x] 5. Eval         recall@K, MRR, faithfulness -> make eval   <- you are here
 [ ] 6. UI           streaming chat, clickable citations, feedback
 [ ] 7. Ops          auth, rate limits, cost ceiling, deploy
 ```
@@ -24,7 +24,8 @@ make ingest    # corpus/ -> data/chunks.jsonl
 make index     # embed + load into Postgres
 make search Q="how do I get money back for a work trip"
 make demo      # interactive: type questions, watch both indexes
-make test      # 28 tests
+make eval      # retrieval metrics across 6 configurations
+make test      # 76 tests
 ```
 
 No API key is needed to run any of the above: embeddings default to
@@ -220,3 +221,91 @@ the corpus is PDF-heavy.
 model choice — is currently justified by reasoning and spot checks, not by a
 metric. That is exactly the gap slice 5 closes, and it is why nothing has been
 tuned aggressively yet.
+
+
+## Slices 3-5 — retrieval, generation, evaluation
+
+### Retrieval pipeline
+
+```
+question -> rewrite (Haiku) -> vector + BM25 -> RRF -> rerank (Haiku) -> top N
+```
+
+Every stage is switchable, because `make eval` has to answer "did the
+reranker help?" with a number. Every stage records the chunk ids it produced,
+so a failure can be attributed to the stage that caused it.
+
+**RRF over score normalisation.** Cosine sits in [0,1] and clusters tightly
+(0.66 vs 0.50 here); BM25 is unbounded and corpus-dependent (4.72 vs 0.98 on
+the same corpus). Any normalisation onto a shared scale is a hyper-parameter
+that drifts with the corpus. RRF discards the scores and fuses ranks:
+`score(d) = Σ weight / (k + rank)`, `k=60` from Cormack et al. Verified on the
+sample corpus: fusion promoted a chunk to #1 that *neither* index ranked
+first.
+
+**All LLM stages degrade to no-ops without a key** — hybrid retrieval still
+runs, and `make eval` still reports retrieval metrics.
+
+### Generation
+
+**Citations are verified, not trusted.** `validate_citations()` parses every
+`[chunk_id]` out of the answer and checks it against what was actually
+retrieved. A fabricated id that looks perfect is the most damaging failure a
+knowledge assistant has, because it manufactures the appearance of evidence —
+and prompting cannot rule it out. Invalid citations are also left unlinked in
+the UI, so a fake reference is visibly not clickable.
+
+**Refusal is gated twice.** The prompt instructs refusal when context is
+insufficient; `MIN_CONFIDENCE` refuses *before* the model is called at all. A
+model handed five irrelevant chunks will usually find something to say about
+them — not calling it is cheaper and safer.
+
+**Prompt caching.** Retrieved context carries the cache breakpoint and the
+question comes after it. Caching is a prefix match, so the reverse order
+caches nothing, silently. `Usage.cache_hit_rate` exists to verify it rather
+than assume it.
+
+### Evaluation
+
+```bash
+make eval        # retrieval metrics, 6 configs, no API key needed
+make eval-full   # + answers, citations, refusal, LLM judge
+```
+
+Metrics split deliberately:
+
+| deterministic (free, exact, every commit) | judged (costs money, varies) |
+|---|---|
+| recall@K, MRR, precision@K, hit@K | faithfulness |
+| citation validity, groundedness | answer relevance |
+| refusal accuracy (both directions) | |
+| required-content coverage | |
+
+"Did the model cite a chunk that doesn't exist?" is a parsing problem, not a
+judgement call. Treating it as one makes it free and exact.
+
+**The harness refuses to flatter you.** It warns when `RETRIEVAL_TOP_K`
+reaches the corpus size (recall becomes 1.0 by construction), when labels
+point at chunks that no longer exist after re-chunking, when there are fewer
+than 50 questions, when no unanswerable questions exist, and when a missing
+API key makes several configurations secretly identical. On the sample corpus
+it currently reports all of these — which is correct, and is why the numbers
+below mean nothing yet:
+
+```
+!! RETRIEVAL_TOP_K=20 >= 8 indexed chunks.
+   Every retriever returns the whole corpus, so recall@K is 1.0 by
+   construction and tells you nothing. Only MRR is meaningful here.
+```
+
+**The eval set is `eval/questions.jsonl`, versioned in the repo** (a
+deliverable). 20 starter questions written against the sample corpus:
+paraphrased rather than copied from the documents, four unanswerable —
+including one near-miss (asking for the *notifications* timeout when only the
+*payments* timeout is documented) that catches a system substituting a
+neighbouring fact for the one asked about.
+
+Replace them with 50-100 questions about **your** corpus. Rules: phrase them
+the way a user would, not the way the document does — questions built by
+copying sentences out of the corpus measure string matching and flatter every
+retriever.
