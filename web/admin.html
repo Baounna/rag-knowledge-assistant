@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feedback dashboard</title>
+<style>
+  :root{--bg:#fbfaf8;--panel:#fff;--line:#e5e1da;--ink:#1c1a17;--muted:#6b655c;
+        --accent:#8a4b2a;--good:#2f6f4f;--bad:#a33a2a;
+        --mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#16150f;--panel:#1e1c17;--line:#332f27;--ink:#ece7dd;--muted:#9a9184;--accent:#d38b5d}}
+  *{box-sizing:border-box}
+  body{margin:0;font:15px/1.6 ui-sans-serif,system-ui,sans-serif;background:var(--bg);
+       color:var(--ink);padding:26px;max-width:1000px;margin:0 auto}
+  h1{font-size:19px;margin:0 0 4px}
+  .hint{color:var(--muted);font-size:13px;margin-bottom:20px}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px}
+  .tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+  .tile .n{font-size:26px;font-weight:650;font-variant-numeric:tabular-nums}
+  .tile .l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .item{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+        padding:14px;margin-bottom:12px}
+  .item.down{border-left:3px solid var(--bad)}
+  .item.up{border-left:3px solid var(--good)}
+  .q{font-weight:600;margin-bottom:5px}
+  .a{color:var(--muted);white-space:pre-wrap;font-size:14px;
+     max-height:6.4em;overflow:hidden;margin-bottom:7px}
+  .meta{font:11px/1.5 var(--mono);color:var(--muted);display:flex;gap:12px;flex-wrap:wrap}
+  .comment{margin-top:7px;padding:8px 10px;background:var(--bg);border-radius:8px;font-size:14px}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<h1>Feedback dashboard</h1>
+<div class="hint">
+  Every rating is joined back to the chunks that produced the answer.
+  A thumbs-down plus its retrieved chunk ids is a debuggable retrieval failure;
+  a thumbs-down alone is a mood. <a href="/">← back to chat</a>
+</div>
+<div class="tiles" id="tiles"></div>
+<div id="items"></div>
+
+<script>
+const escape = s => (s||"").replace(/[&<>"]/g, c =>
+  ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+(async () => {
+  const r = await fetch("/api/admin/feedback");
+  if (!r.ok){
+    document.body.innerHTML =
+      "<h1>Admin only</h1><p>Sign in as an admin. <a href='/'>Back</a></p>";
+    return;
+  }
+  const d = await r.json();
+  const negative = d.counts.total ? (d.counts.down / d.counts.total) : 0;
+  const refusalRate = d.answers.n ? (d.answers.refusals / d.answers.n) : 0;
+  const tiles = [
+    ["ratings", d.counts.total],
+    ["thumbs up", d.counts.up],
+    ["thumbs down", d.counts.down],
+    ["negative rate", (negative*100).toFixed(0) + "%"],
+    ["answers", d.answers.n],
+    ["refusal rate", (refusalRate*100).toFixed(0) + "%"],
+    ["spend", "$" + (d.answers.cents/100).toFixed(2)],
+  ];
+  document.getElementById("tiles").innerHTML = tiles.map(
+    ([l,n]) => `<div class="tile"><div class="n">${n}</div><div class="l">${l}</div></div>`
+  ).join("");
+
+  document.getElementById("items").innerHTML = d.items.map(i => {
+    const ids = (i.retrieval && i.retrieval.chunk_ids) || [];
+    return `<div class="item ${i.rating === 1 ? "up" : "down"}">
+      <div class="q">${i.rating === 1 ? "👍" : "👎"} ${escape(i.question)}</div>
+      <div class="a">${escape(i.answer)}</div>
+      ${i.comment ? `<div class="comment">${escape(i.comment)}</div>` : ""}
+      <div class="meta">
+        <span>${escape(i.email)}</span>
+        <span>${new Date(i.created_at).toLocaleString()}</span>
+        ${i.refused ? "<span>refused</span>" : ""}
+        <span>retrieved: ${ids.map(escape).join(", ") || "—"}</span>
+      </div></div>`;
+  }).join("") || "<p class='hint'>No feedback yet.</p>";
+})();
+</script>
+</body>
+</html>

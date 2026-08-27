@@ -66,6 +66,13 @@ class Settings:
     rerank_top_n: int            # chunks that actually reach the prompt
     min_confidence: float        # refuse below this; 0 disables the pre-model gate
 
+    # -- limits --------------------------------------------------------
+    daily_question_limit: int
+    daily_cost_limit_cents: int
+    allow_signup: bool
+    cookie_secure: bool          # HTTPS-only cookie; must be true in production
+    cents_per_1k_tokens: float   # blended estimate for the per-user cost ceiling
+
     # -- chunking ------------------------------------------------------
     chunk_target_words: int
     chunk_max_words: int
@@ -107,6 +114,11 @@ def get_settings() -> Settings:
         retrieval_top_k=_int("RETRIEVAL_TOP_K", 20),
         rerank_top_n=_int("RERANK_TOP_N", 5),
         min_confidence=_float("MIN_CONFIDENCE", 0.35),
+        daily_question_limit=_int("DAILY_QUESTION_LIMIT", 100),
+        daily_cost_limit_cents=_int("DAILY_COST_LIMIT_CENTS", 200),
+        allow_signup=os.environ.get("ALLOW_SIGNUP", "true").lower() != "false",
+        cookie_secure=os.environ.get("COOKIE_SECURE", "false").lower() == "true",
+        cents_per_1k_tokens=_float("CENTS_PER_1K_TOKENS", 0.6),
         chunk_target_words=_int("CHUNK_TARGET_WORDS", 350),
         chunk_max_words=_int("CHUNK_MAX_WORDS", 500),
         chunk_overlap_sentences=_int("CHUNK_OVERLAP_SENTENCES", 2),

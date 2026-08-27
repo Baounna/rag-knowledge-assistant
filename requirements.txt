@@ -6,8 +6,12 @@ psycopg[binary]>=3.2       # Postgres driver
 httpx>=0.27                # hosted embedding providers
 fastembed>=0.4             # local ONNX embeddings (default; no API key)
 
-# --- slice 4: generation ------------------------------------------------
-# anthropic>=0.69          # Claude API
+# --- slices 4-5: generation and eval ------------------------------------
+anthropic>=0.69            # Claude API
+
+# --- slices 6-7: API and UI ---------------------------------------------
+fastapi>=0.115
+uvicorn[standard]>=0.30
 
 # --- dev ----------------------------------------------------------------
 pytest>=8.0

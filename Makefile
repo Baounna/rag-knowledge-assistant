@@ -2,7 +2,7 @@ VENV := .venv
 PY   := $(VENV)/bin/python
 PIP  := $(VENV)/bin/pip
 
-.PHONY: help setup db-up db-down ingest inspect index reindex search demo eval eval-full test clean
+.PHONY: help setup db-up db-down ingest inspect index reindex search demo serve admin eval eval-full test clean
 
 help:
 	@grep -E '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
@@ -39,6 +39,12 @@ ingest: ## parse + chunk corpus/ -> data/chunks.jsonl
 
 inspect: ## ingest and print sample chunks for eyeballing
 	$(PY) scripts/ingest.py --inspect 5
+
+serve: ## run the app at http://localhost:8000
+	$(PY) -m uvicorn app.api:app --reload --port 8000
+
+admin: ## promote a user to admin:  make admin EMAIL=you@company.com
+	$(PY) scripts/admin.py --email "$(EMAIL)"
 
 eval: ## retrieval metrics across all configurations (no API key needed)
 	$(PY) scripts/eval.py
