@@ -204,6 +204,26 @@ class Store:
             cur.execute("SELECT chunk_id, content_hash FROM chunks")
             return {r["chunk_id"]: r["content_hash"] for r in cur.fetchall()}
 
+    def prune_to(self, keep_chunk_ids: Sequence[str]) -> list[str]:
+        """Delete indexed chunks that are no longer produced by the corpus.
+
+        Without this, deleting a document from `corpus/` leaves its chunks in
+        the index forever -- so the assistant keeps answering from, and citing,
+        a document that no longer exists. For a policy assistant that is not a
+        tidiness problem, it is a wrong-answer problem.
+
+        Also catches documents that SHRANK: chunk ids are positional, so an
+        edit that removes a section orphans its trailing chunks.
+        """
+        with self.conn() as c, c.cursor() as cur:
+            cur.execute(
+                "DELETE FROM chunks WHERE NOT (chunk_id = ANY(%s)) RETURNING chunk_id",
+                (list(keep_chunk_ids),),
+            )
+            removed = [r["chunk_id"] for r in cur.fetchall()]
+            c.commit()
+            return removed
+
     def count(self) -> int:
         with self.conn() as c, c.cursor() as cur:
             cur.execute("SELECT count(*) AS n FROM chunks")

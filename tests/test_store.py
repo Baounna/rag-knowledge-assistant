@@ -128,3 +128,34 @@ def test_hits_carry_citation_metadata(store: Store):
     hit = store.lexical_search("expense", k=1)[0]
     assert hit.url, "no url means no clickable citation"
     assert hit.citation().startswith("[") and ":" in hit.citation()
+
+
+def test_prune_removes_chunks_the_corpus_no_longer_produces(store: Store):
+    """Deleting a document must remove it from the index.
+
+    Otherwise the assistant keeps answering from -- and citing -- a document
+    that no longer exists, which for a policy assistant is a wrong answer, not
+    an untidy one.
+    """
+    store.upsert_chunks([{
+        "chunk_id": "gone#c0", "doc_id": "gone", "text": "retired policy text",
+        "index_text": "retired policy text", "heading_trail": [], "source": "Old",
+        "url": None, "author": None, "doc_date": None, "position": 0,
+        "content_hash": "g1", "embedding": None,
+    }])
+    assert any(h.chunk_id == "gone#c0" for h in store.lexical_search("retired", k=5))
+
+    keep = [h.chunk_id for h in store.lexical_search("expense OR logs OR first", k=50)]
+    removed = store.prune_to([c for c in keep if c != "gone#c0"])
+
+    assert "gone#c0" in removed
+    assert not any(h.chunk_id == "gone#c0" for h in store.lexical_search("retired", k=5))
+
+
+def test_prune_keeps_everything_it_is_told_to_keep(store: Store):
+    before = store.count()
+    with store.conn() as c, c.cursor() as cur:
+        cur.execute("SELECT chunk_id FROM chunks")
+        all_ids = [r["chunk_id"] for r in cur.fetchall()]
+    assert store.prune_to(all_ids) == []
+    assert store.count() == before

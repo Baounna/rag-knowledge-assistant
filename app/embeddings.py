@@ -44,6 +44,18 @@ def _retry(fn, attempts: int = 4, base: float = 0.6):
     for i in range(attempts):
         try:
             return fn()
+        except httpx.HTTPStatusError as exc:
+            # 4xx means the request is wrong, not unlucky. Retrying a 401 four
+            # times with backoff just delays a clear error by ~5 seconds and
+            # buries the cause. 429 is the exception: it IS worth waiting out.
+            if 400 <= exc.response.status_code < 500 and exc.response.status_code != 429:
+                raise RuntimeError(
+                    f"embedding request rejected ({exc.response.status_code}): "
+                    f"{exc.response.text[:200]}"
+                ) from exc
+            last = exc
+            if i == attempts - 1:
+                break
         except Exception as exc:  # noqa: BLE001
             last = exc
             if i == attempts - 1:

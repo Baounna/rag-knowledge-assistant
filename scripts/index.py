@@ -9,6 +9,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 import time
 from pathlib import Path
@@ -18,13 +19,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from app.config import get_settings  # noqa: E402
 from app.embeddings import get_embedder  # noqa: E402
 from app.ingest import read_jsonl  # noqa: E402
+from app.ingest.models import chunk_from_dict  # noqa: E402
 from app.store import Store  # noqa: E402
-
-
-def _index_text(row: dict) -> str:
-    """Mirror of Chunk.embedding_text(): heading trail + body."""
-    trail = row.get("heading_trail") or []
-    return (" > ".join(trail) + "\n\n" + row["text"]) if trail else row["text"]
 
 
 def main() -> int:
@@ -33,6 +29,8 @@ def main() -> int:
     ap.add_argument("--recreate", action="store_true", help="drop and rebuild the table")
     ap.add_argument("--batch", type=int, default=64)
     ap.add_argument("--probe", type=str, default="", help="run a test search afterwards")
+    ap.add_argument("--no-prune", action="store_true",
+                    help="keep indexed chunks that the corpus no longer produces")
     args = ap.parse_args()
 
     settings = get_settings()
@@ -54,33 +52,30 @@ def main() -> int:
     todo = [r for r in rows if known.get(r["chunk_id"]) != r["content_hash"]]
     print(f"chunks           : {len(rows)} total, {len(todo)} new or changed")
 
-    if not todo:
-        print(f"index up to date : {store.count()} chunks")
-        return 0
-
-    embedder = get_embedder(settings)
+    embedder = get_embedder(settings) if todo else None
     started = time.time()
     written = 0
 
     for i in range(0, len(todo), args.batch):
         batch = todo[i : i + args.batch]
-        vectors = embedder.embed_documents([_index_text(r) for r in batch])
+        chunks = [chunk_from_dict(r) for r in batch]
+        vectors = embedder.embed_documents([c.embedding_text() for c in chunks])
         payload = [
             {
-                "chunk_id": r["chunk_id"],
-                "doc_id": r["doc_id"],
-                "text": r["text"],
-                "index_text": _index_text(r),
-                "heading_trail": r.get("heading_trail") or [],
-                "source": r.get("source") or "",
-                "url": r.get("url"),
-                "author": r.get("author"),
-                "doc_date": r.get("doc_date"),
-                "position": r.get("position", 0),
-                "content_hash": r["content_hash"],
-                "embedding": str(v),
+                "chunk_id": c.chunk_id,
+                "doc_id": c.doc_id,
+                "text": c.text,
+                "index_text": c.embedding_text(),   # single source of truth
+                "heading_trail": c.heading_trail,
+                "source": c.source,
+                "url": c.url,
+                "author": c.author,
+                "doc_date": c.doc_date,
+                "position": c.position,
+                "content_hash": c.content_hash,
+                "embedding": json.dumps(v),
             }
-            for r, v in zip(batch, vectors)
+            for c, v in zip(chunks, vectors)
         ]
         written += store.upsert_chunks(payload)
         print(f"  embedded {written}/{len(todo)}", end="\r", flush=True)
@@ -88,6 +83,15 @@ def main() -> int:
     elapsed = time.time() - started
     print(f"\nindexed          : {written} chunks in {elapsed:.1f}s "
           f"({written / max(elapsed, 0.01):.1f}/s)")
+
+    # The JSONL is the full desired state of the index, so anything in the
+    # table that is not in it belongs to a deleted or shrunken document.
+    if not args.no_prune:
+        removed = store.prune_to([r["chunk_id"] for r in rows])
+        if removed:
+            print(f"pruned           : {len(removed)} stale chunks "
+                  f"(e.g. {removed[0]})")
+
     print(f"table total      : {store.count()} chunks")
 
     if args.probe:

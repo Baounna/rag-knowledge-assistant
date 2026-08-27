@@ -188,3 +188,34 @@ chunks whose text changed.
 or `openai`. Dimensions are a property of the model, so changing it means
 `make reindex` — the vector column has a fixed width and will reject a
 mismatch at insert time, which is the right time to find out.
+
+
+## Known limits (read before slice 3)
+
+Honest list of what is *not* solved yet. Each one is a real behaviour of the
+current code, verified rather than assumed.
+
+**HNSW is bypassed when a filter is applied.** `EXPLAIN` on a filtered vector
+query shows `Index Scan using chunks_source_idx` + `Sort` — Postgres filters
+first, then computes exact distances over what survives. That is *correct*
+and, on a small corpus, faster than the approximate index. At corpus scale
+with a selective filter it becomes a full distance scan over the filtered set.
+The lever is pgvector 0.8's `SET hnsw.iterative_scan = relaxed_order`, and it
+should be turned on only once `make eval` can show it is needed.
+
+**A new connection per query.** `Store` opens a connection for every call — six
+call sites. Fine for CLI use, wrong for the API in slice 6: connection setup
+plus auth on every request. Slice 6 adds `psycopg_pool`.
+
+**No hybrid fusion yet.** `vector_search` and `lexical_search` return two
+separate ranked lists. Merging them (RRF) is slice 3.
+
+**PDF heading inference is a heuristic.** `parsers/pdf.py` guesses headings
+from line shape. It reads table rows in the subject PDF as headings. A
+layout-aware parser (PyMuPDF font sizes, or `unstructured`) is the upgrade if
+the corpus is PDF-heavy.
+
+**No `make eval`.** Every tuning decision so far — chunk size, top-K, stemming,
+model choice — is currently justified by reasoning and spot checks, not by a
+metric. That is exactly the gap slice 5 closes, and it is why nothing has been
+tuned aggressively yet.

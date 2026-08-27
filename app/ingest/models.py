@@ -117,6 +117,30 @@ class Chunk:
         return d
 
 
+def chunk_from_dict(row: dict[str, Any]) -> Chunk:
+    """Rebuild a Chunk from a JSONL row.
+
+    Exists so the indexer can call `Chunk.embedding_text()` instead of
+    re-implementing it. Two copies of "what text gets indexed" drift, and when
+    they do, the index silently contains something other than what the chunker
+    intended -- with no error anywhere.
+    """
+    d = dict(row)
+    raw_date = d.pop("doc_date", None)
+    return Chunk(
+        chunk_id=d["chunk_id"],
+        doc_id=d["doc_id"],
+        text=d["text"],
+        heading_trail=list(d.get("heading_trail") or []),
+        source=d.get("source") or "",
+        url=d.get("url"),
+        author=d.get("author"),
+        doc_date=date.fromisoformat(raw_date) if isinstance(raw_date, str) else raw_date,
+        position=int(d.get("position") or 0),
+        content_hash=d.get("content_hash") or "",
+    )
+
+
 def make_content_hash(text: str) -> str:
     """Stable id for chunk text, so re-ingesting an unchanged document does
     not churn the index (and does not re-pay for embeddings)."""
