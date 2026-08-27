@@ -94,7 +94,25 @@ def test_embedding_text_includes_the_trail():
     chunk = Chunker(min_words=5).chunk(doc)[0]
     assert "Payments" in chunk.embedding_text()
     assert "Configuration" in chunk.embedding_text()
-    assert "Payments" not in chunk.text, "trail must not be baked into the stored text"
+
+
+def test_section_headings_survive_into_the_body():
+    """A leaf heading must remain searchable after a merge collapses the trail.
+
+    Regression: "Reimbursement Deadlines" was a real section title that
+    appeared in zero indexed rows, because merging reduced the trail to the
+    common prefix and the heading text lived nowhere else.
+    """
+    doc = _doc(
+        _heading("Expense Policy", 1),
+        _heading("Reimbursement Deadlines", 2), _para("Submit within 30 days."),
+        _heading("Receipts", 2), _para("Receipts required over $25."),
+        title="Expense Policy",
+    )
+    chunks = Chunker(target_words=300, max_words=500, min_words=60).chunk(doc)
+    blob = " ".join(c.embedding_text() for c in chunks)
+    for heading in ("Reimbursement Deadlines", "Receipts"):
+        assert heading in blob, f"{heading!r} is unsearchable"
 
 
 def test_merged_chunk_trail_is_honest():

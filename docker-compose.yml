@@ -1,0 +1,41 @@
+# ParadeDB = Postgres + pgvector (vector search) + pg_search (real BM25 via
+# Tantivy). One database holds the vector index, the lexical index, chat
+# history, and feedback. The subject allows OpenSearch/Tantivy/sqlite-fts for
+# the lexical arm; pg_search IS Tantivy, embedded in Postgres -- so we get
+# genuine BM25 scoring without running a second datastore.
+services:
+  db:
+    image: paradedb/paradedb:latest
+    container_name: rag-db
+    environment:
+      POSTGRES_USER: rag
+      POSTGRES_PASSWORD: rag
+      POSTGRES_DB: rag
+    ports:
+      - "5432:5432"
+    volumes:
+      # Postgres 18+ expects the volume at /var/lib/postgresql (not .../data),
+      # so pg_upgrade can work across a single mount point.
+      - rag-pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rag -d rag"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # OPTIONAL. The default embedding provider is `fastembed` (ONNX, in-process,
+  # no container, no API key), so this service is not needed. Start it only if
+  # you set EMBEDDING_PROVIDER=ollama:
+  #     docker compose --profile ollama up -d
+  embeddings:
+    profiles: ["ollama"]
+    image: ollama/ollama:latest
+    container_name: rag-embeddings
+    ports:
+      - "11434:11434"
+    volumes:
+      - rag-ollama:/root/.ollama
+
+volumes:
+  rag-pgdata:
+  rag-ollama:

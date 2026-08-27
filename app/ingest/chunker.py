@@ -65,6 +65,14 @@ def _words(text: str) -> int:
     return len(text.split())
 
 
+def _dedupe_consecutive(items: list[str]) -> list[str]:
+    out: list[str] = []
+    for item in items:
+        if not out or out[-1].strip().lower() != item.strip().lower():
+            out.append(item)
+    return out
+
+
 def _hard_split(sentence: str, limit: int) -> list[str]:
     """Last-resort level-4 cut: break on word boundaries.
 
@@ -172,7 +180,24 @@ class Chunker:
                 while stack and stack[-1][0] >= block.level:
                     stack.pop()
                 stack.append((block.level, block.text.strip()))
-                trail = root + [t for _, t in stack]
+                # Collapse a repeated root: a document titled "Expense Policy"
+                # whose first H1 is also "Expense Policy" should not produce a
+                # trail of "Expense Policy > Expense Policy".
+                trail = _dedupe_consecutive(root + [t for _, t in stack])
+                # Write the heading into the chunk body, not just the trail.
+                # The merge pass sets a merged chunk's trail to the common
+                # PREFIX, which drops leaf headings -- so a section titled
+                # "Reimbursement Deadlines" would otherwise appear nowhere in
+                # the index and be unsearchable by its own name. Putting it in
+                # the text makes it survive merging, and makes the chunk read
+                # correctly when displayed as a citation.
+                heading_text = block.text.strip()
+                if heading_text and not any(
+                    text.strip().lower() == heading_text.lower() for _, text in buffer
+                ):
+                    group += 1
+                    buffer.append((group, heading_text))
+                    buffer_words += _words(heading_text)
                 continue
 
             if block.is_atomic:

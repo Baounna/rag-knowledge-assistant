@@ -1,9 +1,10 @@
 # --- slice 1: ingestion -------------------------------------------------
 pypdf==6.16.2              # PDF text extraction
 
-# --- slice 2: indexing (not yet wired) ----------------------------------
-# psycopg[binary]>=3.2     # Postgres driver
-# pgvector>=0.3            # vector column type
+# --- slice 2: indexing --------------------------------------------------
+psycopg[binary]>=3.2       # Postgres driver
+httpx>=0.27                # hosted embedding providers
+fastembed>=0.4             # local ONNX embeddings (default; no API key)
 
 # --- slice 4: generation ------------------------------------------------
 # anthropic>=0.69          # Claude API

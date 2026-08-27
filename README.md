@@ -3,11 +3,11 @@
 Answers natural-language questions over an internal document corpus, with
 clickable citations, and refuses when the corpus doesn't support an answer.
 
-Status: **slice 1 of 7 complete** (ingestion).
+Status: **slices 1-2 of 7 complete** (ingestion, indexing).
 
 ```
-[x] 1. Ingestion    parse -> chunk -> chunk records          <- you are here
-[ ] 2. Indexing     embeddings (pgvector) + BM25 (tsvector)
+[x] 1. Ingestion    parse -> chunk -> chunk records
+[x] 2. Indexing     embeddings (pgvector) + BM25 (pg_search)  <- you are here
 [ ] 3. Retrieval    hybrid + RRF -> rerank -> query rewriting
 [ ] 4. Generation   citations + refusal + prompt caching
 [ ] 5. Eval         recall@K, MRR, faithfulness -> make eval
@@ -19,10 +19,15 @@ Status: **slice 1 of 7 complete** (ingestion).
 
 ```bash
 make setup     # venv + dependencies + .env
+make db-up     # Postgres with pgvector + pg_search
 make ingest    # corpus/ -> data/chunks.jsonl
-make inspect   # same, but prints sample chunks to eyeball
-make test      # chunker invariants
+make index     # embed + load into Postgres
+make search Q="how do I get money back for a work trip"
+make test      # 26 tests
 ```
+
+No API key is needed to run any of the above: embeddings default to
+`fastembed` (BGE, ONNX, in-process). A Claude key is required from slice 4.
 
 Drop your own documents into `corpus/` and re-run `make ingest`. Nothing in
 the code needs to change:
@@ -124,3 +129,62 @@ tests/test_chunker.py  invariants (every test = one failure mode)
 corpus/                your documents
 data/chunks.jsonl      output
 ```
+
+
+## Slice 2 — indexing
+
+One table, two indexes over the same rows:
+
+| arm | index | finds |
+|---|---|---|
+| semantic | `VECTOR(384)` + HNSW, cosine | *meaning* — "money back for a work trip" -> the expense policy |
+| lexical | `pg_search` BM25 (Tantivy) | *exact words* — `/var/log/db`, `--force`, error codes |
+
+They fail on opposite inputs, which is the entire argument for hybrid
+retrieval. Measured on this corpus:
+
+```
+query: "how do I get my money back for a work trip?"     (0 shared words)
+  vector  -> expense policy at #1, #2      correct
+  lexical -> unrelated PDF chunks at #2,#3  wrong
+
+query: "/var/log/db"
+  vector  -> correct chunk at #2, behind an unrelated PDF chunk
+  lexical -> correct chunk at #1
+```
+
+Both indexes are built over `index_text` = heading trail + chunk body, never
+the bare text.
+
+### Design decisions worth defending
+
+**One database.** ParadeDB is Postgres with `pgvector` *and* `pg_search`
+(Tantivy embedded in Postgres — so the lexical arm is genuine BM25, which is
+what the subject asks for). Vectors, lexical index, chat history, and feedback
+live in one datastore. `Store.init_schema` falls back to Postgres full-text
+search if `pg_search` is missing, and reports which backend actually ran.
+
+**Cosine, not L2.** Embedding models are trained with cosine similarity; L2 on
+unnormalised vectors also ranks by magnitude.
+
+**English stemming on the BM25 index.** Without it, `deadline` does not match
+`Deadlines` — and the miss is completely silent.
+
+**Asymmetric embedding.** Questions and passages get different prefixes
+(`embed_query` vs `embed_documents`). Using the wrong side degrades every
+score with no error.
+
+**Never feed user input to a query parser.** Lexical search goes through
+`paradedb.match()`, which tokenises. The bare `@@@ 'text'` form parses Tantivy
+query syntax, so a user typing `--force` crashed the endpoint
+(`test_lexical_survives_adversarial_input`).
+
+**Incremental indexing.** `content_hash` means a re-ingest only re-embeds
+chunks whose text changed.
+
+### Swapping the embedding model
+
+`EMBEDDING_PROVIDER` accepts `fastembed` (default, local), `ollama`, `voyage`,
+or `openai`. Dimensions are a property of the model, so changing it means
+`make reindex` — the vector column has a fixed width and will reject a
+mismatch at insert time, which is the right time to find out.
