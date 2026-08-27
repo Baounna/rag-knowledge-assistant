@@ -16,18 +16,43 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from app.store import Filters, Store  # noqa: E402
 
 
-def _store_or_skip() -> Store:
-    store = Store()
+def _test_store_or_skip() -> Store:
+    """Point the tests at a SEPARATE database.
+
+    These tests call `init_schema(drop=True)`. Run against the app's own
+    database, `make test` silently destroys the index you just built -- which
+    it did, once. Tests get `<database>_test`, created on demand.
+    """
+    import os
+    from dataclasses import replace
+
+    import psycopg
+
+    from app.config import get_settings
+
+    base = get_settings()
+    test_url = os.environ.get("TEST_DATABASE_URL") or base.database_url + "_test"
+    admin_url, _, test_db = test_url.rpartition("/")
+
+    try:
+        with psycopg.connect(base.database_url, autocommit=True) as c, c.cursor() as cur:
+            cur.execute("SELECT 1 FROM pg_database WHERE datname = %s", (test_db,))
+            if not cur.fetchone():
+                cur.execute(f'CREATE DATABASE "{test_db}"')
+    except Exception as exc:  # noqa: BLE001
+        pytest.skip(f"database unavailable ({type(exc).__name__}) -- run `make db-up`")
+
+    store = Store(replace(base, database_url=test_url))
     try:
         store.init_schema()
     except Exception as exc:  # noqa: BLE001
-        pytest.skip(f"database unavailable ({type(exc).__name__}) -- run `make db-up`")
+        pytest.skip(f"test database unusable ({type(exc).__name__})")
     return store
 
 
 @pytest.fixture(scope="module")
 def store() -> Store:
-    s = _store_or_skip()
+    s = _test_store_or_skip()
     s.init_schema(drop=True)
     s.upsert_chunks([
         {
