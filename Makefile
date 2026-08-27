@@ -2,7 +2,7 @@ VENV := .venv
 PY   := $(VENV)/bin/python
 PIP  := $(VENV)/bin/pip
 
-.PHONY: help setup db-up db-down ingest inspect index reindex search test clean
+.PHONY: help setup db-up db-down ingest inspect index reindex search demo test clean
 
 help:
 	@grep -E '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-12s %s\n", $$1, $$2}'
@@ -27,6 +27,9 @@ index: ## embed chunks and load them into Postgres
 
 reindex: ## drop the table and rebuild from scratch
 	$(PY) scripts/index.py --recreate
+
+demo: ## interactive retrieval demo (type questions, see both indexes)
+	$(PY) scripts/demo.py
 
 search: ## probe both indexes:  make search Q="how many days to submit expenses"
 	$(PY) scripts/index.py --probe "$(Q)"

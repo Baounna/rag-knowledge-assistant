@@ -23,7 +23,8 @@ make db-up     # Postgres with pgvector + pg_search
 make ingest    # corpus/ -> data/chunks.jsonl
 make index     # embed + load into Postgres
 make search Q="how do I get money back for a work trip"
-make test      # 26 tests
+make demo      # interactive: type questions, watch both indexes
+make test      # 28 tests
 ```
 
 No API key is needed to run any of the above: embeddings default to
