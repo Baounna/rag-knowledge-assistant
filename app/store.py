@@ -236,8 +236,10 @@ class Store:
     """
 
     def vector_search(
-        self, query_vec: Sequence[float], k: int = 20, filters: Filters | None = None
+        self, query_vec: Sequence[float], k: int | None = None,
+        filters: Filters | None = None
     ) -> list[SearchHit]:
+        k = k or self.settings.retrieval_top_k
         vec = json.dumps(list(query_vec))
         filter_params: list[Any] = []
         where = (filters or Filters()).sql(filter_params)
@@ -256,8 +258,9 @@ class Store:
             return self._hits(cur.fetchall(), "vector")
 
     def lexical_search(
-        self, query: str, k: int = 20, filters: Filters | None = None
+        self, query: str, k: int | None = None, filters: Filters | None = None
     ) -> list[SearchHit]:
+        k = k or self.settings.retrieval_top_k
         filter_params: list[Any] = []
         where = (filters or Filters()).sql(filter_params)
         if self.lexical_backend == "bm25":

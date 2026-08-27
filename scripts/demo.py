@@ -75,7 +75,7 @@ def main() -> int:
     print(f"{DIM}:k N  :source TEXT  :nosource  :stats  :q{OFF}")
 
     embedder = get_embedder(settings)
-    k = 5
+    k = settings.retrieval_top_k
     source: str | None = None
 
     while True:

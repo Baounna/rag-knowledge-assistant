@@ -14,17 +14,21 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from app.config import get_settings  # noqa: E402
 from app.ingest import Chunker, ingest_corpus  # noqa: E402
 
 
 def main() -> int:
+    cfg = get_settings()   # .env supplies the defaults; flags override them
     ap = argparse.ArgumentParser(description="Parse and chunk the corpus.")
     ap.add_argument("--corpus", type=Path, default=Path("corpus"))
     ap.add_argument("--out", type=Path, default=Path("data/chunks.jsonl"))
-    ap.add_argument("--target", type=int, default=350, help="target words per chunk")
-    ap.add_argument("--max", dest="max_words", type=int, default=500)
+    ap.add_argument("--target", type=int, default=cfg.chunk_target_words,
+                    help="target words per chunk")
+    ap.add_argument("--max", dest="max_words", type=int, default=cfg.chunk_max_words)
     ap.add_argument("--min", dest="min_words", type=int, default=60)
-    ap.add_argument("--overlap", type=int, default=2, help="overlap sentences")
+    ap.add_argument("--overlap", type=int, default=cfg.chunk_overlap_sentences,
+                    help="overlap sentences")
     ap.add_argument("--inspect", type=int, default=0, metavar="N",
                     help="print N sample chunks after ingesting")
     args = ap.parse_args()
