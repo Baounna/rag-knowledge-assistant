@@ -4,6 +4,32 @@
 # the lexical arm; pg_search IS Tantivy, embedded in Postgres -- so we get
 # genuine BM25 scoring without running a second datastore.
 services:
+  # The application itself, so nothing needs installing on the host.
+  # Inside the compose network services reach each other by NAME (db, ollama),
+  # not localhost -- localhost inside a container is that container.
+  app:
+    build: .
+    container_name: rag-app
+    ports:
+      - "8000:8000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgresql://rag:rag@db:5432/rag
+      OLLAMA_URL: http://ollama:11434
+      LLM_PROVIDER: ${LLM_PROVIDER:-auto}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen2.5:7b-instruct}
+    volumes:
+      # Your documents, read-only: the app never writes to the corpus.
+      - ./corpus:/app/corpus:ro
+      - ./data:/app/data
+      - ./eval:/app/eval
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
   db:
     image: paradedb/paradedb:latest
     container_name: rag-db

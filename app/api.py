@@ -174,7 +174,10 @@ def ask(body: AskRequest, user: User = Depends(current_user)) -> StreamingRespon
         filters = Filters(sources=body.sources) if body.sources else None
         before = llm.usage.output_tokens + llm.usage.input_tokens
 
-        result = retriever.retrieve(body.question, filters=filters, history=history)
+        result = retriever.retrieve(
+            body.question, filters=filters, history=history,
+            use_rewrite=settings.enable_rewrite, use_rerank=settings.enable_rerank,
+        )
         yield _sse("retrieval", {
             "chunks": [
                 {"chunk_id": c.chunk_id, "source": c.source, "url": c.url,
@@ -200,7 +203,10 @@ def ask(body: AskRequest, user: User = Depends(current_user)) -> StreamingRespon
         citations = validate_citations(text, result.chunks)
         refused = text.lower().startswith("i don't know based on")
         tokens = (llm.usage.output_tokens + llm.usage.input_tokens) - before
-        cost_cents = max(0, round(tokens * settings.cents_per_1k_tokens / 1000))
+        # Price per token comes from the BACKEND, not from config: a local
+        # model costs nothing, and charging it against the user's ceiling
+        # would lock them out after ~60 free questions for no reason.
+        cost_cents = max(0, round(tokens * llm.backend.cents_per_1k_tokens / 1000))
 
         message_id = accounts.add_message(
             conversation_id, "assistant", text,

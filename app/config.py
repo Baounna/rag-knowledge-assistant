@@ -27,6 +27,11 @@ def load_dotenv(path: Path | None = None) -> None:
         os.environ.setdefault(key.strip(), value.strip().strip("'\""))
 
 
+def _bool(name: str, default: bool) -> bool:
+    raw = os.environ.get(name, "")
+    return default if not raw else raw.strip().lower() in {"1", "true", "yes", "on"}
+
+
 def _float(name: str, default: float) -> float:
     try:
         return float(os.environ.get(name, "") or default)
@@ -67,6 +72,8 @@ class Settings:
     retrieval_top_k: int         # candidates pulled from EACH index
     rerank_top_n: int            # chunks that actually reach the prompt
     min_confidence: float        # refuse below this; 0 disables the pre-model gate
+    enable_rewrite: bool         # query rewriting + HyDE (1 extra model call)
+    enable_rerank: bool          # LLM reranking (1 extra model call)
 
     # -- limits --------------------------------------------------------
     daily_question_limit: int
@@ -85,6 +92,7 @@ class Settings:
 def get_settings() -> Settings:
     load_dotenv()
     provider = os.environ.get("EMBEDDING_PROVIDER", "fastembed").lower()
+    llm_provider = os.environ.get("LLM_PROVIDER", "auto").lower()
 
     # Dimensions are a property of the model, not a free choice: the vector
     # column is declared with a fixed width, so switching model means
@@ -99,7 +107,7 @@ def get_settings() -> Settings:
     default_model, default_dim = defaults.get(provider, defaults["fastembed"])
 
     return Settings(
-        llm_provider=os.environ.get("LLM_PROVIDER", "auto").lower(),
+        llm_provider=llm_provider,
         ollama_model=os.environ.get("OLLAMA_MODEL", "qwen2.5:7b-instruct"),
         anthropic_api_key=os.environ.get("ANTHROPIC_API_KEY", ""),
         model_answer=os.environ.get("MODEL_ANSWER", "claude-sonnet-5"),
@@ -118,6 +126,11 @@ def get_settings() -> Settings:
         retrieval_top_k=_int("RETRIEVAL_TOP_K", 20),
         rerank_top_n=_int("RERANK_TOP_N", 5),
         min_confidence=_float("MIN_CONFIDENCE", 0.35),
+        # Default OFF for a local model: rewriting and reranking are two extra
+        # calls, and on CPU inference they turn a 20s answer into 8 minutes.
+        # Hosted models get them by default, where they cost cents and help.
+        enable_rewrite=_bool("ENABLE_REWRITE", llm_provider != "ollama"),
+        enable_rerank=_bool("ENABLE_RERANK", llm_provider != "ollama"),
         daily_question_limit=_int("DAILY_QUESTION_LIMIT", 100),
         daily_cost_limit_cents=_int("DAILY_COST_LIMIT_CENTS", 200),
         allow_signup=os.environ.get("ALLOW_SIGNUP", "true").lower() != "false",

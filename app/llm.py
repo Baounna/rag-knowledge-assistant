@@ -73,6 +73,7 @@ class Backend:
     """
 
     name = "backend"
+    cents_per_1k_tokens = 0.0   # local backends cost nothing to run
 
     @property
     def available(self) -> bool:
@@ -199,6 +200,7 @@ class AnthropicBackend(Backend):
     name = "anthropic"
 
     def __init__(self, settings: Settings) -> None:
+        self.cents_per_1k_tokens = settings.cents_per_1k_tokens
         self.settings = settings
         self._client: Any = None
 
@@ -259,6 +261,7 @@ class OllamaBackend(Backend):
     """
 
     name = "ollama"
+    cents_per_1k_tokens = 0.0   # runs on your own hardware; nothing is billed
 
     def __init__(self, settings: Settings) -> None:
         self.settings = settings
