@@ -15,16 +15,16 @@ help:
 
 # ---- run --------------------------------------------------------------
 
-up: ## start database + app          -> http://localhost:8000
+up: ## start database + app          -> http://localhost:8502
 	$(DC) up -d --build app
-	@echo "ready: http://localhost:8000"
+	@echo "ready: http://localhost:8502"
 
 up-local: ## start database + app + local LLM (free, no API key)
 	$(DC) --profile ollama up -d ollama
 	@until curl -sf localhost:11434/api/tags >/dev/null 2>&1; do sleep 2; done
 	$(DC) exec ollama ollama pull $${OLLAMA_MODEL:-qwen2.5:7b-instruct}
 	$(DC) up -d --build app
-	@echo "ready: http://localhost:8000  (set LLM_PROVIDER=ollama in .env)"
+	@echo "ready: http://localhost:8502  (set LLM_PROVIDER=ollama in .env)"
 
 down: ## stop everything (data is kept)
 	$(DC) --profile ollama down
@@ -114,7 +114,7 @@ local-setup: ## OPTIONAL: python venv on your machine (not needed if using Docke
 	@test -f .env || cp .env.example .env
 
 local-serve: ## OPTIONAL: run the app from the host venv
-	$(PY) -m uvicorn app.api:app --reload --port 8000
+	$(PY) -m streamlit run streamlit_app.py
 
 local-test: ## OPTIONAL: run tests from the host venv
 	$(PY) -m pytest tests/ -q

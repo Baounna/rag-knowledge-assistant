@@ -41,7 +41,7 @@ flowchart TB
         RR --> G --> CV --> RF
     end
 
-    RF -->|SSE stream| UI["chat UI<br/>streaming · clickable citations<br/>feedback"]
+    RF -->|st.write_stream| UI["Streamlit UI<br/>streaming · clickable citations<br/>feedback"]
     UI --> U
     U --> AD["admin dashboard<br/>rating ↔ retrieved chunks"]
 
@@ -58,21 +58,23 @@ flowchart TB
 
 ## Request path for one question
 
+Streamlit calls the application modules directly — no HTTP hop, no second
+service, no cookie handling. The cost is that there is no REST API for another
+client to consume; the FastAPI layer that provided one is in git history and
+the modules it called are unchanged.
+
 ```
-POST /api/ask
-  ├─ check session cookie                     401 if absent
-  ├─ check rolling 24h limits                 429 if over
-  ├─ SSE: start
+st.chat_input
+  ├─ session_state holds the signed-in user
+  ├─ check rolling 24h limits                 blocks if over
   ├─ rewrite question              Haiku      1 call   (skipped without a key)
   ├─ lexical + vector search       Postgres   2 queries per rewritten query
   ├─ RRF fuse                      pure code  0 calls
   ├─ rerank candidates             Haiku      1 call   (skipped without a key)
-  ├─ SSE: retrieval  ── UI shows which passages, and which retriever found each
-  ├─ stream answer                 Sonnet     1 call, context prefix cached
-  ├─ SSE: token × n
+  ├─ st.write_stream(generator)    model      1 call, context prefix cached
   ├─ validate citations            pure code  against the retrieved ids
-  ├─ persist message + cost
-  └─ SSE: done  ── linked citations, invalid ones flagged
+  ├─ render: valid ids become links, invalid ones stay plain code
+  └─ persist message + cost
 ```
 
 Three model calls per question. Two are Haiku on the critical path; one is

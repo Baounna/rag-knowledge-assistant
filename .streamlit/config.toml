@@ -1,0 +1,18 @@
+# Server-side config. Kept in the repo so the container and a local run behave
+# identically -- Streamlit silently falls back to different defaults otherwise.
+[server]
+headless = true
+# Streamlit's file watcher scans the whole working directory. With a corpus
+# mounted in, that means watching every document for changes on every rerun.
+fileWatcherType = "none"
+maxUploadSize = 50
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "light"
+primaryColor = "#8a4b2a"
+backgroundColor = "#fbfaf8"
+secondaryBackgroundColor = "#f4ece6"
+textColor = "#1c1a17"

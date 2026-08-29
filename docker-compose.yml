@@ -11,7 +11,10 @@ services:
     build: .
     container_name: rag-app
     ports:
-      - "8000:8000"
+      # Host 8502, container 8501: 8501 is Streamlit's default and is often
+      # already taken by another app on a developer machine. Override with
+      # APP_PORT in .env if 8502 clashes too.
+      - "${APP_PORT:-8502}:8501"
     env_file:
       - path: .env
         required: false

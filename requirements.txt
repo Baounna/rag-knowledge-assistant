@@ -9,9 +9,8 @@ fastembed>=0.4             # local ONNX embeddings (default; no API key)
 # --- slices 4-5: generation and eval ------------------------------------
 anthropic>=0.69            # Claude API
 
-# --- slices 6-7: API and UI ---------------------------------------------
-fastapi>=0.115
-uvicorn[standard]>=0.30
+# --- slices 6-7: UI -----------------------------------------------------
+streamlit>=1.40            # the interface; talks to app/* directly
 
 # --- dev ----------------------------------------------------------------
 pytest>=8.0

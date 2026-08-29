@@ -12,13 +12,20 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app/ ./app/
-COPY web/ ./web/
 COPY scripts/ ./scripts/
 COPY eval/ ./eval/
+COPY streamlit_app.py .
+COPY .streamlit/ ./.streamlit/
 
 # Bake the embedding model into the image. Downloading it on first request
-# would make the first user wait minutes and would re-download on every
-# container restart.
+# would make the first user wait minutes and re-download on every restart.
+#
+# The cache path is pinned and made writable by the runtime user: fastembed
+# defaults to /tmp, which is created here by ROOT and then unreadable to the
+# non-root user the container actually runs as -- the model silently falls
+# back to re-downloading, on every start.
+ENV FASTEMBED_CACHE_PATH=/app/.cache/fastembed \
+    HF_HOME=/app/.cache/huggingface
 RUN python -c "from fastembed import TextEmbedding; TextEmbedding('BAAI/bge-small-en-v1.5')"
 
 # Non-root: a container escape should not land on root.
@@ -26,8 +33,10 @@ RUN useradd --create-home --uid 10001 app \
     && chown -R app:app /app /home/app
 USER app
 
-EXPOSE 8000
+EXPOSE 8501
 HEALTHCHECK --interval=30s --timeout=5s --start-period=40s \
-    CMD curl -fsS http://localhost:8000/api/health || exit 1
+    CMD curl -fsS http://localhost:8501/_stcore/health || exit 1
 
-CMD ["uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["streamlit", "run", "streamlit_app.py", \
+     "--server.port=8501", "--server.address=0.0.0.0", \
+     "--server.headless=true", "--browser.gatherUsageStats=false"]

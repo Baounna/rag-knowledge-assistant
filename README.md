@@ -12,7 +12,7 @@ Deployment: [DEPLOY.md](DEPLOY.md)
 [x] 3. Retrieval    hybrid + RRF -> rerank -> query rewriting
 [x] 4. Generation   citations + refusal + prompt caching
 [x] 5. Eval         recall@K, MRR, faithfulness -> make eval
-[x] 6. UI           streaming chat, clickable citations, feedback
+[x] 6. UI           Streamlit: streaming, clickable citations, feedback
 [x] 7. Ops          auth, rate limits, cost ceiling, deploy
 ```
 
@@ -25,7 +25,7 @@ no Postgres, no model runtime.
 make up-local     # database + app + local LLM   (free, no API key)
 make ingest
 make index
-# open http://localhost:8000
+# open http://localhost:8502
 ```
 
 Or with a Claude key in `.env` (faster, better answers, ~2c per question):
@@ -60,7 +60,7 @@ corpus/
 
 | | where it runs | disk |
 |---|---|---|
-| App (API + UI) | `rag-app` container | ~1 GB image |
+| App (Streamlit UI) | `rag-app` container | ~1 GB image |
 | Postgres + pgvector + BM25 | `rag-db` container | ~1.4 GB image |
 | Local LLM (optional) | `rag-ollama` container | ~7 GB image + ~5 GB model |
 | Your documents | `corpus/`, mounted read-only | yours |
