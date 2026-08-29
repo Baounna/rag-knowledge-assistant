@@ -1,0 +1,47 @@
+# Fly.io deployment. Two machines: this app, and a ParadeDB Postgres.
+#
+# Fly's own managed Postgres has neither pgvector nor pg_search, so the
+# database is deployed separately from `deploy/paradedb.fly.toml`. The app
+# degrades to Postgres full-text search if pg_search is missing (see
+# Store.init_schema), so a plain pgvector host also works -- with weaker
+# lexical retrieval, which is a real quality decision, not a detail.
+
+app = "rag-knowledge-assistant"
+primary_region = "cdg"          # change to your nearest region
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  APP_PORT = "8501"
+  COOKIE_SECURE = "true"        # HTTPS only; Fly terminates TLS
+  ALLOW_SIGNUP = "false"        # provision accounts, then keep the door shut
+  EMBEDDING_PROVIDER = "fastembed"
+  LLM_PROVIDER = "anthropic"    # a local model needs a GPU machine to be usable
+  RETRIEVAL_TOP_K = "20"
+  RERANK_TOP_N = "5"
+  DAILY_QUESTION_LIMIT = "100"
+  DAILY_COST_LIMIT_CENTS = "200"
+
+[http_service]
+  internal_port = 8501
+  force_https = true
+  auto_stop_machines = "suspend"   # suspend, not stop: a cold start reloads
+  auto_start_machines = true       # the embedding model and takes ~30s
+  min_machines_running = 1
+
+  [http_service.concurrency]
+    type = "requests"
+    soft_limit = 20
+    hard_limit = 40
+
+  [[http_service.checks]]
+    grace_period = "45s"           # the embedding model loads at boot
+    interval = "30s"
+    method = "GET"
+    path = "/_stcore/health"
+    timeout = "5s"
+
+[[vm]]
+  size = "shared-cpu-2x"
+  memory = "2gb"                   # ~1GB is the model; less will OOM at boot

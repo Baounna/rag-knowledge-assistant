@@ -5,8 +5,8 @@ DC   := docker compose
 RUN  := $(DC) run --rm app python
 
 .PHONY: help up up-local down logs ps rebuild ingest index reindex eval eval-full test \
-        demo search shell admin db-up db-down ollama-up ollama-down clean nuke \
-        local-setup local-serve local-test
+        demo search shell admin db-up db-down ollama-up ollama-down deploy deploy-check \
+        clean nuke local-setup local-serve local-test
 
 help:
 	@echo "Everything runs in Docker. Nothing is installed on your machine."
@@ -91,6 +91,16 @@ ollama-up: ## start only the local LLM and pull its model
 
 ollama-down: ## stop only the local LLM
 	$(DC) stop ollama
+
+# ---- deploy -----------------------------------------------------------
+
+deploy-check: ## verify the image builds and boots before deploying
+	$(DC) build app
+	@echo "image builds. next: see DEPLOY.md for the fly.io steps"
+
+deploy: ## deploy to fly.io (needs `fly auth login` first)
+	@command -v fly >/dev/null || { echo "flyctl not installed -- see DEPLOY.md"; exit 1; }
+	fly deploy
 
 # ---- cleanup ----------------------------------------------------------
 

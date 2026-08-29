@@ -1,0 +1,37 @@
+# Postgres with pgvector AND pg_search (real BM25), deployed as its own Fly app.
+#
+#   fly apps create rag-db
+#   fly volumes create pgdata --size 3 --app rag-db --region cdg
+#   fly secrets set POSTGRES_PASSWORD=... --app rag-db
+#   fly deploy --config deploy/paradedb.fly.toml --app rag-db
+#
+# Then point the app at it over the private network (no public exposure):
+#   fly secrets set DATABASE_URL=postgresql://rag:PASSWORD@rag-db.internal:5432/rag
+
+app = "rag-db"
+primary_region = "cdg"
+
+[build]
+  image = "paradedb/paradedb:latest"
+
+[env]
+  POSTGRES_USER = "rag"
+  POSTGRES_DB = "rag"
+  PGDATA = "/var/lib/postgresql/pgdata"
+
+[mounts]
+  source = "pgdata"
+  destination = "/var/lib/postgresql"
+
+# No [http_service] and no public ports on purpose: the database is reachable
+# only over Fly's private WireGuard network, from the app.
+[[services]]
+  internal_port = 5432
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = 5432
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1gb"
