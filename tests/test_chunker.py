@@ -174,3 +174,35 @@ def test_chunk_ids_are_unique_and_ordered():
     ids = [c.chunk_id for c in chunks]
     assert len(ids) == len(set(ids))
     assert [c.position for c in chunks] == list(range(len(chunks)))
+
+
+# -- Notion export layout -----------------------------------------------
+
+def test_notion_source_is_the_containing_space_not_a_filesystem_ancestor(tmp_path):
+    """Regression: the label was taken from `path.parents[-1]`, which is the
+    filesystem root -- producing "Notion / app" from the container's working
+    directory instead of the workspace section."""
+    from app.ingest.parsers import parse_file
+
+    space = tmp_path / "corpus" / "notion" / "People Group ff6124ea10e7d438301ca47edf245750"
+    space.mkdir(parents=True)
+    page = space / "Anti-Harassment Policy 7742823f3fa26a5039dd354f2ba7bed2.md"
+    page.write_text("# Anti-Harassment Policy\n\nBody text goes here.\n", encoding="utf-8")
+
+    doc = parse_file(page, "n1")
+    assert doc.source == "Notion / People Group"
+    assert doc.title == "Anti-Harassment Policy"
+    # The page id must survive into a reconstructed URL, or the citation
+    # cannot link back into the workspace.
+    assert doc.url == "https://www.notion.so/7742823f3fa26a5039dd354f2ba7bed2"
+
+
+def test_corpus_readme_is_not_ingested(tmp_path):
+    """Regression: corpus/README.md was indexed as if it were company policy,
+    so questions about the corpus retrieved our own documentation."""
+    from app.ingest.pipeline import iter_source_files
+
+    (tmp_path / "README.md").write_text("How this corpus works.", encoding="utf-8")
+    (tmp_path / "policy.md").write_text("Real content.", encoding="utf-8")
+    names = {p.name for p in iter_source_files(tmp_path)}
+    assert names == {"policy.md"}

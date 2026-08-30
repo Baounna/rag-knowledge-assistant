@@ -53,12 +53,23 @@ class IngestStats:
         return "\n".join(lines)
 
 
+# Files that describe the corpus rather than belong to it. Indexing our own
+# README makes it retrievable as if it were company policy, and it turns up in
+# answers about "how the corpus works" -- which is documentation leaking into
+# the knowledge base.
+EXCLUDED_NAMES = {"readme.md", "readme.txt", "readme", "license", "license.md",
+                  "contributing.md", "changelog.md", "code_of_conduct.md"}
+
+
 def iter_source_files(root: Path) -> Iterator[Path]:
     for path in sorted(root.rglob("*")):
-        if path.is_file() and path.suffix.lower() in SUPPORTED_SUFFIXES:
-            if any(part.startswith(".") for part in path.parts):
-                continue
-            yield path
+        if not path.is_file() or path.suffix.lower() not in SUPPORTED_SUFFIXES:
+            continue
+        if any(part.startswith(".") for part in path.parts):
+            continue
+        if path.name.lower() in EXCLUDED_NAMES:
+            continue
+        yield path
 
 
 def ingest_corpus(

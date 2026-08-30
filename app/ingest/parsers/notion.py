@@ -36,11 +36,22 @@ def parse_notion(path: Path, doc_id: str, *, source: str | None = None) -> Docum
     if page_id and not doc.url:
         doc.url = f"https://www.notion.so/{page_id}"
 
-    # Parent folders in a Notion export are the parent pages. Use them as the
-    # document's source label so retrieval filters can scope to a workspace
-    # section ("only search the Engineering space").
-    parents = [_split_notion_name(p.name)[0] for p in path.parents if p.name]
-    parents = [p for p in parents if p and p.lower() not in {"notion", "corpus"}]
-    if parents and not source:
-        doc.source = f"Notion / {parents[-1]}"
+    # Parent folders in a Notion export are the parent pages. The IMMEDIATE
+    # parent inside the export is the workspace section -- use that as the
+    # source label so retrieval can be scoped to it ("only search the People
+    # Group space").
+    #
+    # Anchor on the `notion` directory rather than walking to the outermost
+    # parent: `path.parents` runs from the file outward, so `parents[-1]` is
+    # the filesystem root, which produced the nonsense label "Notion / app"
+    # from the container's /app working directory.
+    if not source:
+        parts = [p.name for p in reversed(path.parents) if p.name]
+        try:
+            anchor = len(parts) - 1 - parts[::-1].index("notion")
+        except ValueError:
+            anchor = -1
+        section = parts[anchor + 1] if anchor >= 0 and anchor + 1 < len(parts) else ""
+        section = _split_notion_name(section)[0] if section else ""
+        doc.source = f"Notion / {section}" if section else "Notion"
     return doc

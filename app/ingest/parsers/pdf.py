@@ -88,12 +88,20 @@ def parse_pdf(path: Path, doc_id: str, *, source: str | None = None) -> Document
 
     flush_paragraph()
 
-    title = (meta.get("/Title") or "").strip() or path.stem.replace("_", " ")
+    # A PDF carries no frontmatter, so title and source come from its own
+    # metadata if present and otherwise from the filename. Exported filenames
+    # often encode a path ("finance__expenses.pdf"); read that back as a
+    # section so the source label is a place, not a slug.
+    stem = path.stem
+    sections = [s.replace("-", " ").strip().title() for s in stem.split("__") if s.strip()]
+    title = (meta.get("/Title") or "").strip() or (
+        " / ".join(sections) if sections else stem.replace("_", " "))
     author = (meta.get("/Author") or "").strip() or None
+    derived_source = f"PDF / {sections[0]}" if sections else "PDF"
     return Document(
         doc_id=doc_id,
         title=title,
-        source=source or title,
+        source=source or derived_source,
         url=path.resolve().as_uri(),
         author=author,
         blocks=blocks,
