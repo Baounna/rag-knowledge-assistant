@@ -217,7 +217,30 @@ def draft(llm: LLM, chunks: list[dict], batch: int) -> list[EvalQuestion]:
     return out
 
 
-def draft_unanswerable(llm: LLM, store: Store, count: int) -> list[EvalQuestion]:
+def suspect_threshold(store: Store, answerable: list[EvalQuestion]) -> float:
+    """Calibrate the 'this looks answerable' cutoff from THIS corpus.
+
+    BM25 scores are unbounded and corpus-dependent: on an 8-chunk sample they
+    ran 0.7-4.7, on 2000 chunks they run 14-47. A hardcoded threshold is
+    therefore meaningless -- 3.0 sat below the entire real range and flagged
+    every candidate, which is how a guard becomes noise.
+
+    So measure instead: score questions KNOWN to be answerable, and treat a
+    candidate as suspect if it scores like one of them.
+    """
+    scores = []
+    for q in answerable[:25]:
+        hits = store.lexical_search(q.question, k=1)
+        if hits:
+            scores.append(hits[0].score)
+    if len(scores) < 5:
+        return float("inf")            # not enough signal: flag nothing
+    scores.sort()
+    return scores[len(scores) // 4]    # 25th percentile of answerable scores
+
+
+def draft_unanswerable(llm: LLM, store: Store, count: int,
+                       threshold: float = float("inf")) -> list[EvalQuestion]:
     with store.conn() as c, c.cursor() as cur:
         cur.execute("SELECT DISTINCT heading_trail[2] h FROM chunks "
                     "WHERE array_length(heading_trail,1) > 1 LIMIT 60")
@@ -259,8 +282,9 @@ def draft_unanswerable(llm: LLM, store: Store, count: int) -> list[EvalQuestion]
     out: list[EvalQuestion] = []
     for i, (score, top, q) in enumerate(scored[:wanted]):
         tags = ["drafted", "needs-review", "unanswerable"]
-        note = f"best retrieval score {score:.1f} (low = probably genuinely absent)"
-        if score > 3.0:
+        note = (f"best retrieval score {score:.1f}; answerable questions on this "
+                f"corpus score {threshold:.1f}+")
+        if score >= threshold:
             tags.append("SUSPECT")
             note = (f"retrieval found a strong match ({score:.1f}): {top.source} > "
                     f"{' > '.join(top.heading_trail[1:3])}. CHECK whether the corpus "
@@ -338,7 +362,23 @@ def main() -> int:
 
     chunks = pick_chunks(store, args.count)
     questions = draft(llm, chunks, args.batch)
-    questions += draft_unanswerable(llm, store, args.unanswerable)
+    threshold = suspect_threshold(store, questions)
+    print(f"  calibrated: answerable questions score {threshold:.1f}+ on this corpus")
+    questions += draft_unanswerable(llm, store, args.unanswerable, threshold)
+
+    # Deduplicate: the model repeats itself across batches, and a duplicated
+    # question silently double-weights whatever it measures.
+    seen: set[str] = set()
+    deduped = []
+    for q in questions:
+        key = " ".join(q.question.lower().split())
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(q)
+    if len(deduped) < len(questions):
+        print(f"  removed {len(questions) - len(deduped)} duplicate questions")
+    questions = deduped
 
     save_questions(questions, args.out)
     answerable = sum(1 for q in questions if q.answerable)
