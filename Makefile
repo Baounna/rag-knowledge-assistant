@@ -42,7 +42,10 @@ rebuild: ## rebuild the app image after changing dependencies
 # ---- pipeline ---------------------------------------------------------
 
 corpus: ## download a real corpus (GitLab's public handbook, ~170 documents)
-	$(RUN) scripts/fetch_corpus.py --clean
+	# Runs on the host, not in the container: it needs git, and corpus/ is
+	# mounted read-only inside the app so the app can never modify its own
+	# source documents. Pure stdlib, so plain python3 is enough.
+	python3 scripts/fetch_corpus.py --clean
 
 ingest: ## parse + chunk corpus/ -> data/chunks.jsonl
 	$(RUN) scripts/ingest.py
