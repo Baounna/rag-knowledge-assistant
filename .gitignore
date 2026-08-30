@@ -8,3 +8,10 @@ data/*.db
 .pytest_cache/
 node_modules/
 .DS_Store
+
+# Fetched corpus: reproduce it with `make corpus`, do not vendor third-party
+# documentation into this repository. Your OWN documents can be committed.
+.corpus-cache/
+corpus/markdown/*.md
+corpus/pdf/*.pdf
+!corpus/README.md

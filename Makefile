@@ -4,7 +4,7 @@ PIP  := $(VENV)/bin/pip
 DC   := docker compose
 RUN  := $(DC) run --rm app python
 
-.PHONY: help up up-local down logs ps rebuild ingest index reindex eval eval-full test \
+.PHONY: help up up-local down logs ps rebuild corpus ingest index reindex eval eval-full test \
         eval-llm demo search shell admin db-up db-down ollama-up ollama-down deploy deploy-check \
         clean nuke local-setup local-serve local-test
 
@@ -40,6 +40,9 @@ rebuild: ## rebuild the app image after changing dependencies
 	$(DC) build --no-cache app
 
 # ---- pipeline ---------------------------------------------------------
+
+corpus: ## download a real corpus (GitLab's public handbook, ~170 documents)
+	$(RUN) scripts/fetch_corpus.py --clean
 
 ingest: ## parse + chunk corpus/ -> data/chunks.jsonl
 	$(RUN) scripts/ingest.py
