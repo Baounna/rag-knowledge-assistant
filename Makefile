@@ -5,7 +5,7 @@ DC   := docker compose
 RUN  := $(DC) run --rm app python
 
 .PHONY: help up up-local down logs ps rebuild ingest index reindex eval eval-full test \
-        demo search shell admin db-up db-down ollama-up ollama-down deploy deploy-check \
+        eval-llm demo search shell admin db-up db-down ollama-up ollama-down deploy deploy-check \
         clean nuke local-setup local-serve local-test
 
 help:
@@ -50,8 +50,11 @@ index: ## embed chunks and load them into Postgres
 reindex: ## drop the table and rebuild from scratch
 	$(RUN) scripts/index.py --recreate
 
-eval: ## retrieval metrics across all configurations (no API key needed)
+eval: ## retrieval metrics -- fast, no model calls, no cost
 	$(RUN) scripts/eval.py
+
+eval-llm: ## + rewrite/rerank configs (one model call per question, each)
+	$(RUN) scripts/eval.py --with-llm
 
 eval-full: ## + answers, citations, refusal, LLM judge
 	$(RUN) scripts/eval.py --generate --judge

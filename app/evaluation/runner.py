@@ -47,14 +47,28 @@ class Config:
         return [1.0 if self.use_lexical else 0.0, 1.0 if self.use_vector else 0.0]
 
 
-DEFAULT_CONFIGS = [
+# Configurations that touch no model: pure database work, fast, free, and
+# runnable on every commit.
+RETRIEVAL_CONFIGS = [
     Config("lexical-only", use_vector=False),
     Config("vector-only", use_lexical=False),
     Config("hybrid"),
+]
+
+# Configurations that call the LLM once or twice PER QUESTION. On a hosted
+# model that is cents and seconds; on a local CPU model it is roughly a minute
+# per question per config, so these are opt-in rather than default.
+LLM_CONFIGS = [
     Config("hybrid+rewrite", use_rewrite=True),
     Config("hybrid+rerank", use_rerank=True),
     Config("full", use_rewrite=True, use_rerank=True),
 ]
+
+DEFAULT_CONFIGS = RETRIEVAL_CONFIGS + LLM_CONFIGS
+
+
+def needs_llm(config: Config) -> bool:
+    return config.use_rewrite or config.use_rerank
 
 
 @dataclass(slots=True)

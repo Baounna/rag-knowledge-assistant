@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T12:39:38.295332+00:00",
+  "generated_at": "2026-08-30T14:33:30.447480+00:00",
   "embedding_model": "BAAI/bge-small-en-v1.5",
   "coverage": {
     "questions": 20,
@@ -12,8 +12,860 @@
   },
   "reports": [
     {
-      "config": "full",
-      "seconds": 1.43,
+      "config": "lexical-only",
+      "seconds": 1.33,
+      "usage": "0 calls | in 0 out 0 | cache write 0 read 0 (0% hit)",
+      "aggregates": {
+        "hit@1": 0.7,
+        "hit@10": 0.8,
+        "hit@3": 0.8,
+        "hit@5": 0.8,
+        "mrr": 0.75,
+        "precision@5": 0.16,
+        "recall@1": 0.875,
+        "recall@10": 1.0,
+        "recall@3": 1.0,
+        "recall@5": 1.0,
+        "latency_ms_p50": 42.0022
+      },
+      "results": [
+        {
+          "question_id": "q001",
+          "question": "How long do I have to hand in an expense claim?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0001",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0002",
+            "pdf-subject#c0001"
+          ],
+          "final": [
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0001"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0000"
+          ],
+          "latency_ms": 546.7977523803711,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q002",
+          "question": "What happens if I submit my expenses late?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-engineering-handbook#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-engineering-handbook#c0000"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0000"
+          ],
+          "latency_ms": 45.61114311218262,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q003",
+          "question": "Do I need a receipt for a 12 dollar coffee?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0001",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0001"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0000"
+          ],
+          "latency_ms": 43.8389778137207,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q004",
+          "question": "how much per mile for using my own car",
+          "answerable": true,
+          "retrieved": [
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0001",
+            "pdf-subject#c0000",
+            "pdf-subject#c0002",
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000"
+          ],
+          "final": [
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0001",
+            "pdf-subject#c0000",
+            "pdf-subject#c0002",
+            "markdown-engineering-handbook#c0001"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0001"
+          ],
+          "latency_ms": 37.481069564819336,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q005",
+          "question": "Can I fly business class to New York?",
+          "answerable": true,
+          "retrieved": [
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0001",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0001",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0001"
+          ],
+          "latency_ms": 41.951656341552734,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 0.5,
+            "recall@1": 0.0,
+            "hit@1": 0.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q006",
+          "question": "What is the per diem in London?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0000"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0001"
+          ],
+          "latency_ms": 43.50471496582031,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q007",
+          "question": "payments service timeout value",
+          "answerable": true,
+          "retrieved": [
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
+          ],
+          "relevant": [
+            "markdown-engineering-handbook#c0000"
+          ],
+          "latency_ms": 46.3869571685791,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q008",
+          "question": "Where are the database logs when a migration fails?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0001",
+            "markdown-expense-policy#c0001",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0001"
+          ],
+          "relevant": [
+            "markdown-engineering-handbook#c0000"
+          ],
+          "latency_ms": 40.405988693237305,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q009",
+          "question": "Is it safe to run the migration with --force in production?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-engineering-handbook#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001"
+          ],
+          "relevant": [
+            "markdown-engineering-handbook#c0000"
+          ],
+          "latency_ms": 42.899370193481445,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q010",
+          "question": "What time does the search index rebuild?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0000",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0002",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0000",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0000"
+          ],
+          "relevant": [
+            "markdown-engineering-handbook#c0001"
+          ],
+          "latency_ms": 35.69507598876953,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q011",
+          "question": "Does search go down if the nightly rebuild fails?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-engineering-handbook#c0001",
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0000",
+            "pdf-subject#c0002",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0001"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0001",
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0000",
+            "pdf-subject#c0002"
+          ],
+          "relevant": [
+            "markdown-engineering-handbook#c0001"
+          ],
+          "latency_ms": 45.83859443664551,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q012",
+          "question": "When does the search on-call rotation hand over?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0000",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0002",
+            "markdown-expense-policy#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0000",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0001"
+          ],
+          "relevant": [
+            "markdown-engineering-handbook#c0001"
+          ],
+          "latency_ms": 46.38195037841797,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q013",
+          "question": "I cannot log in on my first morning. What do I do?",
+          "answerable": true,
+          "retrieved": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001"
+          ],
+          "relevant": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
+          ],
+          "latency_ms": 36.08298301696777,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q014",
+          "question": "How long do I have to enroll in benefits?",
+          "answerable": true,
+          "retrieved": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0000",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0001",
+            "markdown-expense-policy#c0001",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0000",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0001"
+          ],
+          "relevant": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
+          ],
+          "latency_ms": 37.0790958404541,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q015",
+          "question": "What should I have shipped by the end of week two?",
+          "answerable": true,
+          "retrieved": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0002",
+            "markdown-expense-policy#c0001",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001"
+          ],
+          "final": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0002",
+            "markdown-expense-policy#c0001"
+          ],
+          "relevant": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
+          ],
+          "latency_ms": 42.653560638427734,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q016",
+          "question": "What is the parental leave policy?",
+          "answerable": false,
+          "retrieved": [
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "markdown-engineering-handbook#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "markdown-engineering-handbook#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000"
+          ],
+          "relevant": [],
+          "latency_ms": 33.37669372558594,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 0.0,
+            "recall@1": NaN,
+            "hit@1": 0.0,
+            "recall@3": NaN,
+            "hit@3": 0.0,
+            "recall@5": NaN,
+            "hit@5": 0.0,
+            "recall@10": NaN,
+            "hit@10": 0.0,
+            "precision@5": 0.0
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q017",
+          "question": "How many vacation days do I get?",
+          "answerable": false,
+          "retrieved": [
+            "markdown-expense-policy#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "markdown-expense-policy#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001"
+          ],
+          "relevant": [],
+          "latency_ms": 38.73276710510254,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 0.0,
+            "recall@1": NaN,
+            "hit@1": 0.0,
+            "recall@3": NaN,
+            "hit@3": 0.0,
+            "recall@5": NaN,
+            "hit@5": 0.0,
+            "recall@10": NaN,
+            "hit@10": 0.0,
+            "precision@5": 0.0
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q018",
+          "question": "What is the timeout for the notifications service?",
+          "answerable": false,
+          "retrieved": [
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0000",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000"
+          ],
+          "relevant": [],
+          "latency_ms": 39.412498474121094,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 0.0,
+            "recall@1": NaN,
+            "hit@1": 0.0,
+            "recall@3": NaN,
+            "hit@3": 0.0,
+            "recall@5": NaN,
+            "hit@5": 0.0,
+            "recall@10": NaN,
+            "hit@10": 0.0,
+            "precision@5": 0.0
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q019",
+          "question": "Who is the CEO?",
+          "answerable": false,
+          "retrieved": [
+            "markdown-expense-policy#c0001",
+            "markdown-engineering-handbook#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "markdown-expense-policy#c0001",
+            "markdown-engineering-handbook#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0000"
+          ],
+          "relevant": [],
+          "latency_ms": 38.64598274230957,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 0.0,
+            "recall@1": NaN,
+            "hit@1": 0.0,
+            "recall@3": NaN,
+            "hit@3": 0.0,
+            "recall@5": NaN,
+            "hit@5": 0.0,
+            "recall@10": NaN,
+            "hit@10": 0.0,
+            "precision@5": 0.0
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q020",
+          "question": "Can I expense a flight I took 4 months ago?",
+          "answerable": true,
+          "retrieved": [
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0002"
+          ],
+          "final": [
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0000"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0000"
+          ],
+          "latency_ms": 42.002201080322266,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 0.5,
+            "recall@1": 0.0,
+            "hit@1": 0.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        }
+      ]
+    },
+    {
+      "config": "vector-only",
+      "seconds": 0.78,
       "usage": "0 calls | in 0 out 0 | cache write 0 read 0 (0% hit)",
       "aggregates": {
         "hit@1": 0.8,
@@ -26,7 +878,859 @@
         "recall@10": 1.0,
         "recall@3": 1.0,
         "recall@5": 1.0,
-        "latency_ms_p50": 39.9261
+        "latency_ms_p50": 39.8092
+      },
+      "results": [
+        {
+          "question_id": "q001",
+          "question": "How long do I have to hand in an expense claim?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002",
+            "pdf-subject#c0000"
+          ],
+          "final": [
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0000"
+          ],
+          "latency_ms": 44.01874542236328,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q002",
+          "question": "What happens if I submit my expenses late?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002",
+            "pdf-subject#c0000"
+          ],
+          "final": [
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0000"
+          ],
+          "latency_ms": 38.98048400878906,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q003",
+          "question": "Do I need a receipt for a 12 dollar coffee?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0000"
+          ],
+          "final": [
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0001"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0000"
+          ],
+          "latency_ms": 41.08905792236328,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q004",
+          "question": "how much per mile for using my own car",
+          "answerable": true,
+          "retrieved": [
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0002",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0000",
+            "markdown-engineering-handbook#c0001"
+          ],
+          "final": [
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0002",
+            "pdf-subject#c0001"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0001"
+          ],
+          "latency_ms": 35.8738899230957,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q005",
+          "question": "Can I fly business class to New York?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0002",
+            "pdf-subject#c0001",
+            "pdf-subject#c0000",
+            "markdown-engineering-handbook#c0001"
+          ],
+          "final": [
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0002"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0001"
+          ],
+          "latency_ms": 35.80880165100098,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q006",
+          "question": "What is the per diem in London?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0002",
+            "markdown-expense-policy#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0001",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0000"
+          ],
+          "final": [
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0002",
+            "markdown-expense-policy#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0001"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0001"
+          ],
+          "latency_ms": 44.27838325500488,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q007",
+          "question": "payments service timeout value",
+          "answerable": true,
+          "retrieved": [
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002",
+            "pdf-subject#c0000"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0000",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0001"
+          ],
+          "relevant": [
+            "markdown-engineering-handbook#c0000"
+          ],
+          "latency_ms": 39.68048095703125,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q008",
+          "question": "Where are the database logs when a migration fails?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0002",
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0002"
+          ],
+          "relevant": [
+            "markdown-engineering-handbook#c0000"
+          ],
+          "latency_ms": 39.54935073852539,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q009",
+          "question": "Is it safe to run the migration with --force in production?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-expense-policy#c0001",
+            "markdown-expense-policy#c0000"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0000"
+          ],
+          "relevant": [
+            "markdown-engineering-handbook#c0000"
+          ],
+          "latency_ms": 31.090497970581055,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q010",
+          "question": "What time does the search index rebuild?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-engineering-handbook#c0001",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0000",
+            "pdf-subject#c0002",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0001",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0000",
+            "pdf-subject#c0002"
+          ],
+          "relevant": [
+            "markdown-engineering-handbook#c0001"
+          ],
+          "latency_ms": 37.6431941986084,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q011",
+          "question": "Does search go down if the nightly rebuild fails?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-engineering-handbook#c0001",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0001",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
+          ],
+          "relevant": [
+            "markdown-engineering-handbook#c0001"
+          ],
+          "latency_ms": 40.712833404541016,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q012",
+          "question": "When does the search on-call rotation hand over?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0000",
+            "pdf-subject#c0002",
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0000"
+          ],
+          "relevant": [
+            "markdown-engineering-handbook#c0001"
+          ],
+          "latency_ms": 37.285804748535156,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q013",
+          "question": "I cannot log in on my first morning. What do I do?",
+          "answerable": true,
+          "retrieved": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002",
+            "markdown-expense-policy#c0001",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0000"
+          ],
+          "final": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002"
+          ],
+          "relevant": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
+          ],
+          "latency_ms": 39.731740951538086,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q014",
+          "question": "How long do I have to enroll in benefits?",
+          "answerable": true,
+          "retrieved": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0001",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002",
+            "pdf-subject#c0000"
+          ],
+          "final": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0001",
+            "markdown-engineering-handbook#c0001"
+          ],
+          "relevant": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
+          ],
+          "latency_ms": 35.33124923706055,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q015",
+          "question": "What should I have shipped by the end of week two?",
+          "answerable": true,
+          "retrieved": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0001",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002",
+            "pdf-subject#c0000"
+          ],
+          "final": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0001",
+            "markdown-engineering-handbook#c0001"
+          ],
+          "relevant": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
+          ],
+          "latency_ms": 39.93105888366699,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q016",
+          "question": "What is the parental leave policy?",
+          "answerable": false,
+          "retrieved": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0002",
+            "pdf-subject#c0000"
+          ],
+          "final": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0001"
+          ],
+          "relevant": [],
+          "latency_ms": 40.7719612121582,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 0.0,
+            "recall@1": NaN,
+            "hit@1": 0.0,
+            "recall@3": NaN,
+            "hit@3": 0.0,
+            "recall@5": NaN,
+            "hit@5": 0.0,
+            "recall@10": NaN,
+            "hit@10": 0.0,
+            "precision@5": 0.0
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q017",
+          "question": "How many vacation days do I get?",
+          "answerable": false,
+          "retrieved": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0001",
+            "markdown-expense-policy#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-engineering-handbook#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0002",
+            "pdf-subject#c0000"
+          ],
+          "final": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0001",
+            "markdown-expense-policy#c0000",
+            "markdown-engineering-handbook#c0001",
+            "markdown-engineering-handbook#c0000"
+          ],
+          "relevant": [],
+          "latency_ms": 40.299177169799805,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 0.0,
+            "recall@1": NaN,
+            "hit@1": 0.0,
+            "recall@3": NaN,
+            "hit@3": 0.0,
+            "recall@5": NaN,
+            "hit@5": 0.0,
+            "recall@10": NaN,
+            "hit@10": 0.0,
+            "precision@5": 0.0
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q018",
+          "question": "What is the timeout for the notifications service?",
+          "answerable": false,
+          "retrieved": [
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0001",
+            "markdown-expense-policy#c0000",
+            "pdf-subject#c0002",
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0000"
+          ],
+          "final": [
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0001",
+            "markdown-expense-policy#c0000"
+          ],
+          "relevant": [],
+          "latency_ms": 40.184974670410156,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 0.0,
+            "recall@1": NaN,
+            "hit@1": 0.0,
+            "recall@3": NaN,
+            "hit@3": 0.0,
+            "recall@5": NaN,
+            "hit@5": 0.0,
+            "recall@10": NaN,
+            "hit@10": 0.0,
+            "precision@5": 0.0
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q019",
+          "question": "Who is the CEO?",
+          "answerable": false,
+          "retrieved": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0000",
+            "pdf-subject#c0002",
+            "markdown-expense-policy#c0001",
+            "markdown-engineering-handbook#c0000",
+            "markdown-expense-policy#c0000",
+            "markdown-engineering-handbook#c0001"
+          ],
+          "final": [
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0001",
+            "pdf-subject#c0000",
+            "pdf-subject#c0002",
+            "markdown-expense-policy#c0001"
+          ],
+          "relevant": [],
+          "latency_ms": 40.92717170715332,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 0.0,
+            "recall@1": NaN,
+            "hit@1": 0.0,
+            "recall@3": NaN,
+            "hit@3": 0.0,
+            "recall@5": NaN,
+            "hit@5": 0.0,
+            "recall@10": NaN,
+            "hit@10": 0.0,
+            "precision@5": 0.0
+          },
+          "judgement": null
+        },
+        {
+          "question_id": "q020",
+          "question": "Can I expense a flight I took 4 months ago?",
+          "answerable": true,
+          "retrieved": [
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0000",
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0002",
+            "pdf-subject#c0000"
+          ],
+          "final": [
+            "markdown-expense-policy#c0000",
+            "markdown-expense-policy#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0001",
+            "markdown-engineering-handbook#c0000"
+          ],
+          "relevant": [
+            "markdown-expense-policy#c0000"
+          ],
+          "latency_ms": 39.809226989746094,
+          "answer_text": "",
+          "refused": false,
+          "invalid_citations": [],
+          "metrics": {
+            "mrr": 1.0,
+            "recall@1": 1.0,
+            "hit@1": 1.0,
+            "recall@3": 1.0,
+            "hit@3": 1.0,
+            "recall@5": 1.0,
+            "hit@5": 1.0,
+            "recall@10": 1.0,
+            "hit@10": 1.0,
+            "precision@5": 0.2
+          },
+          "judgement": null
+        }
+      ]
+    },
+    {
+      "config": "hybrid",
+      "seconds": 0.78,
+      "usage": "0 calls | in 0 out 0 | cache write 0 read 0 (0% hit)",
+      "aggregates": {
+        "hit@1": 0.8,
+        "hit@10": 0.8,
+        "hit@3": 0.8,
+        "hit@5": 0.8,
+        "mrr": 0.8,
+        "precision@5": 0.16,
+        "recall@1": 1.0,
+        "recall@10": 1.0,
+        "recall@3": 1.0,
+        "recall@5": 1.0,
+        "latency_ms_p50": 39.5727
       },
       "results": [
         {
@@ -37,9 +1741,9 @@
             "markdown-expense-policy#c0000",
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
             "markdown-expense-policy#c0001",
-            "markdown-engineering-handbook#c0000",
             "markdown-engineering-handbook#c0001",
             "pdf-subject#c0000",
+            "markdown-engineering-handbook#c0000",
             "pdf-subject#c0001",
             "pdf-subject#c0002"
           ],
@@ -47,13 +1751,13 @@
             "markdown-expense-policy#c0000",
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
             "markdown-expense-policy#c0001",
-            "markdown-engineering-handbook#c0000",
-            "markdown-engineering-handbook#c0001"
+            "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0000"
           ],
           "relevant": [
             "markdown-expense-policy#c0000"
           ],
-          "latency_ms": 673.6428737640381,
+          "latency_ms": 37.43553161621094,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -95,7 +1799,7 @@
           "relevant": [
             "markdown-expense-policy#c0000"
           ],
-          "latency_ms": 42.634010314941406,
+          "latency_ms": 39.86859321594238,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -137,7 +1841,7 @@
           "relevant": [
             "markdown-expense-policy#c0000"
           ],
-          "latency_ms": 41.69487953186035,
+          "latency_ms": 40.167808532714844,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -179,7 +1883,7 @@
           "relevant": [
             "markdown-expense-policy#c0001"
           ],
-          "latency_ms": 40.62628746032715,
+          "latency_ms": 39.572715759277344,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -221,7 +1925,7 @@
           "relevant": [
             "markdown-expense-policy#c0001"
           ],
-          "latency_ms": 42.704105377197266,
+          "latency_ms": 37.99247741699219,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -247,8 +1951,8 @@
             "markdown-expense-policy#c0001",
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
             "markdown-engineering-handbook#c0001",
-            "markdown-expense-policy#c0000",
             "pdf-subject#c0001",
+            "markdown-expense-policy#c0000",
             "markdown-engineering-handbook#c0000",
             "pdf-subject#c0000",
             "pdf-subject#c0002"
@@ -257,13 +1961,13 @@
             "markdown-expense-policy#c0001",
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
             "markdown-engineering-handbook#c0001",
-            "markdown-expense-policy#c0000",
-            "pdf-subject#c0001"
+            "pdf-subject#c0001",
+            "markdown-expense-policy#c0000"
           ],
           "relevant": [
             "markdown-expense-policy#c0001"
           ],
-          "latency_ms": 39.12663459777832,
+          "latency_ms": 36.85188293457031,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -305,7 +2009,7 @@
           "relevant": [
             "markdown-engineering-handbook#c0000"
           ],
-          "latency_ms": 39.64424133300781,
+          "latency_ms": 34.99627113342285,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -330,9 +2034,9 @@
           "retrieved": [
             "markdown-engineering-handbook#c0000",
             "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
             "pdf-subject#c0000",
-            "pdf-subject#c0001",
             "markdown-expense-policy#c0001",
             "markdown-expense-policy#c0000",
             "pdf-subject#c0002"
@@ -340,14 +2044,14 @@
           "final": [
             "markdown-engineering-handbook#c0000",
             "markdown-engineering-handbook#c0001",
+            "pdf-subject#c0001",
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
-            "pdf-subject#c0000",
-            "pdf-subject#c0001"
+            "pdf-subject#c0000"
           ],
           "relevant": [
             "markdown-engineering-handbook#c0000"
           ],
-          "latency_ms": 37.48297691345215,
+          "latency_ms": 38.49935531616211,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -389,7 +2093,7 @@
           "relevant": [
             "markdown-engineering-handbook#c0000"
           ],
-          "latency_ms": 39.92605209350586,
+          "latency_ms": 40.758371353149414,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -414,8 +2118,8 @@
           "retrieved": [
             "markdown-engineering-handbook#c0001",
             "markdown-engineering-handbook#c0000",
-            "pdf-subject#c0001",
             "pdf-subject#c0000",
+            "pdf-subject#c0001",
             "markdown-expense-policy#c0001",
             "pdf-subject#c0002",
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
@@ -424,14 +2128,14 @@
           "final": [
             "markdown-engineering-handbook#c0001",
             "markdown-engineering-handbook#c0000",
-            "pdf-subject#c0001",
             "pdf-subject#c0000",
+            "pdf-subject#c0001",
             "markdown-expense-policy#c0001"
           ],
           "relevant": [
             "markdown-engineering-handbook#c0001"
           ],
-          "latency_ms": 39.0172004699707,
+          "latency_ms": 36.23819351196289,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -456,24 +2160,24 @@
           "retrieved": [
             "markdown-engineering-handbook#c0001",
             "markdown-engineering-handbook#c0000",
-            "pdf-subject#c0000",
             "pdf-subject#c0002",
-            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "pdf-subject#c0000",
             "markdown-expense-policy#c0001",
             "pdf-subject#c0001",
+            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
             "markdown-expense-policy#c0000"
           ],
           "final": [
             "markdown-engineering-handbook#c0001",
             "markdown-engineering-handbook#c0000",
-            "pdf-subject#c0000",
             "pdf-subject#c0002",
-            "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
+            "pdf-subject#c0000",
+            "markdown-expense-policy#c0001"
           ],
           "relevant": [
             "markdown-engineering-handbook#c0001"
           ],
-          "latency_ms": 37.09530830383301,
+          "latency_ms": 39.98446464538574,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -515,7 +2219,7 @@
           "relevant": [
             "markdown-engineering-handbook#c0001"
           ],
-          "latency_ms": 39.76130485534668,
+          "latency_ms": 39.58415985107422,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -557,7 +2261,7 @@
           "relevant": [
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
           ],
-          "latency_ms": 40.10915756225586,
+          "latency_ms": 40.65823554992676,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -599,7 +2303,7 @@
           "relevant": [
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
           ],
-          "latency_ms": 37.425994873046875,
+          "latency_ms": 35.44116020202637,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -625,8 +2329,8 @@
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
             "markdown-expense-policy#c0000",
             "markdown-engineering-handbook#c0000",
-            "pdf-subject#c0000",
             "markdown-expense-policy#c0001",
+            "pdf-subject#c0000",
             "pdf-subject#c0002",
             "markdown-engineering-handbook#c0001",
             "pdf-subject#c0001"
@@ -635,13 +2339,13 @@
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
             "markdown-expense-policy#c0000",
             "markdown-engineering-handbook#c0000",
-            "pdf-subject#c0000",
-            "markdown-expense-policy#c0001"
+            "markdown-expense-policy#c0001",
+            "pdf-subject#c0000"
           ],
           "relevant": [
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000"
           ],
-          "latency_ms": 43.189048767089844,
+          "latency_ms": 40.04073143005371,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -665,8 +2369,8 @@
           "answerable": false,
           "retrieved": [
             "markdown-expense-policy#c0000",
-            "markdown-expense-policy#c0001",
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0001",
             "markdown-engineering-handbook#c0000",
             "markdown-engineering-handbook#c0001",
             "pdf-subject#c0001",
@@ -675,13 +2379,13 @@
           ],
           "final": [
             "markdown-expense-policy#c0000",
-            "markdown-expense-policy#c0001",
             "notion-engineering-a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6-onboarding-guide-f1e2d3c4b5a6978869504132a1b2c3d4#c0000",
+            "markdown-expense-policy#c0001",
             "markdown-engineering-handbook#c0000",
             "markdown-engineering-handbook#c0001"
           ],
           "relevant": [],
-          "latency_ms": 36.62610054016113,
+          "latency_ms": 35.41851043701172,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -721,7 +2425,7 @@
             "markdown-engineering-handbook#c0001"
           ],
           "relevant": [],
-          "latency_ms": 41.6567325592041,
+          "latency_ms": 36.73076629638672,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -761,7 +2465,7 @@
             "pdf-subject#c0001"
           ],
           "relevant": [],
-          "latency_ms": 39.36195373535156,
+          "latency_ms": 39.27278518676758,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -801,7 +2505,7 @@
             "markdown-engineering-handbook#c0001"
           ],
           "relevant": [],
-          "latency_ms": 39.133310317993164,
+          "latency_ms": 40.53902626037598,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -843,7 +2547,7 @@
           "relevant": [
             "markdown-expense-policy#c0000"
           ],
-          "latency_ms": 40.76528549194336,
+          "latency_ms": 45.974016189575195,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],

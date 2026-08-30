@@ -20,8 +20,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app.config import get_settings  # noqa: E402
 from app.evaluation import (  # noqa: E402
-    DEFAULT_CONFIGS, Config, Harness, comparison_table, coverage, load_questions, report_dict,
+    DEFAULT_CONFIGS, LLM_CONFIGS, RETRIEVAL_CONFIGS, Config, Harness, comparison_table,
+    coverage, load_questions, needs_llm, report_dict,
 )
+from app.llm import LLM  # noqa: E402
 from app.store import Store  # noqa: E402
 
 RETRIEVAL_COLUMNS = ["recall@1", "recall@3", "recall@5", "recall@10", "mrr", "latency_ms_p50"]
@@ -33,7 +35,10 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--questions", type=Path, default=Path("eval/questions.jsonl"))
     ap.add_argument("--config", action="append", default=None,
-                    help="config name to run; repeatable. default: all")
+                    help="config name to run; repeatable. default: the retrieval-only ones")
+    ap.add_argument("--with-llm", action="store_true",
+                    help="also run configs that call the model per question "
+                         "(rewrite / rerank) -- slow on a local model")
     ap.add_argument("--generate", action="store_true", help="also generate answers")
     ap.add_argument("--judge", action="store_true", help="also run the LLM judge")
     ap.add_argument("--failures", type=int, default=5, help="failure cases to print")
@@ -84,8 +89,10 @@ def main() -> int:
         print(f"\n  !! K={settings.retrieval_top_k} covers over half the corpus "
               f"({cov['indexed_chunks']} chunks) -- recall is inflated.")
 
-    if not settings.anthropic_api_key:
-        print("\n  !! no ANTHROPIC_API_KEY: rewriting and reranking silently do nothing,")
+    # Provider-aware: with a local model configured there IS an LLM, so the
+    # old "no ANTHROPIC_API_KEY" warning was simply false.
+    if not LLM(settings).available:
+        print("\n  !! no model available: rewriting and reranking silently do nothing,")
         print("     so 'hybrid', 'hybrid+rewrite', 'hybrid+rerank' and 'full' are")
         print("     the same pipeline. Identical rows below are expected, not a result.")
 
@@ -93,13 +100,40 @@ def main() -> int:
         print("\nANTHROPIC_API_KEY is not set -- skipping generation and judging")
         args.generate = args.judge = False
 
-    wanted = args.config or [c.name for c in DEFAULT_CONFIGS]
+    # Default to the configs that touch no model. Running rewrite/rerank costs
+    # one or two model calls PER QUESTION per config: seconds on a hosted API,
+    # but roughly a minute each on a local CPU model -- which turned a command
+    # advertised as fast and free into an hour of silent inference.
+    default_names = [c.name for c in (
+        DEFAULT_CONFIGS if (args.with_llm or args.generate or args.judge)
+        else RETRIEVAL_CONFIGS)]
+    wanted = args.config or default_names
     by_name = {c.name: c for c in DEFAULT_CONFIGS}
     unknown = [n for n in wanted if n not in by_name]
     if unknown:
         print(f"unknown config(s): {unknown}. available: {sorted(by_name)}")
         return 1
     configs: list[Config] = [by_name[n] for n in wanted]
+
+    llm_configs = [c for c in configs if needs_llm(c)]
+    if llm_configs:
+        backend = LLM(settings).backend
+        per_call = 60 if backend.name == "ollama" else 3      # seconds, rough
+        calls = len(questions) * sum(
+            int(c.use_rewrite) + int(c.use_rerank) for c in llm_configs)
+        if args.generate:
+            calls += len(questions) * len(configs)
+        if args.judge:
+            calls += len(questions) * len(configs)
+        minutes = calls * per_call / 60
+        print(f"\n  {len(llm_configs)} config(s) call the model per question. "
+              f"~{calls} calls on {backend.name}")
+        print(f"  rough estimate: {minutes:.0f} minutes"
+              + ("  (a local CPU model is slow -- consider --config hybrid)"
+                 if backend.name == "ollama" else ""))
+    else:
+        print("\n  retrieval-only configs: no model calls, no cost. "
+              "Add --with-llm for rewrite/rerank.")
 
     harness = Harness(settings=settings)
     reports = []

@@ -28,6 +28,14 @@ services:
       - ./corpus:/app/corpus:ro
       - ./data:/app/data
       - ./eval:/app/eval
+      # Source mounted for development so an edit takes effect immediately.
+      # Without this, `make eval` silently runs whatever code was in the image
+      # at build time -- a stale-image trap that costs an hour before you
+      # notice the fix you just made did nothing. The Dockerfile still COPYs
+      # these, so the deployed image is self-contained and needs no mounts.
+      - ./app:/app/app:ro
+      - ./scripts:/app/scripts:ro
+      - ./streamlit_app.py:/app/streamlit_app.py:ro
     depends_on:
       db:
         condition: service_healthy

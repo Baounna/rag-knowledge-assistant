@@ -295,9 +295,17 @@ than assume it.
 ### Evaluation
 
 ```bash
-make eval        # retrieval metrics, 6 configs, no API key needed
+make eval        # retrieval-only configs: fast, free, no model calls
+make eval-llm    # + rewrite/rerank configs (1-2 model calls per question)
 make eval-full   # + answers, citations, refusal, LLM judge
 ```
+
+`make eval` deliberately runs only the configurations that touch no model.
+The rewrite and rerank configs cost one or two model calls **per question**:
+seconds on a hosted API, but roughly a minute each on a local CPU model — so
+a command advertised as fast and free would quietly become an hour of
+inference. `--with-llm` opts in, and the harness prints a call count and time
+estimate before it starts.
 
 Metrics split deliberately:
 
