@@ -322,16 +322,30 @@ judgement call. Treating it as one makes it free and exact.
 **The harness refuses to flatter you.** It warns when `RETRIEVAL_TOP_K`
 reaches the corpus size (recall becomes 1.0 by construction), when labels
 point at chunks that no longer exist after re-chunking, when there are fewer
-than 50 questions, when no unanswerable questions exist, and when a missing
-API key makes several configurations secretly identical. On the sample corpus
-it currently reports all of these — which is correct, and is why the numbers
-below mean nothing yet:
+than 50 questions, when no unanswerable questions exist, and when no model is
+available so several configurations are secretly identical.
 
-```
-!! RETRIEVAL_TOP_K=20 >= 8 indexed chunks.
-   Every retriever returns the whole corpus, so recall@K is 1.0 by
-   construction and tells you nothing. Only MRR is meaningful here.
-```
+### Measured
+
+58 questions (49 answerable, 9 unanswerable) over 1,997 chunks:
+
+| config | recall@1 | recall@5 | recall@10 | MRR |
+|---|---|---|---|---|
+| lexical-only | 0.776 | 0.898 | 0.939 | 0.709 |
+| vector-only | 0.694 | 0.796 | 0.878 | 0.627 |
+| **hybrid (RRF)** | **0.796** | **0.918** | **0.939** | **0.713** |
+
+Hybrid wins on every column, which is the result RRF predicts — but read the
+gap honestly: it beats lexical alone by only 2 points of recall@1. Lexical
+also beats vector by 8 points, and that ordering deserves a caveat rather than
+a victory lap: **the questions were drafted by a model that had read the
+passages**, so despite being instructed to avoid the document's wording, some
+vocabulary leaks through and favours BM25. A question set written by hand from
+memory would likely narrow that gap.
+
+Neither the reranker nor query rewriting is in these numbers — both are one
+model call per question, which is a minute each on a local CPU model. Run
+`make eval-llm` to add them.
 
 **The eval set is `eval/questions.jsonl`, versioned in the repo** (a
 deliverable). 20 starter questions written against the sample corpus:
