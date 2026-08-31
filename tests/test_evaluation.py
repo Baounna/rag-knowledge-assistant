@@ -138,3 +138,24 @@ def test_isolating_one_retriever_zero_weights_the_other():
     assert Config("v", use_lexical=False).weights == [0.0, 1.0]
     assert Config("l", use_vector=False).weights == [1.0, 0.0]
     assert Config("hybrid").weights is None
+
+
+def test_answer_metrics_are_not_gated_on_one_provider():
+    """Regression: `make eval-full` checked `settings.anthropic_api_key` and so
+    silently skipped generation whenever the local model was in use -- exiting
+    0 with retrieval numbers only, as if the answer metrics were simply empty.
+
+    The availability check must go through the LLM, which knows about every
+    backend, not through one provider's config field.
+    """
+    import inspect
+    from pathlib import Path
+
+    source = Path(__file__).resolve().parent.parent.joinpath("scripts/eval.py").read_text()
+    gate = [l for l in source.splitlines() if "skipping generation" in l]
+    assert gate, "the generation gate disappeared -- did the check move?"
+    window = source[: source.index(gate[0])].splitlines()[-4:]
+    assert any("LLM(settings).available" in l for l in window), (
+        "the gate must ask the LLM whether a model exists, not check one "
+        "provider's API key"
+    )

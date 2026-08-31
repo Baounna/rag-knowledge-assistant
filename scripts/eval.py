@@ -96,8 +96,15 @@ def main() -> int:
         print("     so 'hybrid', 'hybrid+rewrite', 'hybrid+rerank' and 'full' are")
         print("     the same pipeline. Identical rows below are expected, not a result.")
 
-    if (args.generate or args.judge) and not settings.anthropic_api_key:
-        print("\nANTHROPIC_API_KEY is not set -- skipping generation and judging")
+    # Ask whether a MODEL is available, not whether an Anthropic key is set.
+    # Checking the key meant `make eval-full` silently skipped generation
+    # whenever the local backend was in use -- and exited 0, reporting
+    # retrieval numbers as though the answer metrics had simply come back
+    # empty. A green run that measured nothing is the worst possible failure
+    # for an eval harness.
+    if (args.generate or args.judge) and not LLM(settings).available:
+        print("\nno model available -- skipping generation and judging. "
+              "Set ANTHROPIC_API_KEY, or LLM_PROVIDER=ollama with a pulled model.")
         args.generate = args.judge = False
 
     # Default to the configs that touch no model. Running rewrite/rerank costs
