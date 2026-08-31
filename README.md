@@ -3,8 +3,8 @@
 Answers natural-language questions over an internal document corpus, with
 clickable citations, and refuses when the corpus doesn't support an answer.
 
-Status: **all 7 slices built.** Architecture: [ARCHITECTURE.md](ARCHITECTURE.md) ·
-Deployment: [DEPLOY.md](DEPLOY.md)
+Status: **all 7 slices built and measured.**
+[Eval report](eval/REPORT.md) · [Architecture](ARCHITECTURE.md) · [Deployment](DEPLOY.md)
 
 ```
 [x] 1. Ingestion    parse -> chunk -> chunk records

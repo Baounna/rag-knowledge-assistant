@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T11:35:07.652425+00:00",
+  "generated_at": "2026-08-31T19:49:11.161040+00:00",
   "embedding_model": "BAAI/bge-small-en-v1.5",
   "coverage": {
     "questions": 58,
@@ -13,9 +13,12 @@
   "reports": [
     {
       "config": "hybrid",
-      "seconds": 7.78,
-      "usage": "0 calls | in 0 out 0 | cache write 0 read 0 (0% hit)",
+      "seconds": 27905.84,
+      "usage": "108 calls | in 240309 out 7561 | cache write 0 read 0 (0% hit)",
       "aggregates": {
+        "citation_validity": 1.0,
+        "faithfulness": 7.963,
+        "grounded": 1.0,
         "hit@1": 0.6724,
         "hit@10": 0.7931,
         "hit@3": 0.7586,
@@ -26,7 +29,11 @@
         "recall@10": 0.9388,
         "recall@3": 0.898,
         "recall@5": 0.9184,
-        "latency_ms_p50": 121.7177
+        "refusal_correct": 0.8333,
+        "relevance": 9.1667,
+        "required_content": 0.7935,
+        "uncited_claims": 1.037,
+        "latency_ms_p50": 433322.4363
       },
       "results": [
         {
@@ -65,9 +72,9 @@
           "relevant": [
             "markdown-communication-ask-me-anything#c0004"
           ],
-          "latency_ms": 834.5887660980225,
-          "answer_text": "",
-          "refused": false,
+          "latency_ms": 1238227.915763855,
+          "answer_text": "I don't know based on internal docs.\nThe document states the timeframe for the Reverse AMA once accepted, but it does not specify how long TMRG has to respond to a Reverse AMA request after it is accepted.",
+          "refused": true,
           "invalid_citations": [],
           "metrics": {
             "mrr": 1.0,
@@ -79,9 +86,25 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": NaN,
+            "grounded": 1.0,
+            "refusal_correct": 0.0,
+            "required_content": 0.0,
+            "uncited_claims": 0.0,
+            "faithfulness": 0.0,
+            "relevance": 0.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 0.0,
+            "relevance": 0.0,
+            "unsupported_claims": [
+              "The document states the timeframe for the Reverse AMA once accepted, but it does not specify how long TMRG has to respond to a Reverse AMA request after it is accepted."
+            ],
+            "comment": "The answer contradicts the excerpts, which do specify the timeframe for the Reverse AMA once accepted. Additionally, it does not address the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q002",
@@ -119,9 +142,9 @@
           "relevant": [
             "markdown-finance-procurement-index#c0009"
           ],
-          "latency_ms": 143.5694694519043,
-          "answer_text": "",
-          "refused": false,
+          "latency_ms": 535297.3310947418,
+          "answer_text": "I don't know based on internal docs.\nThe document would need to specify the threshold amount for new spends that can be initiated without going through the full procurement process.",
+          "refused": true,
           "invalid_citations": [],
           "metrics": {
             "mrr": 0.07692307692307693,
@@ -133,9 +156,25 @@
             "hit@5": 0.0,
             "recall@10": 0.0,
             "hit@10": 0.0,
-            "precision@5": 0.0
+            "precision@5": 0.0,
+            "citation_validity": NaN,
+            "grounded": 1.0,
+            "refusal_correct": 0.0,
+            "required_content": 0.0,
+            "uncited_claims": 0.0,
+            "faithfulness": 0.0,
+            "relevance": 5.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 0.0,
+            "relevance": 5.0,
+            "unsupported_claims": [
+              "The document would need to specify the threshold amount for new spends that can be initiated without going through the full procurement process."
+            ],
+            "comment": "The answer is relevant as it addresses the question, but it is not faithful because the excerpts do not provide a specific threshold amount for new spends that can be initiated without going through the full procurement process. The excerpts discuss various policies and guidelines but do not mention a specific threshold.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q003",
@@ -173,8 +212,8 @@
           "relevant": [
             "markdown-hiring-candidate-faq-index#c0009"
           ],
-          "latency_ms": 124.97401237487793,
-          "answer_text": "",
+          "latency_ms": 515126.12771987915,
+          "answer_text": "The cooldown period for reapplying to a similar role after being rejected is 6 months or more. [markdown-hiring-candidate-faq-index#c0009]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -187,9 +226,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer directly addresses the question by providing the cooldown period, and it is fully supported by the excerpt [markdown-hiring-candidate-faq-index#c0009].",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q004",
@@ -227,8 +280,8 @@
           "relevant": [
             "markdown-legal-privacy-transparency-reports#c0011"
           ],
-          "latency_ms": 138.36359977722168,
-          "answer_text": "",
+          "latency_ms": 340807.34634399414,
+          "answer_text": "An account may be reinstated when the user agrees to remove or export the content away from GitLab.com within 24 hours. [markdown-legal-privacy-transparency-reports#c0011]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -241,9 +294,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly supported by the excerpts and fully addresses the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q006",
@@ -281,8 +348,8 @@
           "relevant": [
             "markdown-total-rewards-incentives#c0006"
           ],
-          "latency_ms": 127.35724449157715,
-          "answer_text": "",
+          "latency_ms": 494716.7148590088,
+          "answer_text": "The bonus for a Senior Engineer who takes on an interim Engineering Mgr role for 3 months would be $3,082.19. [markdown-total-rewards-incentives#c0006]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -295,9 +362,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is fully supported by the excerpts, specifically the example provided in [markdown-total-rewards-incentives#c0006], which calculates the bonus for a Senior Engineer taking on an interim Engineering Mgr role for 3 months as $3,082.19. The answer directly addresses the question asked and is relevant.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q007",
@@ -335,8 +416,8 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0019"
           ],
-          "latency_ms": 151.1557102203369,
-          "answer_text": "",
+          "latency_ms": 709880.3679943085,
+          "answer_text": "A contract renewal is for 12 months, and the end date is determined by starting the contract on a specific date and ending it 12 months later. For example, if a contract starts on June 14, 2019, it will end on June 13, 2020. [notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0019]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -349,9 +430,25 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 2.0,
+            "faithfulness": 5.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 5.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "A contract renewal is for 12 months."
+            ],
+            "comment": "The answer is relevant as it addresses the question about the duration of contract renewals and how the end date is determined. However, it makes an unsupported claim that all contract renewals are for 12 months, which is not explicitly stated in the given excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q008",
@@ -389,8 +486,8 @@
           "relevant": [
             "pdf-communication-index#c0013"
           ],
-          "latency_ms": 130.2027702331543,
-          "answer_text": "",
+          "latency_ms": 356903.742313385,
+          "answer_text": "To bring an issue to someone's attention with specific action needed, you should explicitly communicate your need along with @ mentioning who you need it from. [pdf-communication-index#c0013]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -403,9 +500,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer directly addresses the question by providing the specific method (explicitly communicating the need) and cites the relevant excerpt.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q009",
@@ -443,8 +554,8 @@
           "relevant": [
             "pdf-finance-expenses#c0004"
           ],
-          "latency_ms": 116.28437042236328,
-          "answer_text": "",
+          "latency_ms": 520426.3470172882,
+          "answer_text": "The maximum monthly limit to be reimbursed is $10K USD (or local currency equivalent). [pdf-finance-expenses#c0029]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -457,9 +568,25 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 5.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 5.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "The maximum monthly limit to be reimbursed is $10K USD (or local currency equivalent)."
+            ],
+            "comment": "The answer is relevant as it directly addresses the question asked. However, it is not fully supported by the excerpts. The excerpts mention a maximum monthly limit of $10K USD, but the specific excerpt provided in the answer is from a different section (Co-working Space - Monthly) and does not directly state the $10K limit. The $10K limit is mentioned in a different excerpt, which is not provided here.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q010",
@@ -497,8 +624,8 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0083"
           ],
-          "latency_ms": 129.9901008605957,
-          "answer_text": "",
+          "latency_ms": 495859.7981929779,
+          "answer_text": "Amit Bengal - AmitBe@papayaglobal.com (Customer Success Manager at Papaya who looks after GitLab) will reach out to the CES to confirm that they have received the alert. [pdf-hiring-talent-acquisition-framework-coordinator#c0083]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -511,9 +638,25 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "none"
+            ],
+            "comment": "The answer directly addresses the question by identifying the person who will reach out to the CES to confirm receipt of the alert, and it is fully supported by the provided excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q011",
@@ -551,8 +694,8 @@
           "relevant": [
             "pdf-legal-privacy-employee-privacy-policy#c0009"
           ],
-          "latency_ms": 134.2465877532959,
-          "answer_text": "",
+          "latency_ms": 492483.8318824768,
+          "answer_text": "GitLab uses the \"Performance of the employment contract\" and \"Legal obligation\" as legal bases for processing and using personal data for remuneration and benefits administration. [pdf-legal-privacy-employee-privacy-policy#c0009]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -565,9 +708,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 0.5,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is faithful as it directly references the legal bases mentioned in the excerpts for remuneration and benefits administration, which are 'Performance of the employment contract' and 'Legal obligation'. It is also relevant to the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q012",
@@ -605,8 +762,8 @@
           "relevant": [
             "pdf-people-group-relocation#c0004"
           ],
-          "latency_ms": 124.73607063293457,
-          "answer_text": "",
+          "latency_ms": 488650.2149105072,
+          "answer_text": "If you plan to stay in a location for more than 6 months in a single calendar year, that becomes your residence and you must complete the long-term relocation process described below. [pdf-people-group-relocation#c0004]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -619,9 +776,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer correctly identifies that staying in a location for more than 6 months in a single calendar year requires completing the long-term relocation process, which is directly supported by the given excerpts. The answer is both faithful and relevant to the question.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q014",
@@ -659,8 +830,8 @@
           "relevant": [
             "markdown-communication-ask-me-anything#c0010"
           ],
-          "latency_ms": 127.72989273071289,
-          "answer_text": "",
+          "latency_ms": 293250.00500679016,
+          "answer_text": "The primary goal of the Reverse Ask Me Anything format is to continue the momentum of conveying genuine empathy and solidarity for underrepresented team members. [markdown-communication-ask-me-anything#c0010]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -673,9 +844,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer directly addresses the question and is fully supported by the provided excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q016",
@@ -713,8 +898,8 @@
           "relevant": [
             "markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0003"
           ],
-          "latency_ms": 119.51780319213867,
-          "answer_text": "",
+          "latency_ms": 535681.2570095062,
+          "answer_text": "Within 48 hours, the People Connect team will respond and provide annual base compensation details to the Recruiter to utilize for the offer. [markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0003]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -727,9 +912,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly supported by the excerpt provided, and it accurately reflects the timeframe and the process described in the excerpt. It also directly answers the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q017",
@@ -767,7 +966,7 @@
           "relevant": [
             "markdown-legal-privacy-customer-product-usage-information#c0009"
           ],
-          "latency_ms": 123.84462356567383,
+          "latency_ms": 1290.4188632965088,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -783,7 +982,8 @@
             "hit@10": 1.0,
             "precision@5": 0.2
           },
-          "judgement": null
+          "judgement": null,
+          "error": "LLMUnavailable: Ollama at http://ollama:11434 did not respond (HTTPStatusError). Start it with `ollama serve` and pull the model with `ollama pull qwen2.5:7b-instruct`."
         },
         {
           "question_id": "q018",
@@ -821,8 +1021,8 @@
           "relevant": [
             "markdown-people-group-time-off-and-absence-leave-types#c0010"
           ],
-          "latency_ms": 125.50067901611328,
-          "answer_text": "",
+          "latency_ms": 454559.19218063354,
+          "answer_text": "Team members may elect to retain health care coverage benefits for up to 2 years, or to the end of their military service; whichever comes first. [markdown-people-group-time-off-and-absence-leave-types#c0010]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -835,9 +1035,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer directly addresses the question by providing the duration for which a team member can retain health care coverage benefits after 31 days of military leave, and it is supported by the given excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q019",
@@ -875,8 +1089,8 @@
           "relevant": [
             "markdown-total-rewards-benefits-general-and-entity-benefits-remote-com#c0015"
           ],
-          "latency_ms": 122.58410453796387,
-          "answer_text": "",
+          "latency_ms": 822954.1952610016,
+          "answer_text": "The monthly cost for dependent coverage in Luxembourg is $157.09 USD for a partner and $78.55 USD for children under 18. [markdown-total-rewards-benefits-general-and-entity-benefits-remote-com#c0015]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -889,9 +1103,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is completely faithful to the excerpts, providing the exact monthly costs for dependent coverage in Luxembourg. It directly addresses the question asked without any unsupported claims.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q020",
@@ -929,8 +1157,8 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-people-group-ff6124ea10e7d438301ca47edf245750#c0004"
           ],
-          "latency_ms": 117.52986907958984,
-          "answer_text": "",
+          "latency_ms": 568264.1658782959,
+          "answer_text": "The purpose of the anonymous ethics hotline provided by Ethico is to allow any team member to submit a report anonymously about conduct addressed in the Code of Business Conduct and Ethics without the fear of retaliation. [notion-people-group-ff6124ea10e7d438301ca47edf245750-people-group-ff6124ea10e7d438301ca47edf245750#c0004]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -943,9 +1171,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 0.5,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer accurately reflects the purpose of the anonymous ethics hotline as stated in the provided excerpts, and directly addresses the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q023",
@@ -983,8 +1225,8 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0009"
           ],
-          "latency_ms": 129.98628616333008,
-          "answer_text": "",
+          "latency_ms": 473266.2389278412,
+          "answer_text": "Within 24 hours [pdf-hiring-talent-acquisition-framework-coordinator#c0009]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -997,9 +1239,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 0.5,
+            "uncited_claims": 0.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly supported by the excerpts, which state that the candidate acknowledgment email should be sent within 24 hours. The answer also fully addresses the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q025",
@@ -1037,8 +1293,8 @@
           "relevant": [
             "pdf-people-group-talent-assessment#c0015"
           ],
-          "latency_ms": 121.72722816467285,
-          "answer_text": "",
+          "latency_ms": 472003.8137435913,
+          "answer_text": "A newly onboarded team member must wait 3 months before being assessed using the Performance/Growth Potential Matrix. [pdf-people-group-talent-assessment#c0015]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1051,9 +1307,25 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 5.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 5.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "A newly onboarded team member must wait 3 months before being assessed using the Performance/Growth Potential Matrix."
+            ],
+            "comment": "The answer is relevant as it directly addresses the question, but it is not entirely faithful because the exact 3-month period is not explicitly stated in the excerpts. The excerpts mention a 'Too New to Rate' (TNTR) category for individuals with a start date within 3 months, but do not specify that this is the exact duration before assessment.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q026",
@@ -1091,9 +1363,9 @@
           "relevant": [
             "pdf-subject#c0002"
           ],
-          "latency_ms": 118.62611770629883,
-          "answer_text": "",
-          "refused": false,
+          "latency_ms": 341093.2812690735,
+          "answer_text": "I don't know based on internal docs.\nA document addressing the allocation of compensation across different roles or departments, including UI & UX, would need to exist.",
+          "refused": true,
           "invalid_citations": [],
           "metrics": {
             "mrr": 0.125,
@@ -1105,9 +1377,25 @@
             "hit@5": 0.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.0
+            "precision@5": 0.0,
+            "citation_validity": NaN,
+            "grounded": 1.0,
+            "refusal_correct": 0.0,
+            "required_content": 0.5,
+            "uncited_claims": 0.0,
+            "faithfulness": 0.0,
+            "relevance": 5.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 0.0,
+            "relevance": 5.0,
+            "unsupported_claims": [
+              "I don't know based on internal docs."
+            ],
+            "comment": "The answer neither supports its claims with the provided excerpts nor directly answers the question. It suggests that there is no document addressing the allocation of compensation, which is not supported by the given excerpts. The excerpts do not provide specific percentages for UI & UX, but they do discuss compensation in general terms and processes.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q027",
@@ -1145,8 +1433,8 @@
           "relevant": [
             "markdown-finance-accounts-payable-index#c0001"
           ],
-          "latency_ms": 118.71147155761719,
-          "answer_text": "",
+          "latency_ms": 489843.82033348083,
+          "answer_text": "Payments are set up each Thursday and the money is released to vendors through the respective payment systems. [markdown-finance-accounts-payable-index#c0001]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1159,9 +1447,25 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 0.5,
+            "uncited_claims": 1.0,
+            "faithfulness": 5.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 5.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "The answer does not specify the exact schedule for invoice selection for payment runs, only the payment run schedule. It states that payments are set up each Thursday, but does not mention the Tuesday cutoff for invoice approval as per [markdown-finance-accounts-payable-index#c0001]."
+            ],
+            "comment": "The answer is relevant as it directly addresses the payment run schedule, but it does not fully support the claim with the provided excerpts. It misses the specific Tuesday cutoff for invoice approval mentioned in the excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q028",
@@ -1199,8 +1503,8 @@
           "relevant": [
             "markdown-hiring-referral-process#c0003"
           ],
-          "latency_ms": 115.41199684143066,
-          "answer_text": "",
+          "latency_ms": 474592.3638343811,
+          "answer_text": "A referral is classified as a referral for 6 months (from the date TA receives the referral) for jobs within the same job family. [markdown-hiring-referral-process#c0003]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1213,9 +1517,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 0.5,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly supported by the excerpt provided in [markdown-hiring-referral-process#c0003], and it accurately answers the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q029",
@@ -1253,8 +1571,8 @@
           "relevant": [
             "markdown-legal-privacy-index#c0003"
           ],
-          "latency_ms": 120.13125419616699,
-          "answer_text": "",
+          "latency_ms": 433322.43633270264,
+          "answer_text": "The process called that makes personal data no longer linkable to an individual is **Pseudonymization**. [pdf-legal-privacy-employee-privacy-policy#c0028]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1267,9 +1585,25 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 0.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 0.0,
+            "relevance": 5.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 0.0,
+            "relevance": 5.0,
+            "unsupported_claims": [
+              "The process called that makes personal data no longer linkable to an individual is Pseudonymization."
+            ],
+            "comment": "The answer is not supported by the given excerpts. The excerpts discuss anonymization, which is the process that makes personal data no longer linkable to an individual, not pseudonymization. Pseudonymization is described as a process that alters personal data so that it can no longer be attributed to a specific individual without the use of additional re-identifying information.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q030",
@@ -1307,8 +1641,8 @@
           "relevant": [
             "markdown-people-group-time-off-and-absence-leave-types#c0011"
           ],
-          "latency_ms": 126.75285339355469,
-          "answer_text": "",
+          "latency_ms": 1372102.8678417206,
+          "answer_text": "The team member must apply for reinstatement no more than 90 days after completion of military service. [markdown-people-group-time-off-and-absence-leave-types#c0011]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1321,9 +1655,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly supported by the excerpt and accurately addresses the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q031",
@@ -1361,8 +1709,8 @@
           "relevant": [
             "markdown-total-rewards-benefits-general-and-entity-benefits-france-sas#c0004"
           ],
-          "latency_ms": 112.77580261230469,
-          "answer_text": "",
+          "latency_ms": 501300.64272880554,
+          "answer_text": "For triplets or more, GitLab provides 46 weeks of maternity leave, with 22 weeks after the birth. [markdown-total-rewards-benefits-general-and-entity-benefits-france-sas#c0004]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1375,9 +1723,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly supported by the excerpts and fully addresses the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q032",
@@ -1415,8 +1777,8 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0021"
           ],
-          "latency_ms": 124.59397315979004,
-          "answer_text": "",
+          "latency_ms": 1527892.0567035675,
+          "answer_text": "Two months before the contract ends, HR Savvy will send an email to the People Operations Team. [notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0021]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1429,9 +1791,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly supported by the excerpts and fully addresses the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q033",
@@ -1469,7 +1845,7 @@
           "relevant": [
             "pdf-communication-index#c0005"
           ],
-          "latency_ms": 116.98722839355469,
+          "latency_ms": 2928.081274032593,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1485,7 +1861,8 @@
             "hit@10": 1.0,
             "precision@5": 0.2
           },
-          "judgement": null
+          "judgement": null,
+          "error": "LLMUnavailable: Ollama at http://ollama:11434 did not respond (HTTPStatusError). Start it with `ollama serve` and pull the model with `ollama pull qwen2.5:7b-instruct`."
         },
         {
           "question_id": "q034",
@@ -1523,8 +1900,8 @@
           "relevant": [
             "pdf-finance-accounting-index#c0047"
           ],
-          "latency_ms": 113.24906349182129,
-          "answer_text": "",
+          "latency_ms": 415399.46579933167,
+          "answer_text": "The minimum threshold for recording prepaid expenses is $5,000 USD. [pdf-finance-accounting-index#c0047]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1537,9 +1914,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly supported by the provided excerpts and accurately states the minimum threshold for recording prepaid expenses as $5,000 USD, which is clearly mentioned in the given text.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q035",
@@ -1577,8 +1968,8 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0036"
           ],
-          "latency_ms": 123.68607521057129,
-          "answer_text": "",
+          "latency_ms": 1811399.9876976013,
+          "answer_text": "Recruiters should prepare for the new hire start date 10 days from the sent date, but they should be prepared for the process to take more than 10 days due to People Connect's processing time. [pdf-hiring-talent-acquisition-framework-coordinator#c0036]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1591,9 +1982,25 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "Recruiters should prepare for the new hire start date 10 days from the sent date."
+            ],
+            "comment": "The answer is faithful as it correctly states that recruiters should prepare for the process to take more than 10 days due to People Connect's processing time, as stated in the excerpt. However, it introduces an unsupported claim that the start date is 10 days from the sent date, which is not explicitly mentioned in the given excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q038",
@@ -1631,8 +2038,8 @@
           "relevant": [
             "markdown-communication-ask-me-anything#c0008"
           ],
-          "latency_ms": 114.81881141662598,
-          "answer_text": "",
+          "latency_ms": 278125.5033016205,
+          "answer_text": "Reverse AMA meetings should be hosted publicly by default unless the topic is [not-public](/handbook/values/#not-public) [markdown-communication-ask-me-anything#c0008]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1645,9 +2052,25 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 0.5,
+            "uncited_claims": 0.0,
+            "faithfulness": 5.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 5.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "Reverse AMA meetings should be hosted publicly by default unless the topic is [not-public]"
+            ],
+            "comment": "The answer is relevant as it directly addresses the question about hosting Reverse AMA meetings. However, it is only partially supported by the excerpts, which do not explicitly state a default public hosting policy for Reverse AMAs. The excerpts do mention that AMAs should be public by default, but this is in the context of regular AMAs, not specifically Reverse AMAs.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q039",
@@ -1685,8 +2108,8 @@
           "relevant": [
             "markdown-finance-procurement-index#c0029"
           ],
-          "latency_ms": 125.00190734863281,
-          "answer_text": "",
+          "latency_ms": 432970.28398513794,
+          "answer_text": "The planning stages for large internal events should be completed at least 18-24 months prior to the actual event. [markdown-finance-procurement-index#c0029]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1699,9 +2122,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer directly addresses the question and is fully supported by the provided excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q040",
@@ -1739,8 +2176,8 @@
           "relevant": [
             "markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0002"
           ],
-          "latency_ms": 121.71769142150879,
-          "answer_text": "",
+          "latency_ms": 387551.6982078552,
+          "answer_text": "The team member's current manager and potential new manager should be notified when an internal candidate is moving to the offer stage. [markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0002]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1753,9 +2190,25 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "none"
+            ],
+            "comment": "The answer directly addresses the question by identifying who should be notified when an internal candidate is moving to the offer stage. It correctly cites the relevant excerpt from the provided documents, ensuring that the claim is supported by the excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q041",
@@ -1793,8 +2246,8 @@
           "relevant": [
             "markdown-legal-privacy-product-usage-events-faq#c0003"
           ],
-          "latency_ms": 116.5623664855957,
-          "answer_text": "",
+          "latency_ms": 250992.0527935028,
+          "answer_text": "Yes. Snowplow event data is encrypted during transmission using HTTPS/TLS to securely transmit data from the client to the collector endpoint. [markdown-legal-privacy-product-usage-events-faq#c0003]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1807,9 +2260,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly supported by the excerpts and fully addresses the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q042",
@@ -1847,8 +2314,8 @@
           "relevant": [
             "markdown-people-group-learning-and-development-growth-and-development-index#c0002"
           ],
-          "latency_ms": 128.2341480255127,
-          "answer_text": "",
+          "latency_ms": 270841.07756614685,
+          "answer_text": "Your request should be submitted at least 30 days in advance of the beginning of your experience when possible. [markdown-people-group-learning-and-development-growth-and-development-index#c0002]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1861,9 +2328,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly and completely relevant to the question asked, and every claim is supported by the provided excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q043",
@@ -1901,8 +2382,8 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0011"
           ],
-          "latency_ms": 144.86980438232422,
-          "answer_text": "",
+          "latency_ms": 432990.81683158875,
+          "answer_text": "If underperformance is an issue, or there is any hesitation regarding the successful completion of a probation period, this should be discussed immediately with Team Member Relations. [notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0011]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1915,9 +2396,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer directly addresses the question by providing the specific action managers should take when they notice underperformance during the probation period. It is fully supported by the given excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q044",
@@ -1955,8 +2450,8 @@
           "relevant": [
             "pdf-communication-index#c0010"
           ],
-          "latency_ms": 120.52416801452637,
-          "answer_text": "",
+          "latency_ms": 619320.7561969757,
+          "answer_text": "It is OK to ask as many questions as you have. Please ask them so many people can answer them and so others can benefit from seeing the answer. Use issues or public chat channels (like #questions) instead of direct messages or one-on-one emails. [pdf-communication-index#c0010]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -1969,9 +2464,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 3.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly supported by the excerpt from [pdf-communication-index#c0010] and addresses the question about the recommended way to ask questions in GitLab.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q045",
@@ -2009,8 +2518,8 @@
           "relevant": [
             "pdf-finance-expenses#c0010"
           ],
-          "latency_ms": 117.78831481933594,
-          "answer_text": "",
+          "latency_ms": 206097.18251228333,
+          "answer_text": "Team members should book domestic flights at least 14 days in advance to take advantage of discounted fares. [pdf-finance-expenses#c0010]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2023,9 +2532,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer directly addresses the question and is fully supported by the provided excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q046",
@@ -2063,8 +2586,8 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0001"
           ],
-          "latency_ms": 115.28563499450684,
-          "answer_text": "",
+          "latency_ms": 403112.54954338074,
+          "answer_text": "Interviews are defaulted to be scheduled at a minimum of 48 hours out to leave time for interviewer prep. [pdf-hiring-talent-acquisition-framework-coordinator#c0001]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2077,9 +2600,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly supported by the excerpt and fully addresses the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q047",
@@ -2117,8 +2654,8 @@
           "relevant": [
             "pdf-legal-privacy-employee-privacy-policy#c0029"
           ],
-          "latency_ms": 118.21699142456055,
-          "answer_text": "",
+          "latency_ms": 452207.2479724884,
+          "answer_text": "Yes, a GitLab employee can withdraw their consent to process secondary emergency contact information. [pdf-legal-privacy-employee-privacy-policy#c0029]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2131,9 +2668,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 0.5,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is faithful as it directly references the excerpt that supports the claim, and it is relevant to the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q048",
@@ -2171,8 +2722,8 @@
           "relevant": [
             "pdf-people-group-relocation#c0001"
           ],
-          "latency_ms": 120.11361122131348,
-          "answer_text": "",
+          "latency_ms": 410458.58335494995,
+          "answer_text": "The maximum total number of days a GitLab team member can work outside their permanent location in a calendar year is 183 days. [pdf-people-group-relocation#c0001]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2185,9 +2736,25 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "The answer does not contradict the excerpts, and it is directly supported by the excerpt [pdf-people-group-relocation#c0001]."
+            ],
+            "comment": "The answer is both faithful and relevant. It accurately states the maximum number of days a GitLab team member can work outside their permanent location in a calendar year, as stated in the provided excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q049",
@@ -2225,7 +2792,7 @@
           "relevant": [
             "markdown-communication-zoom-webinars#c0004"
           ],
-          "latency_ms": 113.40737342834473,
+          "latency_ms": 1353.8706302642822,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2241,7 +2808,8 @@
             "hit@10": 1.0,
             "precision@5": 0.2
           },
-          "judgement": null
+          "judgement": null,
+          "error": "LLMUnavailable: Ollama at http://ollama:11434 did not respond (HTTPStatusError). Start it with `ollama serve` and pull the model with `ollama pull qwen2.5:7b-instruct`."
         },
         {
           "question_id": "q050",
@@ -2279,8 +2847,8 @@
           "relevant": [
             "markdown-finance-accounts-payable-corp-credit-cards#c0002"
           ],
-          "latency_ms": 122.48349189758301,
-          "answer_text": "",
+          "latency_ms": 424950.93989372253,
+          "answer_text": "The maximum amount you can spend on a team meal for up to 20 people is $2,000 USD. This is derived from the $100 per person limit, as 20 people multiplied by $100 equals $2,000 [pdf-finance-expenses#c0021].",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2293,9 +2861,25 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 5.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 5.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "The maximum amount you can spend on a team meal for up to 20 people is $2,000 USD."
+            ],
+            "comment": "The answer is relevant as it directly addresses the question, but it introduces a claim ($2,000 limit) that is not supported by the given excerpts. The excerpts mention a $100 per person limit, which would result in a $2,000 limit for 20 people, but this is not explicitly stated in the provided documents.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q052",
@@ -2333,8 +2917,8 @@
           "relevant": [
             "markdown-legal-privacy-law-enforcement-guidelines#c0004"
           ],
-          "latency_ms": 113.58165740966797,
-          "answer_text": "",
+          "latency_ms": 611085.7832431793,
+          "answer_text": "GitLab, Inc.<br>Attn: Legal Department<br>268 Bush St., No 350<br>San Francisco, CA 94101 [markdown-legal-privacy-law-enforcement-guidelines#c0004]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2347,9 +2931,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 0.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly and completely relevant to the question asked, and every claim is supported by the excerpts provided.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q053",
@@ -2387,8 +2985,8 @@
           "relevant": [
             "markdown-people-group-people-operations-index#c0006"
           ],
-          "latency_ms": 125.3669261932373,
-          "answer_text": "",
+          "latency_ms": 408207.55434036255,
+          "answer_text": "A team member can anticipate acknowledgement of their case within 24 hours after submitting a question or request using HelpLab. [markdown-people-group-people-operations-index#c0006]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2401,9 +2999,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer directly addresses the question and is fully supported by the provided excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q054",
@@ -2441,8 +3053,8 @@
           "relevant": [
             "markdown-total-rewards-benefits-general-and-entity-benefits-france-sas#c0009"
           ],
-          "latency_ms": 108.37030410766602,
-          "answer_text": "",
+          "latency_ms": 667079.1668891907,
+          "answer_text": "GitLab fully supplements your salary for up to 25 working days during sick leave. [markdown-total-rewards-benefits-general-and-entity-benefits-canada-corp-benefits#c0005]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2455,9 +3067,25 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 5.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 5.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "GitLab fully supplements your salary for up to 25 working days during sick leave."
+            ],
+            "comment": "The answer is relevant as it addresses the question, but it includes a claim that is not fully supported by the excerpts. The excerpts state that GitLab supplements pay up to 100% of regular salary for up to 25 working days, but it does not explicitly state that this is a 'full' salary supplementation. Therefore, the claim is partially supported.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q055",
@@ -2495,8 +3123,8 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-360-feedback-86188523ae86b93378c714039b286b88#c0005"
           ],
-          "latency_ms": 117.39802360534668,
-          "answer_text": "",
+          "latency_ms": 666842.8609371185,
+          "answer_text": "Yes, team members can choose whether to request 360 feedback as part of their performance conversation. [notion-people-group-ff6124ea10e7d438301ca47edf245750-360-feedback-86188523ae86b93378c714039b286b88#c0005]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2509,9 +3137,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 0.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer directly addresses the question and is fully supported by the provided excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q056",
@@ -2549,8 +3191,8 @@
           "relevant": [
             "pdf-finance-expenses#c0025"
           ],
-          "latency_ms": 106.24980926513672,
-          "answer_text": "",
+          "latency_ms": 274452.49485969543,
+          "answer_text": "The maximum amount for parking and tolls per day for train travel is $150. [pdf-finance-expenses#c0025]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2563,9 +3205,23 @@
             "hit@5": 1.0,
             "recall@10": 1.0,
             "hit@10": 1.0,
-            "precision@5": 0.2
+            "precision@5": 0.2,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 0.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is directly supported by the excerpt and fully addresses the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "u001",
@@ -2601,8 +3257,8 @@
             "pdf-people-group-talent-assessment#c0022"
           ],
           "relevant": [],
-          "latency_ms": 117.41042137145996,
-          "answer_text": "",
+          "latency_ms": 258845.99661827087,
+          "answer_text": "The specific criteria for promotion are based on performance, not growth potential. [pdf-people-group-promotions-transfers#c0017] However, the exact detailed criteria are not provided in the excerpts.",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2615,9 +3271,25 @@
             "hit@5": 0.0,
             "recall@10": NaN,
             "hit@10": 0.0,
-            "precision@5": 0.0
+            "precision@5": 0.0,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 0.0,
+            "required_content": NaN,
+            "uncited_claims": 1.0,
+            "faithfulness": 5.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 5.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "However, the exact detailed criteria are not provided in the excerpts."
+            ],
+            "comment": "The answer is relevant as it directly addresses the question about promotion criteria. However, it introduces an unsupported claim that the detailed criteria are not provided, which is not explicitly stated in the given excerpts. The excerpts do mention that promotions are based on performance, but they do not explicitly state that detailed criteria are absent.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "u002",
@@ -2653,8 +3325,8 @@
             "markdown-total-rewards-benefits-general-and-entity-benefits-pty-benefits-australia#c0001"
           ],
           "relevant": [],
-          "latency_ms": 112.15639114379883,
-          "answer_text": "",
+          "latency_ms": 498816.6117668152,
+          "answer_text": "Part-time team members receive pro-rated coverage. [markdown-total-rewards-benefits-general-and-entity-benefits-index#c0007]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2667,9 +3339,25 @@
             "hit@5": 0.0,
             "recall@10": NaN,
             "hit@10": 0.0,
-            "precision@5": 0.0
+            "precision@5": 0.0,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 0.0,
+            "required_content": NaN,
+            "uncited_claims": 1.0,
+            "faithfulness": 5.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 5.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "Part-time team members receive pro-rated coverage."
+            ],
+            "comment": "The answer is relevant as it directly addresses the question about part-time employee medical coverage. However, it is only partially supported by the excerpts, which do mention pro-rated coverage for life insurance but not specifically for medical coverage.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "u003",
@@ -2705,9 +3393,9 @@
             "markdown-people-group-time-off-and-absence-time-off-types#c0010"
           ],
           "relevant": [],
-          "latency_ms": 129.20331954956055,
-          "answer_text": "",
-          "refused": false,
+          "latency_ms": 278737.8749847412,
+          "answer_text": "I don't know based on internal docs.\nThe document would need to exist: GitLab Onboarding > New Employee Responsibilities in the First Month.",
+          "refused": true,
           "invalid_citations": [],
           "metrics": {
             "mrr": 0.0,
@@ -2719,9 +3407,25 @@
             "hit@5": 0.0,
             "recall@10": NaN,
             "hit@10": 0.0,
-            "precision@5": 0.0
+            "precision@5": 0.0,
+            "citation_validity": NaN,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": NaN,
+            "uncited_claims": 0.0,
+            "faithfulness": 0.0,
+            "relevance": 0.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 0.0,
+            "relevance": 0.0,
+            "unsupported_claims": [
+              "The document would need to exist: GitLab Onboarding > New Employee Responsibilities in the First Month."
+            ],
+            "comment": "The answer contradicts the excerpts by asserting that the information is not available, which is not supported by the given excerpts. The excerpts do provide some information about onboarding and responsibilities, even if not in a single document as suggested.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "u005",
@@ -2757,9 +3461,9 @@
             "markdown-people-group-general-onboarding-onboarding-buddies#c0002"
           ],
           "relevant": [],
-          "latency_ms": 125.73027610778809,
-          "answer_text": "",
-          "refused": false,
+          "latency_ms": 316461.6208076477,
+          "answer_text": "I don't know based on internal docs.\nThe document mentions onboarding buddies and tasks to be completed before the start date but does not specify the exact responsibilities of a new employee in the first week of their role.",
+          "refused": true,
           "invalid_citations": [],
           "metrics": {
             "mrr": 0.0,
@@ -2771,9 +3475,25 @@
             "hit@5": 0.0,
             "recall@10": NaN,
             "hit@10": 0.0,
-            "precision@5": 0.0
+            "precision@5": 0.0,
+            "citation_validity": NaN,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": NaN,
+            "uncited_claims": 0.0,
+            "faithfulness": 5.0,
+            "relevance": 0.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 5.0,
+            "relevance": 0.0,
+            "unsupported_claims": [
+              "The document mentions onboarding buddies and tasks to be completed before the start date but does not specify the exact responsibilities of a new employee in the first week of their role."
+            ],
+            "comment": "The answer is relevant because it directly addresses the question, but it is not faithful as it does not provide any information from the given excerpts. The excerpts do not explicitly list the exact responsibilities of a new employee in the first week, but they do provide context and related information.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "u007",
@@ -2809,8 +3529,8 @@
             "pdf-people-group-relocation#c0002"
           ],
           "relevant": [],
-          "latency_ms": 112.64276504516602,
-          "answer_text": "",
+          "latency_ms": 342250.2155303955,
+          "answer_text": "The company ensures that all employees are aware of the importance of communicating location through the following means:\n\n1. [pdf-people-group-relocation#c0001] Emphasizes the importance of requesting approval to relocate and the potential consequences of not doing so, including disciplinary action up to and including termination.\n\n2. [pdf-people-group-relocation#c0002] Highlights that managers can deny requests or ask for changes if the request impacts business results, and failure to communicate can result in underperformance management action or loss of employment.",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2823,9 +3543,23 @@
             "hit@5": 0.0,
             "recall@10": NaN,
             "hit@10": 0.0,
-            "precision@5": 0.0
+            "precision@5": 0.0,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 0.0,
+            "required_content": NaN,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is fully supported by the provided excerpts and directly addresses the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "u008",
@@ -2861,8 +3595,8 @@
             "markdown-people-group-learning-and-development-career-development-index#c0012"
           ],
           "relevant": [],
-          "latency_ms": 113.20924758911133,
-          "answer_text": "",
+          "latency_ms": 251891.89386367798,
+          "answer_text": "The company ensures that all employees are aware of the importance of inclusive interviewing through training and guidelines. Specifically, interviewers are encouraged to attend or revisit LevelUp training to be aware of the kinds of questions they can and cannot ask, and to adhere to legal guidelines and avoid discriminatory inquiries. [markdown-hiring-conducting-a-gitlab-interview#c0008][markdown-hiring-conducting-a-gitlab-interview#c0009]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2875,9 +3609,23 @@
             "hit@5": 0.0,
             "recall@10": NaN,
             "hit@10": 0.0,
-            "precision@5": 0.0
+            "precision@5": 0.0,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 0.0,
+            "required_content": NaN,
+            "uncited_claims": 2.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is both faithful and relevant. It accurately reflects the information provided in the excerpts, mentioning the importance of training and guidelines for inclusive interviewing. The answer directly addresses the question asked.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "u010",
@@ -2913,7 +3661,7 @@
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0021"
           ],
           "relevant": [],
-          "latency_ms": 122.02954292297363,
+          "latency_ms": 44046.98586463928,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2929,7 +3677,8 @@
             "hit@10": 0.0,
             "precision@5": 0.0
           },
-          "judgement": null
+          "judgement": null,
+          "error": "LLMUnavailable: Ollama at http://ollama:11434 did not respond (HTTPStatusError). Start it with `ollama serve` and pull the model with `ollama pull qwen2.5:7b-instruct`."
         },
         {
           "question_id": "u011",
@@ -2965,8 +3714,8 @@
             "pdf-people-group-talent-assessment#c0011"
           ],
           "relevant": [],
-          "latency_ms": 122.11799621582031,
-          "answer_text": "",
+          "latency_ms": 455328.71413230896,
+          "answer_text": "The company ensures that all employees are aware of the importance of communicating their location through the People Group / Relocation document, which states that team members must request approval to relocate and must reside in their primary location for at least 183 days within a calendar year. Managers are responsible for ensuring compliance with these requirements. [pdf-people-group-relocation#c0001]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -2979,9 +3728,23 @@
             "hit@5": 0.0,
             "recall@10": NaN,
             "hit@10": 0.0,
-            "precision@5": 0.0
+            "precision@5": 0.0,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 0.0,
+            "required_content": NaN,
+            "uncited_claims": 2.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is both faithful and relevant. It accurately cites the relevant excerpt from the 'pdf-people-group-relocation' document, which clearly outlines the company's policy on communicating location and the responsibilities of managers in ensuring compliance.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "u012",
@@ -3017,8 +3780,8 @@
             "pdf-finance-expenses#c0002"
           ],
           "relevant": [],
-          "latency_ms": 113.49654197692871,
-          "answer_text": "",
+          "latency_ms": 306622.31063842773,
+          "answer_text": "Team members should submit receipts for every business expense. For non-US team members, receipts are required for all expenses. US team members are required to only submit receipts for any expenses over $50 USD. Expense claims for a single item up to $5,000 can be expensed via Navan. If the expense exceeds $5,000, it needs to go through the procurement process in Zip. [pdf-finance-expenses#c0003]\n\nI don't know based on internal docs. The exact deadlines for submitting expense reports are not specified in the provided excerpts.",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -3031,9 +3794,25 @@
             "hit@5": 0.0,
             "recall@10": NaN,
             "hit@10": 0.0,
-            "precision@5": 0.0
+            "precision@5": 0.0,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 0.0,
+            "required_content": NaN,
+            "uncited_claims": 6.0,
+            "faithfulness": 5.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 5.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "I don't know based on internal docs. The exact deadlines for submitting expense reports are not specified in the provided excerpts."
+            ],
+            "comment": "The answer is relevant as it correctly states the requirements for submitting receipts and the process for expenses over $5,000. However, it does not address the exact deadlines for submitting expense reports, which are not present in the given excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q024",
@@ -3071,8 +3850,8 @@
           "relevant": [
             "pdf-legal-privacy-employee-privacy-policy#c0030"
           ],
-          "latency_ms": 113.67917060852051,
-          "answer_text": "",
+          "latency_ms": 344018.12839508057,
+          "answer_text": "The contact email for the Privacy Team at GitLab is DPO@gitlab.com. [markdown-legal-privacy-index#c0001]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -3085,9 +3864,25 @@
             "hit@5": 0.0,
             "recall@10": 0.0,
             "hit@10": 0.0,
-            "precision@5": 0.0
+            "precision@5": 0.0,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 1.0,
+            "uncited_claims": 1.0,
+            "faithfulness": 5.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 5.0,
+            "relevance": 10.0,
+            "unsupported_claims": [
+              "The contact email for the Privacy Team at GitLab is DPO@gitlab.com."
+            ],
+            "comment": "The answer is relevant as it directly addresses the question, but it is not fully supported by the excerpts. The excerpts mention that you can contact the Privacy Team at DPO@gitlab.com, but they do not explicitly state that this is the primary or sole contact email for the Privacy Team. The answer also does not mention the alternative contact email, legal_internal@gitlab.com, which is provided in the excerpts.",
+            "judged": true
+          },
+          "error": ""
         },
         {
           "question_id": "q051",
@@ -3125,8 +3920,8 @@
           "relevant": [
             "markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0005"
           ],
-          "latency_ms": 116.34469032287598,
-          "answer_text": "",
+          "latency_ms": 430615.2374744415,
+          "answer_text": "Based on the provided excerpts, a team member who is assessed as \"Developing\" in performance can potentially be considered for a new role, but it would depend on their demonstrated willingness and ability to extend beyond their current scope once ramped, or their potential to grow further with additional guidance or direction. [pdf-people-group-talent-assessment#c0005]",
           "refused": false,
           "invalid_citations": [],
           "metrics": {
@@ -3139,9 +3934,23 @@
             "hit@5": 0.0,
             "recall@10": 0.0,
             "hit@10": 0.0,
-            "precision@5": 0.0
+            "precision@5": 0.0,
+            "citation_validity": 1.0,
+            "grounded": 1.0,
+            "refusal_correct": 1.0,
+            "required_content": 0.5,
+            "uncited_claims": 1.0,
+            "faithfulness": 10.0,
+            "relevance": 10.0
           },
-          "judgement": null
+          "judgement": {
+            "faithfulness": 10.0,
+            "relevance": 10.0,
+            "unsupported_claims": [],
+            "comment": "The answer is faithful as it directly references the provided excerpt, which states that a 'Developing' team member can be more successful in another role with more direction or in a role that better suits their skill set. The answer is also relevant as it directly addresses the question of whether a 'Developing' team member can be considered for a new role.",
+            "judged": true
+          },
+          "error": ""
         }
       ]
     }
