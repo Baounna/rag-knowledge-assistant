@@ -44,4 +44,8 @@ primary_region = "cdg"          # change to your nearest region
 
 [[vm]]
   size = "shared-cpu-2x"
-  memory = "2gb"                   # ~1GB is the model; less will OOM at boot
+  # Measured, not guessed: the app idles at ~40MB and the ONNX embedding model
+  # is ~65MB on disk. 1gb is comfortable; an earlier comment here claimed the
+  # model needed ~1GB, which was wrong by more than an order of magnitude and
+  # would have sized every deployment target too large.
+  memory = "1gb"

@@ -83,14 +83,24 @@ class Store:
     def init_schema(self, *, drop: bool = False) -> str:
         dim = self.settings.embedding_dim
         with self.conn() as c, c.cursor() as cur:
+            # pgvector is mandatory, and is committed BEFORE the optional
+            # extension is attempted. Postgres aborts the whole transaction on
+            # any failed statement, so rolling back a failed pg_search also
+            # rolled back this CREATE EXTENSION -- the table then failed with
+            # `type "vector" does not exist`, blaming pgvector for a problem
+            # caused by the optional extension beside it. Only a provider
+            # without pg_search reaches that path, so it went unseen until the
+            # first real deployment.
             cur.execute("CREATE EXTENSION IF NOT EXISTS vector")
+            c.commit()
 
-            # Real BM25 (Tantivy) if the image provides it; Postgres full-text
-            # search otherwise. Both are lexical rankers -- BM25 is the better
-            # one, and the subject names it, so prefer it and say plainly in
-            # the report which backend actually ran.
+            # Real BM25 (Tantivy) where the provider offers it; Postgres
+            # full-text search otherwise. Both are lexical rankers -- BM25 is
+            # the better one and the subject names it, so prefer it and report
+            # which backend actually ran.
             try:
                 cur.execute("CREATE EXTENSION IF NOT EXISTS pg_search")
+                c.commit()
                 self.lexical_backend = "bm25"
             except psycopg.Error:
                 c.rollback()

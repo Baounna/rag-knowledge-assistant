@@ -159,3 +159,27 @@ def test_prune_keeps_everything_it_is_told_to_keep(store: Store):
         all_ids = [r["chunk_id"] for r in cur.fetchall()]
     assert store.prune_to(all_ids) == []
     assert store.count() == before
+
+
+def test_optional_extension_failure_does_not_undo_pgvector(store: Store):
+    """Regression: pgvector and pg_search were created in one transaction, so
+    a provider that rejects pg_search rolled back BOTH -- and the table then
+    failed with `type "vector" does not exist`, pointing at the wrong cause.
+
+    Only a database WITHOUT pg_search reaches that path, so it survived every
+    local run against ParadeDB and surfaced on the first real deployment.
+    """
+    import psycopg
+
+    # Simulate the provider's refusal in the same shape Neon returns it.
+    with store.conn() as c, c.cursor() as cur:
+        cur.execute("CREATE EXTENSION IF NOT EXISTS vector")
+        c.commit()
+        try:
+            cur.execute("CREATE EXTENSION IF NOT EXISTS definitely_not_an_extension")
+            c.commit()
+        except psycopg.Error:
+            c.rollback()
+        # pgvector must survive a neighbouring extension's failure.
+        cur.execute("SELECT 1 FROM pg_extension WHERE extname = 'vector'")
+        assert cur.fetchone() is not None, "rollback destroyed pgvector"
