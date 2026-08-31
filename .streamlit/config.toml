@@ -1,18 +1,33 @@
-# Server-side config. Kept in the repo so the container and a local run behave
-# identically -- Streamlit silently falls back to different defaults otherwise.
+# Server-side config, committed so the container and a local run behave
+# identically -- Streamlit falls back to different defaults otherwise.
 [server]
 headless = true
-# Streamlit's file watcher scans the whole working directory. With a corpus
-# mounted in, that means watching every document for changes on every rerun.
+# The file watcher scans the working directory. With a corpus mounted in,
+# that means watching ~200 documents for changes on every rerun.
 fileWatcherType = "none"
 maxUploadSize = 50
 
 [browser]
 gatherUsageStats = false
 
+[client]
+toolbarMode = "minimal"
+showErrorDetails = true
+
+# A calm, readable palette. This is a reference tool people read carefully,
+# so contrast and typography matter more than decoration; colour is reserved
+# for meaning (a valid citation, a refusal, a warning) rather than spent on
+# chrome.
 [theme]
 base = "light"
-primaryColor = "#8a4b2a"
-backgroundColor = "#fbfaf8"
-secondaryBackgroundColor = "#f4ece6"
-textColor = "#1c1a17"
+primaryColor = "#1a6a5a"              # deep teal: actions and valid citations
+backgroundColor = "#fcfcfa"
+secondaryBackgroundColor = "#f1efe9"  # sidebar, user messages, expanders
+textColor = "#1b1a17"
+linkColor = "#1a6a5a"
+codeBackgroundColor = "#f1efe9"
+borderColor = "#e2ded4"
+font = "sans-serif"
+headingFont = "sans-serif"
+codeFont = "monospace"
+baseRadius = "0.6rem"

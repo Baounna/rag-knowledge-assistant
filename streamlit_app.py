@@ -23,8 +23,17 @@ from app.config import get_settings
 from app.llm import LLM
 from app.retrieval import RetrievalResult, Retriever
 from app.store import Filters, Store
+from app.ui_style import inject as inject_style, pill
 
-st.set_page_config(page_title="Knowledge Assistant", page_icon="📚", layout="centered")
+st.set_page_config(
+    page_title="Knowledge Assistant",
+    page_icon="📚",
+    layout="centered",
+    initial_sidebar_state="expanded",
+    menu_items={"about": "Retrieval-augmented assistant over internal documents. "
+                         "Every claim is cited; unsupported questions are refused."},
+)
+inject_style()
 
 
 # ---------------------------------------------------------------------------
@@ -73,9 +82,23 @@ def user() -> User | None:
 
 
 def login_screen() -> None:
-    accounts = services()["accounts"]
-    st.title("📚 Internal Knowledge Assistant")
-    st.caption("Answers from your internal documents, with citations you can click.")
+    accounts, store = services()["accounts"], services()["store"]
+    st.markdown("# 📚 Knowledge Assistant")
+    st.markdown(
+        '<p class="muted">Answers drawn only from your internal documents, with a '
+        "clickable citation behind every claim — and a refusal when the documents "
+        "do not support one.</p>",
+        unsafe_allow_html=True,
+    )
+    try:
+        st.markdown(
+            pill(f"{store.count():,} passages indexed", "ok")
+            + pill("citations verified against retrieval", "ok"),
+            unsafe_allow_html=True,
+        )
+    except Exception:  # noqa: BLE001
+        pass
+    st.write("")
 
     tab_in, tab_up = st.tabs(["Sign in", "Create account"])
 
@@ -185,6 +208,8 @@ def sidebar() -> None:
     s, accounts, me = services(), services()["accounts"], user()
     with st.sidebar:
         st.markdown(f"**{me.email}**")
+        if me.is_admin:
+            st.markdown(pill("admin", "ok"), unsafe_allow_html=True)
         limits = accounts.check_limits(me)
         st.progress(
             min(1.0, limits.questions_used / max(limits.questions_limit, 1)),
@@ -201,7 +226,7 @@ def sidebar() -> None:
             st.session_state.conversation_id = None
             st.rerun()
 
-        st.caption("RECENT")
+        st.markdown('<p class="muted">RECENT</p>', unsafe_allow_html=True)
         for conv in accounts.list_conversations(me.id, limit=25):
             if st.button(conv["title"][:38], key=f"c{conv['id']}", use_container_width=True):
                 st.session_state.conversation_id = conv["id"]
@@ -345,13 +370,62 @@ def main() -> None:
         admin_dashboard()
         return
 
-    st.title("📚 Knowledge Assistant")
-    if services()["store"].count() == 0:
+    s = services()
+    indexed = s["store"].count()
+
+    st.markdown("# 📚 Knowledge Assistant")
+    badges = pill(f"{indexed:,} passages", "ok" if indexed else "warn")
+    badges += pill(f"{len(source_names())} sources")
+    badges += (pill(f"{s['llm'].model_for('answer')}", "ok") if s["llm"].available
+               else pill("no model — answers will be refused", "warn"))
+    st.markdown(badges, unsafe_allow_html=True)
+
+    if indexed == 0:
         st.warning("The index is empty. Run `make ingest && make index`.", icon="📭")
+        return
+
+    has_history = bool(st.session_state.get("conversation_id"))
+    if not has_history:
+        empty_state()
 
     replay_history()
-    if question := st.chat_input("Ask about internal docs…"):
+
+    pending = st.session_state.pop("pending_question", None)
+    if question := (pending or st.chat_input("Ask about internal docs…")):
         stream_answer(question)
+
+
+EXAMPLES = [
+    "How long do I have to submit an expense claim?",
+    "Can I fly business class on a long-haul flight?",
+    "What is the mileage reimbursement rate?",
+    "What is our policy on office dogs?",
+]
+
+
+def empty_state() -> None:
+    """First screen: show what the assistant can do, and let them try it.
+
+    The last example is deliberately unanswerable. Watching it refuse is the
+    fastest way to understand that this assistant answers from documents
+    rather than from a model's general knowledge -- which is the whole point
+    of the system and the easiest thing to miss in a demo.
+    """
+    st.markdown(
+        '<p class="muted">Ask a question about the indexed documents. '
+        "Try one of these — the last one is not covered by the corpus, so it "
+        "should be refused rather than guessed.</p>",
+        unsafe_allow_html=True,
+    )
+    st.markdown('<div class="example-grid">', unsafe_allow_html=True)
+    cols = st.columns(2)
+    for i, example in enumerate(EXAMPLES):
+        label = ("🚫 " if i == len(EXAMPLES) - 1 else "→ ") + example
+        if cols[i % 2].button(label, key=f"ex{i}", use_container_width=True):
+            st.session_state.pending_question = example
+            st.rerun()
+    st.markdown("</div>", unsafe_allow_html=True)
+    st.write("")
 
 
 main()
