@@ -40,6 +40,8 @@ from app.evaluation import EvalQuestion, load_questions, save_questions  # noqa:
 from app.llm import LLM  # noqa: E402
 from app.store import Store  # noqa: E402
 
+EMBEDDER = None  # set by --check; the embedding model is slow to load
+
 FACT = re.compile(r"\$[\d,]+|\b\d+\s*(?:days?|hours?|weeks?|months?|%|per cent)\b|\b\d{1,2}:\d{2}\b",
                   re.IGNORECASE)
 
@@ -297,6 +299,78 @@ def draft_unanswerable(llm: LLM, store: Store, count: int,
     return out
 
 
+def check(path: Path, store: Store, fix: bool = False) -> int:
+    """Screen drafted labels mechanically before a human reads them.
+
+    Two checks, both cheap and both catching a different kind of bad label:
+
+      GROUNDED  -- does the `must_include` string actually appear in the
+                   passage the question is labelled against? If the answer
+                   says "4 weeks" and the passage never says "4 weeks", the
+                   model either read a neighbouring chunk or invented it.
+
+      REACHABLE -- does the labelled chunk appear in the top 10 for its own
+                   question? Reported, but NEVER auto-removed.
+
+    Only GROUNDED failures are removable. A question whose label the retriever
+    cannot reach is either mislabelled OR genuinely hard -- and the hard ones
+    are the most valuable questions in the set, because they are the only ones
+    that can show a reranker or a better chunking strategy helping. Dropping
+    them would quietly select for questions the system already answers, which
+    is how an eval set comes to report excellent numbers about nothing.
+
+    So: unreachable questions are surfaced for a human to judge, and only
+    labels contradicted by their own passage are removed automatically.
+    """
+    questions = load_questions(path)
+    with store.conn() as c, c.cursor() as cur:
+        cur.execute("SELECT chunk_id, text FROM chunks")
+        text_of = {r["chunk_id"]: r["text"] for r in cur.fetchall()}
+
+    broken, hard, clean = [], [], []
+    for q in questions:
+        if not q.answerable:
+            clean.append(q)
+            continue
+        cid = q.relevant_chunk_ids[0] if q.relevant_chunk_ids else ""
+        passage = text_of.get(cid, "")
+
+        if not passage:
+            broken.append((q, "label is not in the index"))
+            continue
+        missing = [m for m in q.must_include if m.lower() not in passage.lower()]
+        if missing:
+            broken.append((q, f"passage never says {missing}"))
+            continue
+
+        ranked = {h.chunk_id for h in store.lexical_search(q.question, k=10)}
+        ranked |= {h.chunk_id for h in store.vector_search(
+            EMBEDDER.embed_query(q.question), k=10)}
+        (hard if cid not in ranked else clean).append(q)
+
+    print(f"  {len(clean)} clean | {len(hard)} hard | {len(broken)} broken\n")
+
+    if broken:
+        print("  BROKEN -- the passage contradicts its own label, safe to remove:")
+        for q, why in broken:
+            print(f"    {q.id}  {q.question[:64]}")
+            print(f"          {why}")
+    if hard:
+        print("\n  HARD -- retrieval misses the labelled chunk. KEEP THESE unless the")
+        print("  label is wrong: they are the only questions that can show an")
+        print("  improvement to retrieval actually working.")
+        for q in hard:
+            print(f"    {q.id}  {q.question[:64]}")
+
+    if fix and broken:
+        save_questions(clean + hard, path)
+        print(f"\n  removed {len(broken)} broken questions, kept {len(hard)} hard ones "
+              f"-> {path}")
+    elif broken:
+        print(f"\n  re-run with FIX=1 to remove only the broken ones")
+    return 0
+
+
 def review(path: Path, store: Store) -> int:
     """Print each question beside the passage it is labelled against."""
     questions = load_questions(path)
@@ -338,6 +412,10 @@ def main() -> int:
     ap.add_argument("--batch", type=int, default=4, help="passages per model call")
     ap.add_argument("--out", type=Path, default=Path("eval/questions.draft.jsonl"))
     ap.add_argument("--review", action="store_true", help="print the draft for checking")
+    ap.add_argument("--check", action="store_true",
+                    help="screen labels mechanically before human review")
+    ap.add_argument("--fix", action="store_true",
+                    help="with --check: drop the questions that fail")
     args = ap.parse_args()
 
     settings = get_settings()
@@ -346,6 +424,11 @@ def main() -> int:
 
     if args.review:
         return review(args.out, store)
+    if args.check:
+        global EMBEDDER
+        from app.embeddings import get_embedder
+        EMBEDDER = get_embedder(settings)
+        return check(args.out, store, fix=args.fix)
 
     llm = LLM(settings)
     if not llm.available:

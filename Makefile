@@ -5,7 +5,7 @@ DC   := docker compose
 RUN  := $(DC) run --rm app python
 
 .PHONY: help up up-local down logs ps rebuild corpus ingest index reindex eval eval-full test \
-        draft-questions review-questions eval-llm demo search shell admin db-up db-down ollama-up ollama-down deploy deploy-check \
+        draft-questions check-questions review-questions eval-llm demo search shell admin db-up db-down ollama-up ollama-down deploy deploy-check \
         clean nuke local-setup local-serve local-test
 
 help:
@@ -61,6 +61,9 @@ reindex: ## drop the table and rebuild from scratch
 
 draft-questions: ## draft candidate eval questions from the indexed corpus
 	$(RUN) scripts/draft_questions.py --count $${COUNT:-60}
+
+check-questions: ## screen drafted labels mechanically (add FIX=1 to drop failures)
+	$(RUN) scripts/draft_questions.py --check $${FIX:+--fix}
 
 review-questions: ## print the draft beside the passages, for checking
 	$(RUN) scripts/draft_questions.py --review
