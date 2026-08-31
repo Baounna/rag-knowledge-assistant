@@ -3,7 +3,8 @@ __pycache__/
 *.pyc
 .env
 data/*.jsonl
-!eval/*.jsonl        # the eval set IS a deliverable and must be versioned
+!eval/*.jsonl
+!eval/*.md        # the eval set IS a deliverable and must be versioned
 data/*.db
 .pytest_cache/
 node_modules/

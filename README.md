@@ -358,3 +358,27 @@ Replace them with 50-100 questions about **your** corpus. Rules: phrase them
 the way a user would, not the way the document does — questions built by
 copying sentences out of the corpus measure string matching and flatter every
 retriever.
+
+
+## Host Python note (macOS)
+
+If `python3` on the host fails with `Symbol not found:
+_XML_SetAllocTrackerActivationThreshold`, Homebrew's `python@3.14` has its
+`pyexpat` linked against macOS's `/usr/lib/libexpat.1.dylib`, which is older
+than the Homebrew `expat` it was built against. Nothing in this project is
+affected — everything runs on Python 3.12 inside Docker — but host tooling
+that parses XML will break.
+
+Fix by repointing the library and re-signing:
+
+```bash
+PYEXPAT=$(python3 -c "import sys,glob;print(glob.glob(sys.prefix+'/lib/python3.14/lib-dynload/pyexpat*.so')[0])")
+cp "$PYEXPAT" "$PYEXPAT.backup"
+install_name_tool -change /usr/lib/libexpat.1.dylib \
+  /opt/homebrew/opt/expat/lib/libexpat.1.dylib "$PYEXPAT"
+codesign -f -s - "$PYEXPAT"
+```
+
+A future `brew upgrade python@3.14` replaces the file, so this either has to
+be redone or will be fixed upstream by then. `brew reinstall` is the proper
+repair once `brew update` succeeds.
