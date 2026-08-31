@@ -159,3 +159,21 @@ def test_answer_metrics_are_not_gated_on_one_provider():
         "the gate must ask the LLM whether a model exists, not check one "
         "provider's API key"
     )
+
+
+def test_a_failed_generation_does_not_abort_the_run():
+    """Regression: one flaky model call raised out of Harness.run and destroyed
+    ~40 minutes of completed work. A harness that cannot survive a single
+    transient error is unusable for exactly the long runs it exists for."""
+    import inspect
+
+    from app.evaluation.runner import Harness
+
+    source = inspect.getsource(Harness.run)
+    assert "self.generator.answer" in source
+    generate_block = source[source.index("if generate:"):]
+    assert "try:" in generate_block[:200], (
+        "the generation call must be wrapped: a failed question is recorded "
+        "and skipped, never allowed to abort the run"
+    )
+    assert "error =" in generate_block, "the failure must be recorded, not swallowed"

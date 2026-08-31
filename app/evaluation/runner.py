@@ -85,6 +85,7 @@ class QuestionResult:
     invalid_citations: list[str] = field(default_factory=list)
     metrics: dict[str, float] = field(default_factory=dict)
     judgement: Judgement | None = None
+    error: str = ""
 
 
 @dataclass(slots=True)
@@ -153,8 +154,20 @@ class Harness:
 
             answer: Answer | None = None
             judgement: Judgement | None = None
+            error = ""
             if generate:
-                answer = self.generator.answer(q.question, retrieval)
+                try:
+                    answer = self.generator.answer(q.question, retrieval)
+                except Exception as exc:  # noqa: BLE001
+                    # One flaky model call must not destroy the run. A local
+                    # backend drops requests under load, and losing 40 minutes
+                    # of completed work to a single transient error makes the
+                    # harness unusable for exactly the long runs it exists for.
+                    # The question is recorded as failed and the run continues;
+                    # failures are reported rather than silently averaged away.
+                    error = f"{type(exc).__name__}: {exc}"
+                    print(f"\n    ! {q.id} generation failed ({type(exc).__name__}), continuing")
+            if answer is not None:
                 m["citation_validity"] = citation_validity(answer)
                 m["grounded"] = 1.0 if is_grounded(answer) else 0.0
                 m["refusal_correct"] = 1.0 if refusal_correct(q, answer) else 0.0
@@ -172,12 +185,19 @@ class Harness:
                 answer_text=answer.text if answer else "",
                 refused=answer.refused if answer else False,
                 invalid_citations=answer.invalid_citations if answer else [],
-                metrics=m, judgement=judgement,
+                metrics=m, judgement=judgement, error=error,
             ))
 
         keys = sorted({k for r in results for k in r.metrics})
         aggregates = {k: nanmean([r.metrics.get(k, float("nan")) for r in results]) for k in keys}
         aggregates["latency_ms_p50"] = sorted(r.latency_ms for r in results)[len(results) // 2]
+
+        failed = [r for r in results if r.error]
+        if failed:
+            # Surfaced, never buried: metrics averaged over a partial run mean
+            # something different from metrics over a complete one.
+            print(f"\n  !! {len(failed)}/{len(results)} generations failed and are "
+                  f"excluded from the answer metrics")
 
         return Report(config=config.name, results=results, aggregates=aggregates,
                       usage=self.llm.usage.report(), seconds=time.time() - started)
