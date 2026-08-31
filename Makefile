@@ -41,11 +41,14 @@ rebuild: ## rebuild the app image after changing dependencies
 
 # ---- pipeline ---------------------------------------------------------
 
-corpus: ## download a real corpus (GitLab's public handbook, ~170 documents)
+corpus: ## download a real corpus and lay it out across all three connectors
 	# Runs on the host, not in the container: it needs git, and corpus/ is
 	# mounted read-only inside the app so the app can never modify its own
 	# source documents. Pure stdlib, so plain python3 is enough.
 	python3 scripts/fetch_corpus.py --clean
+	./scripts/make_pdfs.sh corpus/markdown corpus/pdf 12
+	python3 scripts/make_notion_export.py --count 10
+	@echo "corpus ready across markdown / pdf / notion -- next: make ingest && make index"
 
 ingest: ## parse + chunk corpus/ -> data/chunks.jsonl
 	$(RUN) scripts/ingest.py
