@@ -299,7 +299,13 @@ def stream_answer(question: str) -> None:
         def tokens() -> Iterator[str]:
             yield from s["generator"].stream(question, result, history)
 
-        text = st.write_stream(tokens())
+        # Stream INTO a placeholder, then overwrite that same placeholder with
+        # the rendered version. `st.empty()` called afterwards creates a new
+        # empty slot -- it does not erase what was already written -- so the
+        # raw stream stayed on screen and the answer appeared twice: once with
+        # a bare [chunk-id] and once with the citation rendered.
+        slot = st.empty()
+        text = slot.write_stream(tokens())
         if isinstance(text, list):
             text = "".join(text)
         text = (text or "").strip()
@@ -311,8 +317,8 @@ def stream_answer(question: str) -> None:
                     "url": c.url, "valid": c.valid} for c in citations]
         refused = text.lower().startswith("i don't know based on")
 
-        st.empty()
-        render_answer(text, payload)
+        with slot.container():
+            render_answer(text, payload)
         render_sources(result)
 
         tokens_used = (s["llm"].usage.input_tokens + s["llm"].usage.output_tokens) - before

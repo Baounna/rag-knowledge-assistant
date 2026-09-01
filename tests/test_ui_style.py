@@ -49,3 +49,20 @@ def test_user_and_assistant_turns_are_distinguishable():
 def test_pill_helper_marks_its_kind():
     assert 'class="pill ok"' in pill("x", "ok")
     assert 'class="pill "' in pill("x")
+
+
+def test_streamed_answer_is_replaced_not_appended():
+    """Regression: the raw stream and the rendered answer both stayed on
+    screen, so every reply appeared twice -- once with a bare [chunk-id] and
+    once with the citation rendered as a link.
+
+    `st.empty()` called after writing creates a NEW empty slot; it does not
+    erase earlier output. The stream has to go into a placeholder that is then
+    overwritten.
+    """
+    source = (ROOT / "streamlit_app.py").read_text()
+    assert "slot = st.empty()" in source
+    assert "slot.write_stream" in source, "the stream must target the placeholder"
+    assert "with slot.container():" in source, (
+        "the rendered answer must replace the placeholder's contents"
+    )
