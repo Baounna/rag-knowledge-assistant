@@ -168,3 +168,20 @@ def test_usage_reports_cache_hit_rate():
     assert u.cache_hit_rate == 0.0
     u.cache_creation_input_tokens, u.cache_read_input_tokens = 100, 900
     assert u.cache_hit_rate == pytest.approx(0.9)
+
+
+def test_defaults_follow_settings_not_hardcoded_on():
+    """A caller that omits the stage flags must get the configured pipeline.
+
+    `scripts/demo.py` omits them. Before this, it silently ran query-rewrite and
+    reranking -- two LLM calls per question -- on a deployment that had both
+    disabled, so the CLI and the app disagreed about what "retrieval" means.
+    """
+    from dataclasses import replace as _replace
+
+    base = _replace(get_settings(), anthropic_api_key="k", llm_provider="anthropic")
+    off = Retriever(store=FakeStore(), embedder=FakeEmbedder(), llm=LLM(base),
+                    settings=_replace(base, enable_rewrite=False, enable_rerank=False))
+    result = off.retrieve("q", top_k=3, top_n=3)
+    assert result.queries_used == ["q"], "rewrite ran despite enable_rewrite=False"
+    assert all(c.rerank_score is None for c in result.chunks)

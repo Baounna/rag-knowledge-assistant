@@ -253,13 +253,21 @@ class Retriever:
         history: Sequence[dict[str, str]] = (),
         top_k: int | None = None,
         top_n: int | None = None,
-        use_rewrite: bool = True,
-        use_rerank: bool = True,
+        use_rewrite: bool | None = None,
+        use_rerank: bool | None = None,
         rrf_k: int = 60,
         weights: Sequence[float] | None = None,
     ) -> RetrievalResult:
         top_k = top_k or self.settings.retrieval_top_k
         top_n = top_n or self.settings.rerank_top_n
+        # Default to what the deployment is configured for, not to "on". These
+        # stages each cost an LLM call, and a caller that omits the flags used
+        # to get a slower, non-deterministic pipeline than the app and the eval
+        # harness -- which both pass the settings explicitly -- actually run.
+        if use_rewrite is None:
+            use_rewrite = self.settings.enable_rewrite
+        if use_rerank is None:
+            use_rerank = self.settings.enable_rerank
         result = RetrievalResult(query=query, chunks=[])
 
         queries, hyde = ([query], "")
