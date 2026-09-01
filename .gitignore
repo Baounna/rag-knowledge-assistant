@@ -20,3 +20,4 @@ corpus/notion/
 
 # The assignment document: kept local, not published
 SUBJECT.pdf
+.tools/

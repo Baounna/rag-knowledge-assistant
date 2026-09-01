@@ -26,15 +26,13 @@ CSS = """
     --warn:#a8621a; --warn-soft:#fbf1e4;
     --bad:#a33a2a; --bad-soft:#fbecea;
   }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --ink:#e9e6de; --muted:#9d988c; --line:#33302a;
-      --panel:#171714; --sunk:#201f1b;
-      --accent:#5fbfa6; --accent-soft:#16302a;
-      --warn:#d99a4e; --warn-soft:#2c2318;
-      --bad:#d9705e; --bad-soft:#2e1c19;
-    }
-  }
+  /* No prefers-color-scheme block here, deliberately.
+     Streamlit's theme is pinned to light in .streamlit/config.toml, and it
+     does NOT follow the OS. A media query here followed the OS instead, so on
+     a machine set to dark mode these tokens went dark while Streamlit kept
+     painting dark text -- producing an unreadable dark-on-dark chat bubble.
+     One source of truth: the config file. To offer dark mode, remove `base`
+     from config.toml so Streamlit follows the OS, and reinstate the query. */
 
   /* ---- rhythm ------------------------------------------------------ */
   .block-container{ max-width: 46rem; padding-top: 2.2rem; }
