@@ -17,3 +17,6 @@ corpus/markdown/*.md
 corpus/pdf/*.pdf
 corpus/notion/
 !corpus/README.md
+
+# The assignment document: kept local, not published
+SUBJECT.pdf
