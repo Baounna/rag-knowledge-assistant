@@ -40,7 +40,7 @@ Other commands:
 ```bash
 make ps       # what is running and what it is using
 make logs     # follow the app log
-make test     # 95 tests
+make test     # 105 tests
 make eval     # retrieval metrics across 6 configurations
 make down     # stop everything, keep the data
 make nuke     # delete everything this project created (~15GB back)
@@ -327,13 +327,13 @@ available so several configurations are secretly identical.
 
 ### Measured
 
-58 questions (49 answerable, 9 unanswerable) over 1,997 chunks:
+56 questions (47 answerable, 9 unanswerable) over 1,994 chunks:
 
 | config | recall@1 | recall@5 | recall@10 | MRR |
 |---|---|---|---|---|
-| lexical-only | 0.776 | 0.898 | 0.939 | 0.709 |
-| vector-only | 0.694 | 0.796 | 0.878 | 0.627 |
-| **hybrid (RRF)** | **0.796** | **0.918** | **0.939** | **0.713** |
+| lexical-only | 0.787 | 0.894 | 0.936 | 0.711 |
+| vector-only | 0.723 | 0.830 | 0.894 | 0.647 |
+| **hybrid (RRF)** | **0.830** | **0.936** | **0.936** | **0.730** |
 
 Hybrid wins on every column, which is the result RRF predicts — but read the
 gap honestly: it beats lexical alone by only 2 points of recall@1. Lexical
