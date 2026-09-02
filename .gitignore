@@ -21,3 +21,6 @@ corpus/notion/
 # The assignment document: kept local, not published
 SUBJECT.pdf
 .tools/
+
+# Internship report: contains company and supervisor names (repo is public)
+report/
