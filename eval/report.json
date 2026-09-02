@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T19:50:45.226557+00:00",
+  "generated_at": "2026-09-01T15:48:44.497171+00:00",
   "embedding_model": "BAAI/bge-small-en-v1.5",
   "coverage": {
     "questions": 56,
@@ -13,7 +13,7 @@
   "reports": [
     {
       "config": "lexical-only",
-      "seconds": 8.95,
+      "seconds": 7.84,
       "usage": "0 calls | in 0 out 0 | cache write 0 read 0 (0% hit)",
       "aggregates": {
         "hit@1": 0.6607,
@@ -26,7 +26,7 @@
         "recall@10": 0.9362,
         "recall@3": 0.8936,
         "recall@5": 0.8936,
-        "latency_ms_p50": 128.6671
+        "latency_ms_p50": 125.0486
       },
       "results": [
         {
@@ -65,7 +65,7 @@
           "relevant": [
             "markdown-communication-ask-me-anything#c0004"
           ],
-          "latency_ms": 1586.5943431854248,
+          "latency_ms": 922.9199886322021,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -120,7 +120,7 @@
           "relevant": [
             "markdown-finance-procurement-index#c0009"
           ],
-          "latency_ms": 230.84044456481934,
+          "latency_ms": 137.60638236999512,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -175,7 +175,7 @@
           "relevant": [
             "markdown-hiring-candidate-faq-index#c0009"
           ],
-          "latency_ms": 168.37477684020996,
+          "latency_ms": 129.04810905456543,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -230,7 +230,7 @@
           "relevant": [
             "markdown-legal-privacy-transparency-reports#c0011"
           ],
-          "latency_ms": 203.20796966552734,
+          "latency_ms": 126.43003463745117,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -285,7 +285,7 @@
           "relevant": [
             "markdown-total-rewards-incentives#c0006"
           ],
-          "latency_ms": 153.28359603881836,
+          "latency_ms": 133.1808567047119,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -340,7 +340,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0019"
           ],
-          "latency_ms": 131.4067840576172,
+          "latency_ms": 127.52270698547363,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -395,7 +395,7 @@
           "relevant": [
             "pdf-communication-index#c0013"
           ],
-          "latency_ms": 139.46008682250977,
+          "latency_ms": 141.4177417755127,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -450,7 +450,7 @@
           "relevant": [
             "pdf-finance-expenses#c0004"
           ],
-          "latency_ms": 172.47772216796875,
+          "latency_ms": 124.92108345031738,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -505,7 +505,7 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0083"
           ],
-          "latency_ms": 123.08788299560547,
+          "latency_ms": 124.04227256774902,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -560,7 +560,7 @@
           "relevant": [
             "pdf-legal-privacy-employee-privacy-policy#c0009"
           ],
-          "latency_ms": 138.6878490447998,
+          "latency_ms": 127.39992141723633,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -615,7 +615,7 @@
           "relevant": [
             "pdf-people-group-relocation#c0004"
           ],
-          "latency_ms": 123.22568893432617,
+          "latency_ms": 121.80471420288086,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -670,7 +670,7 @@
           "relevant": [
             "markdown-communication-ask-me-anything#c0010"
           ],
-          "latency_ms": 143.40519905090332,
+          "latency_ms": 132.58957862854004,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -725,7 +725,7 @@
           "relevant": [
             "markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0003"
           ],
-          "latency_ms": 130.37776947021484,
+          "latency_ms": 132.68280029296875,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -780,7 +780,7 @@
           "relevant": [
             "markdown-people-group-time-off-and-absence-leave-types#c0010"
           ],
-          "latency_ms": 123.37064743041992,
+          "latency_ms": 123.50654602050781,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -835,7 +835,7 @@
           "relevant": [
             "markdown-total-rewards-benefits-general-and-entity-benefits-remote-com#c0015"
           ],
-          "latency_ms": 140.181303024292,
+          "latency_ms": 119.30465698242188,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -890,7 +890,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-people-group-ff6124ea10e7d438301ca47edf245750#c0004"
           ],
-          "latency_ms": 126.29103660583496,
+          "latency_ms": 127.14028358459473,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -945,7 +945,7 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0009"
           ],
-          "latency_ms": 125.07987022399902,
+          "latency_ms": 123.53134155273438,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1000,7 +1000,7 @@
           "relevant": [
             "pdf-people-group-talent-assessment#c0015"
           ],
-          "latency_ms": 124.9234676361084,
+          "latency_ms": 122.4970817565918,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1055,7 +1055,7 @@
           "relevant": [
             "markdown-finance-accounts-payable-index#c0001"
           ],
-          "latency_ms": 128.46088409423828,
+          "latency_ms": 123.84986877441406,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1110,7 +1110,7 @@
           "relevant": [
             "markdown-hiring-referral-process#c0003"
           ],
-          "latency_ms": 127.45904922485352,
+          "latency_ms": 121.67215347290039,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1165,7 +1165,7 @@
           "relevant": [
             "markdown-legal-privacy-index#c0003"
           ],
-          "latency_ms": 131.6547393798828,
+          "latency_ms": 124.29165840148926,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1220,7 +1220,7 @@
           "relevant": [
             "markdown-people-group-time-off-and-absence-leave-types#c0011"
           ],
-          "latency_ms": 136.1701488494873,
+          "latency_ms": 134.1404914855957,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1275,7 +1275,7 @@
           "relevant": [
             "markdown-total-rewards-benefits-general-and-entity-benefits-france-sas#c0004"
           ],
-          "latency_ms": 127.89463996887207,
+          "latency_ms": 120.82672119140625,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1330,7 +1330,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0021"
           ],
-          "latency_ms": 137.1607780456543,
+          "latency_ms": 134.66548919677734,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1385,7 +1385,7 @@
           "relevant": [
             "pdf-communication-index#c0005"
           ],
-          "latency_ms": 113.72780799865723,
+          "latency_ms": 120.47290802001953,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1440,7 +1440,7 @@
           "relevant": [
             "pdf-finance-accounting-index#c0047"
           ],
-          "latency_ms": 124.4974136352539,
+          "latency_ms": 119.39764022827148,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1495,7 +1495,7 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0036"
           ],
-          "latency_ms": 123.98219108581543,
+          "latency_ms": 132.38120079040527,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1550,7 +1550,7 @@
           "relevant": [
             "markdown-communication-ask-me-anything#c0008"
           ],
-          "latency_ms": 149.68514442443848,
+          "latency_ms": 127.43258476257324,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1605,7 +1605,7 @@
           "relevant": [
             "markdown-finance-procurement-index#c0029"
           ],
-          "latency_ms": 135.35499572753906,
+          "latency_ms": 131.44659996032715,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1660,7 +1660,7 @@
           "relevant": [
             "markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0002"
           ],
-          "latency_ms": 128.68738174438477,
+          "latency_ms": 125.83303451538086,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1715,7 +1715,7 @@
           "relevant": [
             "markdown-legal-privacy-product-usage-events-faq#c0003"
           ],
-          "latency_ms": 128.53455543518066,
+          "latency_ms": 118.22128295898438,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1770,7 +1770,7 @@
           "relevant": [
             "markdown-people-group-learning-and-development-growth-and-development-index#c0002"
           ],
-          "latency_ms": 164.63017463684082,
+          "latency_ms": 126.81293487548828,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1825,7 +1825,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0011"
           ],
-          "latency_ms": 133.00347328186035,
+          "latency_ms": 133.1944465637207,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1880,7 +1880,7 @@
           "relevant": [
             "pdf-communication-index#c0010"
           ],
-          "latency_ms": 119.70186233520508,
+          "latency_ms": 129.11009788513184,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1935,7 +1935,7 @@
           "relevant": [
             "pdf-finance-expenses#c0010"
           ],
-          "latency_ms": 135.3471279144287,
+          "latency_ms": 130.64122200012207,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -1990,7 +1990,7 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0001"
           ],
-          "latency_ms": 126.24645233154297,
+          "latency_ms": 122.52950668334961,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2045,7 +2045,7 @@
           "relevant": [
             "pdf-legal-privacy-employee-privacy-policy#c0029"
           ],
-          "latency_ms": 118.60823631286621,
+          "latency_ms": 117.19846725463867,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2100,7 +2100,7 @@
           "relevant": [
             "pdf-people-group-relocation#c0001"
           ],
-          "latency_ms": 125.44584274291992,
+          "latency_ms": 138.17429542541504,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2155,7 +2155,7 @@
           "relevant": [
             "markdown-communication-zoom-webinars#c0004"
           ],
-          "latency_ms": 117.3863410949707,
+          "latency_ms": 123.45361709594727,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2210,7 +2210,7 @@
           "relevant": [
             "markdown-finance-accounts-payable-corp-credit-cards#c0002"
           ],
-          "latency_ms": 124.02701377868652,
+          "latency_ms": 123.36921691894531,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2265,7 +2265,7 @@
           "relevant": [
             "markdown-legal-privacy-law-enforcement-guidelines#c0004"
           ],
-          "latency_ms": 137.3600959777832,
+          "latency_ms": 128.22246551513672,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2320,7 +2320,7 @@
           "relevant": [
             "markdown-people-group-people-operations-index#c0006"
           ],
-          "latency_ms": 142.59004592895508,
+          "latency_ms": 125.77128410339355,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2375,7 +2375,7 @@
           "relevant": [
             "markdown-total-rewards-benefits-general-and-entity-benefits-france-sas#c0009"
           ],
-          "latency_ms": 113.42549324035645,
+          "latency_ms": 116.99652671813965,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2430,7 +2430,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-360-feedback-86188523ae86b93378c714039b286b88#c0005"
           ],
-          "latency_ms": 118.84021759033203,
+          "latency_ms": 122.08032608032227,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2485,7 +2485,7 @@
           "relevant": [
             "pdf-finance-expenses#c0025"
           ],
-          "latency_ms": 117.69843101501465,
+          "latency_ms": 124.39274787902832,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2538,7 +2538,7 @@
             "markdown-hiring-conducting-a-gitlab-interview#c0015"
           ],
           "relevant": [],
-          "latency_ms": 121.22440338134766,
+          "latency_ms": 112.92243003845215,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2591,7 +2591,7 @@
             "markdown-total-rewards-benefits-general-and-entity-benefits-korea-ltd-benefits#c0002"
           ],
           "relevant": [],
-          "latency_ms": 118.12329292297363,
+          "latency_ms": 116.3783073425293,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2644,7 +2644,7 @@
             "pdf-people-group-talent-assessment#c0025"
           ],
           "relevant": [],
-          "latency_ms": 108.44731330871582,
+          "latency_ms": 124.33385848999023,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2697,7 +2697,7 @@
             "markdown-total-rewards-benefits-general-and-entity-benefits-remote-com#c0011"
           ],
           "relevant": [],
-          "latency_ms": 128.34763526916504,
+          "latency_ms": 121.3541030883789,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2750,7 +2750,7 @@
             "markdown-communication-zoom-index#c0001"
           ],
           "relevant": [],
-          "latency_ms": 124.94945526123047,
+          "latency_ms": 125.84567070007324,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2803,7 +2803,7 @@
             "markdown-hiring-interviewing-index#c0001"
           ],
           "relevant": [],
-          "latency_ms": 129.744291305542,
+          "latency_ms": 125.4417896270752,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2856,7 +2856,7 @@
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-people-group-ff6124ea10e7d438301ca47edf245750#c0011"
           ],
           "relevant": [],
-          "latency_ms": 129.6255588531494,
+          "latency_ms": 111.49477958679199,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2909,7 +2909,7 @@
             "pdf-communication-index#c0000"
           ],
           "relevant": [],
-          "latency_ms": 128.66711616516113,
+          "latency_ms": 118.94607543945312,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -2962,7 +2962,7 @@
             "pdf-finance-expenses#c0044"
           ],
           "relevant": [],
-          "latency_ms": 131.3624382019043,
+          "latency_ms": 137.36248016357422,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3017,7 +3017,7 @@
           "relevant": [
             "pdf-legal-privacy-employee-privacy-policy#c0030"
           ],
-          "latency_ms": 131.6828727722168,
+          "latency_ms": 125.04863739013672,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3072,7 +3072,7 @@
           "relevant": [
             "markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0005"
           ],
-          "latency_ms": 124.71318244934082,
+          "latency_ms": 124.53269958496094,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3095,7 +3095,7 @@
     },
     {
       "config": "vector-only",
-      "seconds": 6.97,
+      "seconds": 7.33,
       "usage": "0 calls | in 0 out 0 | cache write 0 read 0 (0% hit)",
       "aggregates": {
         "hit@1": 0.6071,
@@ -3108,7 +3108,7 @@
         "recall@10": 0.8936,
         "recall@3": 0.766,
         "recall@5": 0.8298,
-        "latency_ms_p50": 121.7873
+        "latency_ms_p50": 125.1578
       },
       "results": [
         {
@@ -3147,7 +3147,7 @@
           "relevant": [
             "markdown-communication-ask-me-anything#c0004"
           ],
-          "latency_ms": 137.0551586151123,
+          "latency_ms": 159.77239608764648,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3202,7 +3202,7 @@
           "relevant": [
             "markdown-finance-procurement-index#c0009"
           ],
-          "latency_ms": 133.31151008605957,
+          "latency_ms": 126.0063648223877,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3257,7 +3257,7 @@
           "relevant": [
             "markdown-hiring-candidate-faq-index#c0009"
           ],
-          "latency_ms": 144.9575424194336,
+          "latency_ms": 121.04392051696777,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3312,7 +3312,7 @@
           "relevant": [
             "markdown-legal-privacy-transparency-reports#c0011"
           ],
-          "latency_ms": 126.38664245605469,
+          "latency_ms": 131.12282752990723,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3367,7 +3367,7 @@
           "relevant": [
             "markdown-total-rewards-incentives#c0006"
           ],
-          "latency_ms": 120.80717086791992,
+          "latency_ms": 129.9583911895752,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3422,7 +3422,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0019"
           ],
-          "latency_ms": 130.01608848571777,
+          "latency_ms": 128.49068641662598,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3477,7 +3477,7 @@
           "relevant": [
             "pdf-communication-index#c0013"
           ],
-          "latency_ms": 133.96239280700684,
+          "latency_ms": 145.90096473693848,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3532,7 +3532,7 @@
           "relevant": [
             "pdf-finance-expenses#c0004"
           ],
-          "latency_ms": 120.72134017944336,
+          "latency_ms": 124.1450309753418,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3587,7 +3587,7 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0083"
           ],
-          "latency_ms": 127.16460227966309,
+          "latency_ms": 120.30744552612305,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3642,7 +3642,7 @@
           "relevant": [
             "pdf-legal-privacy-employee-privacy-policy#c0009"
           ],
-          "latency_ms": 129.7316551208496,
+          "latency_ms": 268.97192001342773,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3697,7 +3697,7 @@
           "relevant": [
             "pdf-people-group-relocation#c0004"
           ],
-          "latency_ms": 118.85809898376465,
+          "latency_ms": 128.98898124694824,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3752,7 +3752,7 @@
           "relevant": [
             "markdown-communication-ask-me-anything#c0010"
           ],
-          "latency_ms": 121.61612510681152,
+          "latency_ms": 128.79490852355957,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3807,7 +3807,7 @@
           "relevant": [
             "markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0003"
           ],
-          "latency_ms": 118.84927749633789,
+          "latency_ms": 123.53038787841797,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3862,7 +3862,7 @@
           "relevant": [
             "markdown-people-group-time-off-and-absence-leave-types#c0010"
           ],
-          "latency_ms": 119.75526809692383,
+          "latency_ms": 128.39198112487793,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3917,7 +3917,7 @@
           "relevant": [
             "markdown-total-rewards-benefits-general-and-entity-benefits-remote-com#c0015"
           ],
-          "latency_ms": 118.81780624389648,
+          "latency_ms": 122.61486053466797,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -3972,7 +3972,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-people-group-ff6124ea10e7d438301ca47edf245750#c0004"
           ],
-          "latency_ms": 122.68638610839844,
+          "latency_ms": 127.40969657897949,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4027,7 +4027,7 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0009"
           ],
-          "latency_ms": 118.99423599243164,
+          "latency_ms": 122.09963798522949,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4082,7 +4082,7 @@
           "relevant": [
             "pdf-people-group-talent-assessment#c0015"
           ],
-          "latency_ms": 117.38729476928711,
+          "latency_ms": 130.57494163513184,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4137,7 +4137,7 @@
           "relevant": [
             "markdown-finance-accounts-payable-index#c0001"
           ],
-          "latency_ms": 127.83622741699219,
+          "latency_ms": 119.65441703796387,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4192,7 +4192,7 @@
           "relevant": [
             "markdown-hiring-referral-process#c0003"
           ],
-          "latency_ms": 122.15042114257812,
+          "latency_ms": 120.02062797546387,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4247,7 +4247,7 @@
           "relevant": [
             "markdown-legal-privacy-index#c0003"
           ],
-          "latency_ms": 120.06759643554688,
+          "latency_ms": 127.55680084228516,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4302,7 +4302,7 @@
           "relevant": [
             "markdown-people-group-time-off-and-absence-leave-types#c0011"
           ],
-          "latency_ms": 134.3514919281006,
+          "latency_ms": 120.49031257629395,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4357,7 +4357,7 @@
           "relevant": [
             "markdown-total-rewards-benefits-general-and-entity-benefits-france-sas#c0004"
           ],
-          "latency_ms": 112.43724822998047,
+          "latency_ms": 119.59362030029297,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4412,7 +4412,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0021"
           ],
-          "latency_ms": 124.36723709106445,
+          "latency_ms": 134.98616218566895,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4467,7 +4467,7 @@
           "relevant": [
             "pdf-communication-index#c0005"
           ],
-          "latency_ms": 121.78730964660645,
+          "latency_ms": 120.3908920288086,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4522,7 +4522,7 @@
           "relevant": [
             "pdf-finance-accounting-index#c0047"
           ],
-          "latency_ms": 118.97587776184082,
+          "latency_ms": 118.19767951965332,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4577,7 +4577,7 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0036"
           ],
-          "latency_ms": 119.58885192871094,
+          "latency_ms": 135.82301139831543,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4632,7 +4632,7 @@
           "relevant": [
             "markdown-communication-ask-me-anything#c0008"
           ],
-          "latency_ms": 115.33975601196289,
+          "latency_ms": 120.32604217529297,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4687,7 +4687,7 @@
           "relevant": [
             "markdown-finance-procurement-index#c0029"
           ],
-          "latency_ms": 131.81138038635254,
+          "latency_ms": 127.67481803894043,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4742,7 +4742,7 @@
           "relevant": [
             "markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0002"
           ],
-          "latency_ms": 114.3348217010498,
+          "latency_ms": 121.1249828338623,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4797,7 +4797,7 @@
           "relevant": [
             "markdown-legal-privacy-product-usage-events-faq#c0003"
           ],
-          "latency_ms": 125.59127807617188,
+          "latency_ms": 130.8281421661377,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4852,7 +4852,7 @@
           "relevant": [
             "markdown-people-group-learning-and-development-growth-and-development-index#c0002"
           ],
-          "latency_ms": 116.80197715759277,
+          "latency_ms": 125.50735473632812,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4907,7 +4907,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0011"
           ],
-          "latency_ms": 119.50039863586426,
+          "latency_ms": 122.62201309204102,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -4962,7 +4962,7 @@
           "relevant": [
             "pdf-communication-index#c0010"
           ],
-          "latency_ms": 114.41159248352051,
+          "latency_ms": 114.41636085510254,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5017,7 +5017,7 @@
           "relevant": [
             "pdf-finance-expenses#c0010"
           ],
-          "latency_ms": 125.1838207244873,
+          "latency_ms": 123.37327003479004,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5072,7 +5072,7 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0001"
           ],
-          "latency_ms": 115.81730842590332,
+          "latency_ms": 123.25835227966309,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5127,7 +5127,7 @@
           "relevant": [
             "pdf-legal-privacy-employee-privacy-policy#c0029"
           ],
-          "latency_ms": 116.51468276977539,
+          "latency_ms": 118.0117130279541,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5182,7 +5182,7 @@
           "relevant": [
             "pdf-people-group-relocation#c0001"
           ],
-          "latency_ms": 123.23641777038574,
+          "latency_ms": 127.44927406311035,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5237,7 +5237,7 @@
           "relevant": [
             "markdown-communication-zoom-webinars#c0004"
           ],
-          "latency_ms": 123.84390830993652,
+          "latency_ms": 118.47281455993652,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5292,7 +5292,7 @@
           "relevant": [
             "markdown-finance-accounts-payable-corp-credit-cards#c0002"
           ],
-          "latency_ms": 116.28103256225586,
+          "latency_ms": 126.06263160705566,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5347,7 +5347,7 @@
           "relevant": [
             "markdown-legal-privacy-law-enforcement-guidelines#c0004"
           ],
-          "latency_ms": 125.84233283996582,
+          "latency_ms": 125.15783309936523,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5402,7 +5402,7 @@
           "relevant": [
             "markdown-people-group-people-operations-index#c0006"
           ],
-          "latency_ms": 127.36034393310547,
+          "latency_ms": 134.95206832885742,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5457,7 +5457,7 @@
           "relevant": [
             "markdown-total-rewards-benefits-general-and-entity-benefits-france-sas#c0009"
           ],
-          "latency_ms": 115.8595085144043,
+          "latency_ms": 122.8172779083252,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5512,7 +5512,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-360-feedback-86188523ae86b93378c714039b286b88#c0005"
           ],
-          "latency_ms": 125.13446807861328,
+          "latency_ms": 116.75500869750977,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5567,7 +5567,7 @@
           "relevant": [
             "pdf-finance-expenses#c0025"
           ],
-          "latency_ms": 129.9450397491455,
+          "latency_ms": 115.40651321411133,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5620,7 +5620,7 @@
             "pdf-people-group-promotions-transfers#c0011"
           ],
           "relevant": [],
-          "latency_ms": 121.53315544128418,
+          "latency_ms": 124.39942359924316,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5673,7 +5673,7 @@
             "markdown-total-rewards-benefits-general-and-entity-benefits-gitlab-ireland-ltd#c0001"
           ],
           "relevant": [],
-          "latency_ms": 119.70400810241699,
+          "latency_ms": 117.77758598327637,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5726,7 +5726,7 @@
             "markdown-hiring-job-description-library#c0001"
           ],
           "relevant": [],
-          "latency_ms": 122.45798110961914,
+          "latency_ms": 123.67677688598633,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5779,7 +5779,7 @@
             "markdown-hiring-job-description-library#c0001"
           ],
           "relevant": [],
-          "latency_ms": 140.17081260681152,
+          "latency_ms": 123.12984466552734,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5832,7 +5832,7 @@
             "markdown-people-group-employment-branding-people-communications#c0000"
           ],
           "relevant": [],
-          "latency_ms": 164.35575485229492,
+          "latency_ms": 131.87026977539062,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5885,7 +5885,7 @@
             "markdown-hiring-interviewing-customer-support-interviewing#c0001"
           ],
           "relevant": [],
-          "latency_ms": 149.41954612731934,
+          "latency_ms": 137.40134239196777,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5938,7 +5938,7 @@
             "markdown-finance-procurement-index#c0007"
           ],
           "relevant": [],
-          "latency_ms": 119.41361427307129,
+          "latency_ms": 130.85675239562988,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -5991,7 +5991,7 @@
             "markdown-people-group-employment-branding-people-communications#c0000"
           ],
           "relevant": [],
-          "latency_ms": 119.57120895385742,
+          "latency_ms": 125.0455379486084,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6044,7 +6044,7 @@
             "pdf-finance-expenses#c0047"
           ],
           "relevant": [],
-          "latency_ms": 115.12446403503418,
+          "latency_ms": 131.6537857055664,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6099,7 +6099,7 @@
           "relevant": [
             "pdf-legal-privacy-employee-privacy-policy#c0030"
           ],
-          "latency_ms": 116.3787841796875,
+          "latency_ms": 246.92273139953613,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6154,7 +6154,7 @@
           "relevant": [
             "markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0005"
           ],
-          "latency_ms": 134.92131233215332,
+          "latency_ms": 132.86495208740234,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6177,7 +6177,7 @@
     },
     {
       "config": "hybrid",
-      "seconds": 6.98,
+      "seconds": 7.06,
       "usage": "0 calls | in 0 out 0 | cache write 0 read 0 (0% hit)",
       "aggregates": {
         "hit@1": 0.6964,
@@ -6190,7 +6190,7 @@
         "recall@10": 0.9362,
         "recall@3": 0.9149,
         "recall@5": 0.9362,
-        "latency_ms_p50": 123.5721
+        "latency_ms_p50": 125.6926
       },
       "results": [
         {
@@ -6229,7 +6229,7 @@
           "relevant": [
             "markdown-communication-ask-me-anything#c0004"
           ],
-          "latency_ms": 118.43514442443848,
+          "latency_ms": 131.03461265563965,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6284,7 +6284,7 @@
           "relevant": [
             "markdown-finance-procurement-index#c0009"
           ],
-          "latency_ms": 127.02393531799316,
+          "latency_ms": 129.63461875915527,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6339,7 +6339,7 @@
           "relevant": [
             "markdown-hiring-candidate-faq-index#c0009"
           ],
-          "latency_ms": 166.42189025878906,
+          "latency_ms": 130.89704513549805,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6394,7 +6394,7 @@
           "relevant": [
             "markdown-legal-privacy-transparency-reports#c0011"
           ],
-          "latency_ms": 136.26837730407715,
+          "latency_ms": 138.00573348999023,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6449,7 +6449,7 @@
           "relevant": [
             "markdown-total-rewards-incentives#c0006"
           ],
-          "latency_ms": 117.22850799560547,
+          "latency_ms": 134.46450233459473,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6504,7 +6504,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0019"
           ],
-          "latency_ms": 123.57211112976074,
+          "latency_ms": 150.87366104125977,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6559,7 +6559,7 @@
           "relevant": [
             "pdf-communication-index#c0013"
           ],
-          "latency_ms": 128.5848617553711,
+          "latency_ms": 151.26800537109375,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6614,7 +6614,7 @@
           "relevant": [
             "pdf-finance-expenses#c0004"
           ],
-          "latency_ms": 126.59478187561035,
+          "latency_ms": 130.3718090057373,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6669,7 +6669,7 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0083"
           ],
-          "latency_ms": 121.69837951660156,
+          "latency_ms": 131.59608840942383,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6724,7 +6724,7 @@
           "relevant": [
             "pdf-legal-privacy-employee-privacy-policy#c0009"
           ],
-          "latency_ms": 133.18443298339844,
+          "latency_ms": 134.7181797027588,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6779,7 +6779,7 @@
           "relevant": [
             "pdf-people-group-relocation#c0004"
           ],
-          "latency_ms": 131.06894493103027,
+          "latency_ms": 138.66114616394043,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6834,7 +6834,7 @@
           "relevant": [
             "markdown-communication-ask-me-anything#c0010"
           ],
-          "latency_ms": 117.91849136352539,
+          "latency_ms": 140.00964164733887,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6889,7 +6889,7 @@
           "relevant": [
             "markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0003"
           ],
-          "latency_ms": 111.20176315307617,
+          "latency_ms": 128.9961338043213,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6944,7 +6944,7 @@
           "relevant": [
             "markdown-people-group-time-off-and-absence-leave-types#c0010"
           ],
-          "latency_ms": 134.6414089202881,
+          "latency_ms": 128.64303588867188,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -6999,7 +6999,7 @@
           "relevant": [
             "markdown-total-rewards-benefits-general-and-entity-benefits-remote-com#c0015"
           ],
-          "latency_ms": 111.98115348815918,
+          "latency_ms": 143.27526092529297,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7054,7 +7054,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-people-group-ff6124ea10e7d438301ca47edf245750#c0004"
           ],
-          "latency_ms": 118.74532699584961,
+          "latency_ms": 132.05981254577637,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7109,7 +7109,7 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0009"
           ],
-          "latency_ms": 128.33905220031738,
+          "latency_ms": 134.57179069519043,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7164,7 +7164,7 @@
           "relevant": [
             "pdf-people-group-talent-assessment#c0015"
           ],
-          "latency_ms": 160.23707389831543,
+          "latency_ms": 172.3940372467041,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7219,7 +7219,7 @@
           "relevant": [
             "markdown-finance-accounts-payable-index#c0001"
           ],
-          "latency_ms": 135.32471656799316,
+          "latency_ms": 137.0549201965332,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7274,7 +7274,7 @@
           "relevant": [
             "markdown-hiring-referral-process#c0003"
           ],
-          "latency_ms": 125.14114379882812,
+          "latency_ms": 126.22976303100586,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7329,7 +7329,7 @@
           "relevant": [
             "markdown-legal-privacy-index#c0003"
           ],
-          "latency_ms": 120.92781066894531,
+          "latency_ms": 125.11730194091797,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7384,7 +7384,7 @@
           "relevant": [
             "markdown-people-group-time-off-and-absence-leave-types#c0011"
           ],
-          "latency_ms": 126.90877914428711,
+          "latency_ms": 128.326416015625,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7439,7 +7439,7 @@
           "relevant": [
             "markdown-total-rewards-benefits-general-and-entity-benefits-france-sas#c0004"
           ],
-          "latency_ms": 117.6760196685791,
+          "latency_ms": 128.86762619018555,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7494,7 +7494,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0021"
           ],
-          "latency_ms": 129.96411323547363,
+          "latency_ms": 129.96673583984375,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7549,7 +7549,7 @@
           "relevant": [
             "pdf-communication-index#c0005"
           ],
-          "latency_ms": 116.5475845336914,
+          "latency_ms": 122.86043167114258,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7604,7 +7604,7 @@
           "relevant": [
             "pdf-finance-accounting-index#c0047"
           ],
-          "latency_ms": 114.11404609680176,
+          "latency_ms": 118.09396743774414,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7659,7 +7659,7 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0036"
           ],
-          "latency_ms": 131.0899257659912,
+          "latency_ms": 127.77972221374512,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7714,7 +7714,7 @@
           "relevant": [
             "markdown-communication-ask-me-anything#c0008"
           ],
-          "latency_ms": 123.31414222717285,
+          "latency_ms": 120.96619606018066,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7769,7 +7769,7 @@
           "relevant": [
             "markdown-finance-procurement-index#c0029"
           ],
-          "latency_ms": 121.61684036254883,
+          "latency_ms": 117.7830696105957,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7824,7 +7824,7 @@
           "relevant": [
             "markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0002"
           ],
-          "latency_ms": 121.35958671569824,
+          "latency_ms": 119.2319393157959,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7879,7 +7879,7 @@
           "relevant": [
             "markdown-legal-privacy-product-usage-events-faq#c0003"
           ],
-          "latency_ms": 120.62478065490723,
+          "latency_ms": 112.93745040893555,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7934,7 +7934,7 @@
           "relevant": [
             "markdown-people-group-learning-and-development-growth-and-development-index#c0002"
           ],
-          "latency_ms": 114.82834815979004,
+          "latency_ms": 120.62835693359375,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -7989,7 +7989,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0011"
           ],
-          "latency_ms": 117.96712875366211,
+          "latency_ms": 108.76893997192383,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8044,7 +8044,7 @@
           "relevant": [
             "pdf-communication-index#c0010"
           ],
-          "latency_ms": 121.16718292236328,
+          "latency_ms": 125.69260597229004,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8099,7 +8099,7 @@
           "relevant": [
             "pdf-finance-expenses#c0010"
           ],
-          "latency_ms": 116.77789688110352,
+          "latency_ms": 124.68457221984863,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8154,7 +8154,7 @@
           "relevant": [
             "pdf-hiring-talent-acquisition-framework-coordinator#c0001"
           ],
-          "latency_ms": 113.3420467376709,
+          "latency_ms": 116.29438400268555,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8209,7 +8209,7 @@
           "relevant": [
             "pdf-legal-privacy-employee-privacy-policy#c0029"
           ],
-          "latency_ms": 122.50661849975586,
+          "latency_ms": 115.73362350463867,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8264,7 +8264,7 @@
           "relevant": [
             "pdf-people-group-relocation#c0001"
           ],
-          "latency_ms": 124.32694435119629,
+          "latency_ms": 122.80011177062988,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8319,7 +8319,7 @@
           "relevant": [
             "markdown-communication-zoom-webinars#c0004"
           ],
-          "latency_ms": 120.54753303527832,
+          "latency_ms": 126.25956535339355,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8374,7 +8374,7 @@
           "relevant": [
             "markdown-finance-accounts-payable-corp-credit-cards#c0002"
           ],
-          "latency_ms": 123.71063232421875,
+          "latency_ms": 123.40998649597168,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8429,7 +8429,7 @@
           "relevant": [
             "markdown-legal-privacy-law-enforcement-guidelines#c0004"
           ],
-          "latency_ms": 132.44390487670898,
+          "latency_ms": 118.0729866027832,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8484,7 +8484,7 @@
           "relevant": [
             "markdown-people-group-people-operations-index#c0006"
           ],
-          "latency_ms": 121.34647369384766,
+          "latency_ms": 114.61496353149414,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8539,7 +8539,7 @@
           "relevant": [
             "markdown-total-rewards-benefits-general-and-entity-benefits-france-sas#c0009"
           ],
-          "latency_ms": 118.38150024414062,
+          "latency_ms": 118.38626861572266,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8594,7 +8594,7 @@
           "relevant": [
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-360-feedback-86188523ae86b93378c714039b286b88#c0005"
           ],
-          "latency_ms": 116.92142486572266,
+          "latency_ms": 118.25108528137207,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8649,7 +8649,7 @@
           "relevant": [
             "pdf-finance-expenses#c0025"
           ],
-          "latency_ms": 129.54020500183105,
+          "latency_ms": 113.5261058807373,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8702,7 +8702,7 @@
             "pdf-people-group-promotions-transfers#c0030"
           ],
           "relevant": [],
-          "latency_ms": 123.60072135925293,
+          "latency_ms": 119.89164352416992,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8755,7 +8755,7 @@
             "markdown-total-rewards-benefits-general-and-entity-benefits-pty-benefits-australia#c0001"
           ],
           "relevant": [],
-          "latency_ms": 128.60918045043945,
+          "latency_ms": 109.39645767211914,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8808,7 +8808,7 @@
             "markdown-people-group-time-off-and-absence-time-off-types#c0010"
           ],
           "relevant": [],
-          "latency_ms": 133.1655979156494,
+          "latency_ms": 116.02234840393066,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8861,7 +8861,7 @@
             "markdown-people-group-general-onboarding-onboarding-buddies#c0002"
           ],
           "relevant": [],
-          "latency_ms": 118.24512481689453,
+          "latency_ms": 113.9822006225586,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8914,7 +8914,7 @@
             "pdf-people-group-relocation#c0002"
           ],
           "relevant": [],
-          "latency_ms": 131.68811798095703,
+          "latency_ms": 126.129150390625,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -8967,7 +8967,7 @@
             "markdown-people-group-learning-and-development-career-development-index#c0012"
           ],
           "relevant": [],
-          "latency_ms": 128.48615646362305,
+          "latency_ms": 118.40248107910156,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -9020,7 +9020,7 @@
             "notion-people-group-ff6124ea10e7d438301ca47edf245750-contracts-background-screenings-probation-periods-piaa-82dfb53ae22994729a19e884151b792d#c0021"
           ],
           "relevant": [],
-          "latency_ms": 124.38035011291504,
+          "latency_ms": 114.70770835876465,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -9073,7 +9073,7 @@
             "pdf-people-group-talent-assessment#c0011"
           ],
           "relevant": [],
-          "latency_ms": 119.88162994384766,
+          "latency_ms": 112.56098747253418,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -9126,7 +9126,7 @@
             "pdf-finance-expenses#c0002"
           ],
           "relevant": [],
-          "latency_ms": 124.07755851745605,
+          "latency_ms": 126.12104415893555,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -9181,7 +9181,7 @@
           "relevant": [
             "pdf-legal-privacy-employee-privacy-policy#c0030"
           ],
-          "latency_ms": 113.70444297790527,
+          "latency_ms": 114.61377143859863,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
@@ -9236,7 +9236,7 @@
           "relevant": [
             "markdown-hiring-talent-acquisition-framework-internal-hiring-process#c0005"
           ],
-          "latency_ms": 123.60858917236328,
+          "latency_ms": 120.16129493713379,
           "answer_text": "",
           "refused": false,
           "invalid_citations": [],
